@@ -1,0 +1,56 @@
+/*
+ *	Copyright 2017 Scott Cooper
+ *
+ *	This program is free software: you can redistribute it and/or modify it under the terms
+ *	of the GNU General Public License as published by the Free Software Foundation,
+ *	either version 2 of the License, or (at your option) any later version.
+ *
+ *	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ *	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *	See the GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License along with this program.
+ *	If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/*	In order to better help other modders, the constants.uc file has been
+ *	broken out into individual files so additional comments and notes can
+ *	be added.
+ *	
+ *	2017-02-01 Written by Knight Captain
+ */
+
+enum timers
+{
+	FAWN_TRIAL_TIMER = 0,	// For the start time of the second session.
+	SALT_TIDES_TIMER = 1,	// Set by Braccus so you have to wait on Monk Isle.
+	// Used by Surok, Bucia, Jendon, and Harnna.
+	// Maybe each was to have their own timer?
+	// ASK_HARNNA_TIMER = 2,	// Set if Harnna has been asked too many questions.
+	ETHICALITY_TIMER = 3,	// Set in the Test of Ethicality
+	MAKE_CLOAK_TIMER = 4,	// Set by Cellia when you give her the slain wolf's body.
+							// She's the only person who uses it?
+	EDRIN_SAIL_TIMER = 5,	// 5 Edrin
+	// NECROMANCE_TIMER
+	MORTEGRO_SEANCE	 = 6,	// Needs 12 hours to pass before he can summon shade again.
+	AMULET_USE_TIMER = 7,	// Set so you are stuck in the Silver Seed area unless
+							// a week has passed or you have planted the Silver Seed.
+	OLON_DRUNK_TIMER = 12	// Olon drunk enough to talk
+};
+
+/*
+Timers count the number of hours since the timer was set or reset.
+
+Commands:
+UI_get_timer(int)
+	Gets the number of hours since the timer was set or reset.
+	If it was not set returns a random number between 0-12.
+	This is usually used with a variable so it can be checked:
+		var timer limit;
+		timer_check = UI_get_timer(MY_LISTED_TIMER);
+		if (timer_check < 24) // A day has not passed yet.
+
+UI_set_timer(int)
+	Starts or resets a timer to the current game time.
+
+*/

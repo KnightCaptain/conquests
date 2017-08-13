@@ -1,0 +1,27 @@
+/*
+ *	Copyright 2006 Alun Bestor/The Exult Team
+ *	Copyright 2017 Scott Cooper
+ *
+ *	This program is free software: you can redistribute it and/or modify it under the terms
+ *	of the GNU General Public License as published by the Free Software Foundation,
+ *	either version 2 of the License, or (at your option) any later version.
+ *
+ *	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ *	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *	See the GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License along with this program.
+ *	If not, see <http://www.gnu.org/licenses/>.
+ */
+
+enum egg_states
+{
+	CACHED_IN = 0,			// Activated when chunk read in?
+	PARTY_NEAR = 1,
+	AVATAR_NEAR = 2,		// Avatar steps into area.
+	AVATAR_FAR = 3,			// Avatar steps outside area.
+	AVATAR_FOOTPAD = 4,		// Avatar must step on it.
+	PARTY_FOOTPAD = 5,
+	SOMETHING_ON = 6,		// Something placed on/near it.
+	EXTERNAL_CRITERIA = 7	// Appears on Isle of Avatar.  Guessing
+};

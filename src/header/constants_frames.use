@@ -1,0 +1,130 @@
+/*
+ *	Copyright 2006 Alun Bestor/The Exult Team
+ *	Copyright 2017 Scott Cooper
+ *
+ *	This program is free software: you can redistribute it and/or modify it under the terms
+ *	of the GNU General Public License as published by the Free Software Foundation,
+ *	either version 2 of the License, or (at your option) any later version.
+ *
+ *	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ *	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *	See the GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License along with this program.
+ *	If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/*
+ *	NPC animation frames. Use these with UI_set_item_frame or (preferably) in
+ *	script blocks, with 'actor frame'.
+ *	e.g.: script AVATAR { actor frame STAND; actor frame USE; actor frame
+ *	SWING_1; actor_frame STAND; }
+ *	Important note: use 'actor frame' with NPCs instead of 'frame', as 'actor
+ *	frame' takes the NPC's current facing into account.
+ */
+
+enum npc_frames
+{
+	STAND		= 0,
+	WALK_1		= 1,
+	WALK_2		= 2,
+
+	USE			= 3,	//general use motion
+
+	SWING_1		= 4,	//start of one-handed swing, arm up over shoulder
+	SWING_2		= 5,	//middle of one-handed swing, arm out to the side
+	SWING_3 	= 6,	//end of one-handed swing, arm out to the front
+
+	SWING_2H_1 	= 7,	//start of 2-handed swing, arms up over shoulder
+	SWING_2H_2 	= 8,	//middle of 2-handed swing, arms out to the side
+	SWING_2H_3	= 9,	//end of 2-handed swing, arms out to the front
+
+	SIT			= 10,	//sitting down
+	LEAN		= 11,	//leaning down
+	KNEEL		= 12,	//kneeling on one knee
+	LIE			= 13,	//lying down
+	CAST_1		= 14,	//both arms high in the air (casting motion)
+	CAST_2		= 15	//both arms stretched out (casting motion)
+};
+
+// North/South/East/West frame offsets for the NPC frames. Only really necessary
+// if you're using UI_set_item_frame or 'frame'
+enum frame_offsets
+{
+	NORTH_FRAMESET	= 0,
+	SOUTH_FRAMESET	= 16,
+	WEST_FRAMESET	= 32,
+	EAST_FRAMESET	= 48
+};
+
+//NPC animation frames, WITH rotation bit. Use these with UI_set_item_frame_rot
+//or (preferably) in script blocks, with 'frame'.
+//e.g.: script AVATAR { frame STAND_WEST; frame USE_NORTH; frame SWING_1_SOUTH; frame STAND_EAST; }
+
+enum npc_rot_frames
+{
+	STAND_NORTH			= 0,
+	WALK_1_NORTH		= 1,
+	WALK_2_NORTH		= 2,
+	USE_NORTH			= 3,
+	SWING_1_NORTH		= 4,
+	SWING_2_NORTH		= 5,
+	SWING_3_NORTH		= 6,
+	SWING_2H_1_NORTH	= 7,
+	SWING_2H_2_NORTH	= 8,
+	SWING_2H_3_NORTH	= 9,
+	SIT_NORTH			= 10,
+	LEAN_NORTH			= 11,
+	KNEEL_NORTH			= 12,
+	LIE_NORTH			= 13,
+	CAST_1_NORTH		= 14,
+	CAST_2_NORTH		= 15,
+	STAND_SOUTH			= 16,
+	WALK_1_SOUTH		= 17,
+	WALK_2_SOUTH		= 18,
+	USE_SOUTH			= 19,
+	SWING_1_SOUTH		= 20,
+	SWING_2_SOUTH		= 21,
+	SWING_3_SOUTH		= 22,
+	SWING_2H_1_SOUTH	= 23,
+	SWING_2H_2_SOUTH	= 24,
+	SWING_2H_3_SOUTH	= 25,
+	SIT_SOUTH			= 26,
+	LEAN_SOUTH			= 27,
+	KNEEL_SOUTH			= 28,
+	LIE_SOUTH			= 29,
+	CAST_1_SOUTH		= 30,
+	CAST_2_SOUTH		= 31,
+	STAND_WEST			= 32,
+	WALK_1_WEST			= 33,
+	WALK_2_WEST			= 34,
+	USE_WEST			= 35,
+	SWING_1_WEST		= 36,
+	SWING_2_WEST		= 37,
+	SWING_3_WEST		= 38,
+	SWING_2H_1_WEST		= 39,
+	SWING_2H_2_WEST		= 40,
+	SWING_2H_3_WEST		= 41,
+	SIT_WEST			= 42,
+	LEAN_WEST			= 43,
+	KNEEL_WEST			= 44,
+	LIE_WEST			= 45,
+	CAST_1_WEST			= 46,
+	CAST_2_WEST			= 47,
+	STAND_EAST			= 48,
+	WALK_1_EAST			= 49,
+	WALK_2_EAST			= 50,
+	USE_EAST			= 51,
+	SWING_1_EAST		= 52,
+	SWING_2_EAST		= 53,
+	SWING_3_EAST		= 54,
+	SWING_2H_1_EAST		= 55,
+	SWING_2H_2_EAST		= 56,
+	SWING_2H_3_EAST		= 57,
+	SIT_EAST			= 58,
+	LEAN_EAST			= 59,
+	KNEEL_EAST			= 60,
+	LIE_EAST			= 61,
+	CAST_1_EAST			= 62,
+	CAST_2_EAST			= 63
+};

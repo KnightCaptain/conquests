@@ -1,0 +1,29 @@
+/*
+ *	Copyright 2006 Alun Bestor/The Exult Team
+ *	Copyright 2017 Scott Cooper
+ *
+ *	This program is free software: you can redistribute it and/or modify it under the terms
+ *	of the GNU General Public License as published by the Free Software Foundation,
+ *	either version 2 of the License, or (at your option) any later version.
+ *
+ *	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ *	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *	See the GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License along with this program.
+ *	If not, see <http://www.gnu.org/licenses/>.
+ */
+
+//Mask values used (e.g.) in find_nearby intrinsic; these are flags, which mean
+//that they can be added together
+enum item_masks
+{
+	MASK_NONE				= 0,
+	MASK_NPC				= 4,
+	MASK_NPC2				= 8,		//Maybe non-party NPCs only? All NPCs in Exult
+	MASK_EGG				= 16,		//Also for barges
+	MASK_INVISIBLE			= 32,
+	MASK_PARTY_INVISIBLE	= 64,
+	MASK_TRANSLUCENT		= 128,
+	MASK_ALL_UNSEEN			= 176		//MASK_EGG+MASK_INVISIBLE+MASK_TRANLUCENT
+};

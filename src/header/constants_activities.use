@@ -1,0 +1,140 @@
+/*
+ *	Copyright 2006 Alun Bestor/The Exult Team
+ *	Copyright 2017 Scott Cooper
+ *
+ *	This program is free software: you can redistribute it and/or modify it under the terms
+ *	of the GNU General Public License as published by the Free Software Foundation,
+ *	either version 2 of the License, or (at your option) any later version.
+ *
+ *	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ *	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *	See the GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License along with this program.
+ *	If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/*
+ *	Any NPC, spawned or standard/numbered NPC, can be assigned these values.
+ *	These are the same as visible on the cheat screen.
+ */
+
+enum schedules
+{
+	// Renamed to not conflict with COMBAT, the NPC stat property.
+	IN_COMBAT		= 0,
+
+	// Walk horizontally until you hit a wall, then turn around. (Patrolling on the cheap.)
+	PACE_HORIZONTAL	= 1,
+
+	// Same as above, but vertically.
+	PACE_VERTICAL	= 2,
+
+	// NPC walks to the Avatar to talk to them. When they get within a certain distance
+	// of where the Avatar was when this schedule was set, a STARTED_TALKING event is
+	// triggered on the NPC. At this point the schedule must be changed via run_schedule.
+	TALK			= 3,	
+
+	DANCE			= 4,
+
+	// Sit in the nearest chair and place food out to eat.
+	EAT				= 5,
+
+	// Use a scythe to cut down crops.
+	FARM			= 6,
+
+	// A more specific version of LOITER, used for narrowing down schedule barks.
+	// See BAKE, SEW, and BLACKSMITH for more specific examples of shop behaviour.
+	TEND_SHOP		= 7,
+
+	// Use a pickaxe to hit cave walls and minerals. Only functional in BG due to
+	// hard-coded shape numbers. It was largely unused in SI.
+	MINE			= 8,
+	// MINER		= 8,
+
+	// Follow the Avatar without joining the party.
+	HOUND			= 9,
+
+	// The NPC stands in place, but will respond to double-clicking and other actions.
+	// Renamed to avoid conflict with STAND, the NPC animation frame.
+	STAND_THERE		= 10,	
+	STANDTHERE		= 10,
+
+	// Hang around a certain point, within 10 units (tiles?) or so.
+	LOITER			= 11,
+
+	// Roams nearby the scheduled spot, as much as a 320x200 screen away.
+	// This can be larger depending on screen resolution.
+	WANDER			= 12,
+
+	// Use tongs, a hammer, and sword blanks to forge metal.
+	BLACKSMITH		= 13,
+
+	// Find the nearest bed and sleep in it. Can also be used without a bed nearby.
+	SLEEP			= 14,
+
+	// Similar to STAND, except that they will never leave the WAIT schedule until
+	// it is manually changed. The preset schedule list is ignored.
+	WAIT			= 15,
+
+	// Find the nearest open chair and sit down.
+	MAJOR_SIT		= 16,
+
+	// Lean down and eat. Used by fish, cows, and other animals.
+	GRAZE			= 17,
+
+	// Use flour sacks, tables, rollers, and a hearth to create bread and pastries.
+	BAKE			= 18,
+
+	// Use chairs at spinning wheels, looms, shears, and creates cloth, cloaks, etc.
+	SEW				= 19,
+
+	// Tries to keep out of the Avatar's way - will half-heartedly flee until
+	// out of a certain range.
+	SHY				= 20,
+
+	// Create potions and read books.
+	LAB				= 21,
+
+	// Approaches the party and will take gold from the Avatar's backpack,
+	// then will bark "Greetings!" in SI.
+	THIEF			= 22,	
+
+	// Looks for other NPCs doing EAT_AT_INN, and serves them.
+	WAITER			= 23,
+
+	// Unknown??
+	SPECIAL			= 24,
+
+	// Tag! Thou art it! And so forth.
+	KID_GAMES		= 25,
+	TAG				= 25,
+
+	// Find the nearest open chair and sit down, similar to EAT, but won't create food,
+	// and has relevant barks.
+	EAT_AT_INN		= 26,
+
+	// Uses a two-handed sword to battle others in DUEL, or fencing dummies,
+	// also uses a bow and arrows to hit archery targets.
+	DUEL			= 27,
+	SPAR			= 27,
+
+	// Looks for the podium shape and uses that as a base point for specific LOITER and
+	// Fellowship related barks. Is broken in SI, Leon resets to Loiter after trying it.
+	// He looks for a vertical podium shape, but there isn't one at the Fellowship Camp.
+	PREACH			= 28,
+
+	// Follow a particular set of patrol waypoints, defined by path eggs in numeric order.
+	// Can do specific actions based on path egg quality numbers.
+	PATROL			= 29,
+
+	// Sit at a desk and use quills, parchment, and related items.
+	DESK_WORK		= 30,
+
+	// That most noble of pursuits.
+	// Like WAIT, this completely overrides the NPC's schedule list.
+	FOLLOW_AVATAR	= 31,
+
+	// These are not normally scheduled, but are used by the game engine.
+	MOVE2SCHEDULE	= 32
+};

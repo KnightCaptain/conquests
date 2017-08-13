@@ -1,0 +1,97 @@
+/*
+ *	Copyright 2006 The Exult Team
+ *	Copyright 2017 Scott Cooper
+ *
+ *	This program is free software: you can redistribute it and/or modify it under the terms
+ *	of the GNU General Public License as published by the Free Software Foundation,
+ *	either version 2 of the License, or (at your option) any later version.
+ *
+ *	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ *	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *	See the GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License along with this program.
+ *	If not, see <http://www.gnu.org/licenses/>.
+ */
+
+// These should be set per-game, so any code is easily transferable between mods.
+
+enum inventory_slots
+{
+	SHIELD_HAND	=  0,	// BG  2
+	OFF_HAND	=  0,	// BG  2
+	WEAPON_HAND	=  1,	// Same in BG
+	BOTH_HANDS	=  1,	// Same in BG
+	CLOAK		=  2,	// BG 13, Exult-only
+	AMULET		=  3,	// BG 22, Exult-only
+	HEAD		=  4,	// BG  9
+	GLOVES		=  5,	// BG 14, Exult-only
+	USECODE		=  6,	// BG 12
+	RIGHT_RING	=  7,	// Same in BG
+	LEFT_RING	=  8,	// BG  6
+	EARS		=  9,	// BG 16, Exult-only
+	QUIVER		= 10,	// BG  8
+	BELT		= 11,	// BG  3
+	TORSO		= 12,	// BG  5
+	FEET		= 13,	// BG 11
+	LEGS		= 14,	// BG 10
+	BACKPACK	= 15,	// BG  0
+	BACK_SHIELD	= 16,	// BG 17, Exult-only
+	BACK_2H		= 17	// BG 19, Exult-only
+};
+
+/*
+// Old non-interchangeable lists
+
+// Ready slots for Black Gate: use with <UI_is_readied> or <UI_get_readied>.
+// These are the same whether paperdolls are on or off.
+enum inv_slots_bg
+{
+	BG_BACKPACK		=  0,
+	BG_WEAPON_HAND	=  1,
+	BG_BOTH_HANDS	=  1,
+	BG_SHIELD_HAND	=  2,
+	BG_OFF_HAND		=  2,
+	BG_BELT			=  3,
+	BG_TORSO		=  5,
+	BG_LEFT_RING	=  6,
+	BG_RIGHT_RING	=  7,
+	BG_QUIVER		=  8,
+	BG_HEAD			=  9,
+	BG_LEGS			= 10,
+	BG_FEET			= 11,
+	BG_USECODE		= 12,
+	BG_CLOAK		= 13,	// Exult-only
+	BG_GLOVES		= 14,	// Exult-only
+	BG_EARS			= 16,	// Exult-only
+	BG_BACK_SHIELD	= 17,	// Exult-only
+	BG_BACK_2H		= 19,	// Exult-only
+	BG_AMULET		= 22	// Exult-only
+};
+
+// Ready slots for Serpent Isle: use with <UI_is_readied> or <UI_get_readied>.
+// These are the same whether paperdolls are on or off.
+enum inv_slots_si
+{
+	SI_SHIELD_HAND	=  0,
+	SI_OFF_HAND		=  0,
+	SI_WEAPON_HAND	=  1,
+	SI_BOTH_HANDS	=  1,
+	SI_CLOAK		=  2,
+	SI_AMULET		=  3,
+	SI_HEAD			=  4,
+	SI_GLOVES		=  5,
+	SI_USECODE		=  6,
+	SI_RIGHT_RING	=  7,
+	SI_LEFT_RING	=  8,
+	SI_EARS			=  9,
+	SI_QUIVER		= 10,
+	SI_BELT			= 11,
+	SI_TORSO		= 12,
+	SI_FEET			= 13,
+	SI_LEGS			= 14,
+	SI_BACKPACK		= 15,
+	SI_BACK_SHIELD	= 16,
+	SI_BACK_2H		= 17
+};
+*/

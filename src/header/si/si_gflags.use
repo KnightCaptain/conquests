@@ -1,0 +1,1652 @@
+/*
+ *	Copyright 2006 The Exult Team
+ *	Copyright 2017 Scott Cooper
+ *
+ *	This program is free software: you can redistribute it and/or modify it under the terms
+ *	of the GNU General Public License as published by the Free Software Foundation,
+ *	either version 2 of the License, or (at your option) any later version.
+ *
+ *	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ *	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *	See the GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License along with this program.
+ *	If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/*	This file lists known flags from SI+SS. It is incomplete, but the goal
+ *	is to list them all one day. To help search for them, the list has
+ *	been reordered with that goal in mind.
+ *
+ *	Thanks to Malignant Manor for a large number of flags!
+ *	2016-12-25 De-grouped and reordered by number by Knight Captain
+ *	2017-01-03 All flags researched and nearly all identified by KC.
+ *	2017-01-20 Added Debug Mode flag for testing purposes.
+ */
+
+enum serpent_isle_flags
+{
+	// Set after having the Hound of Doskar sniffs Cantra's practice sword
+	SHAMINOS_KEEP_BARRIERS_GONE = 0x0,
+	// 0x1 set in shape#(0x124), the seat? Named for Filbercio's description
+	MYSTIC_ENGINE_ENGAGED = 0x1,
+	// 0x2 not-in-usecode but used in mods
+	// Iolo has finished his introductory speech.
+	STARTING_SPEECH = 0x3,
+	// Batlin is dead and the Banes of Chaos have possessed the Three Companions.
+	BANES_RELEASED = 0x4,
+	// Never set, set to false in gangPlankBlocksSailing 0x918
+	// If set via cheat menu, allows use of any boat or Filbercio's barge
+	// without other flags being set
+	CAN_USE_ANY_BOAT = 0x5,
+	// The lightning storm has hit the party
+	EQUIPMENT_EXCHANGED = 0x6,
+
+	/*
+	 *	Temporary flags are used for a great many things
+	 */
+	 
+	TEMP_FLAG_1 = 0x7,
+	TEMP_FLAG_2 = 0x8,
+	TEMP_FLAG_3 = 0x9,
+	TEMP_FLAG_4 = 0xA,
+
+	// Never set, allows Andral to explain how Fawnish women are "highly regarded" or "overly pampered"
+	// depending on the Avatar's gender. Probably should be enabled by default.
+	ASK_ANDRAL_ABOUT_FAWN = 0xB,
+	// Andral has given directions to Sleeping Bull, and cannot be asked about it again.
+	ASKED_ANDRAL_ABOUT_INN = 0xC,
+	// Vision of a cat?
+	VISION_OF_A_CAT = 0xD,
+	// Set in stolenSomething 0x945, possibly a broken trigger for the Three Companions
+	// to leave the party?
+	STOLEN_SOMETHING = 0xE,
+
+	/*
+	 *	Former Companions with Equipment
+	 *	Set when companions leave the party without returning their equipment.
+	 */
+	STEFANO_HAS_BELONGINGS = 0xF,
+	GWENNO_HAS_BELONGINGS = 0x10,
+	SELINA_HAS_BELONGINGS = 0x11,
+	// 0x12 not-in-usecode
+	BOYDON_HAS_BELONGINGS = 0x13,
+	// 0x14 not-in-usecode
+	PETRA_HAS_BELONGINGS = 0x15,
+	WILFRED_HAS_BELONGINGS = 0x16,
+	DUPRE_HAS_BELONGINGS = 0x17,
+	SHAMINO_HAS_BELONGINGS = 0x18,
+	IOLO_HAS_BELONGINGS = 0x19,
+	
+	/*
+	 *	Copy Protection duplicate prevention
+	 */
+	
+	ASKED_9TH_CIRCLE = 0x1A,
+	ASKED_ARMOR_MATERIALS = 0x1B,
+	ASKED_BEASTS = 0x1C,
+	ASKED_REAGENTS = 0x1D,
+	ASKED_MASS_DEATH = 0x1E,
+	ASKED_GINSING = 0x1F,
+	ASKED_CREATE_AUTOMATA = 0x20,
+	ASKED_REASONS_FOR_WRITING = 0x21,
+	ASKED_OPHIDIAN_WRITING = 0x22,
+	ASKED_OTHER_LANDMARKS = 0x23,
+	ASKED_CITIES_ESTABLISHED = 0x24,
+	ASKED_PRINCIPLES_OF_BALANCE = 0x25,
+	ASKED_CLANS_OF_MONITOR = 0x26,
+	ASKED_WEAPON_TYPES = 0x27,
+	ASKED_WORDS_OF_POWER = 0x28,
+	// 0x29 was not-in-usecode, but added to a new copyProtectionQuestions 0x98C
+	// which has been rewritten to change the die roll and include the question.
+	ASKED_LAMBSKIN_GLOVES = 0x29,
+	
+	// Set in showVisions 0x9B6 and unset elsewhere for the specific vision.
+	WATCHING_VISION = 0x2A,
+		
+	/*
+	 *	Monitor Townplot
+	 */
+
+	// 0x2B not-in-usecode Beta: entrytariffpaid
+	// Set in Egg checkHelmOfMonitor object#(0x743)
+	HAVE_HELM_OF_MONITOR = 0x2C,
+	TOLD_MARSTEN_SERVE_LORD_BRITISH = 0x2D,
+	// 0x2E	not-in-usecode Beta: marstensaidpomdirgun
+	// Marsten: "Courage is the Soul of Life."
+	MARSTEN_GAVE_PERMISSION = 0x2F,
+	// 0x30	not-in-usecode Beta: marstensaidgoblins
+	// 0x31	not-in-usecode Beta: timeforfuneral
+	FIRST_TALK_WITH_MARSTEN = 0x32,
+	CAN_ASK_ABOUT_TEST = 0x33,
+	// 0x34 not-in-usecode Beta: talkedmarstenpost
+	ASK_LYDIA_ABOUT_POISON = 0x35,
+	CAN_ACCUSE_MARSTEN = 0x36,
+	// 0x37 not-in-usecode Beta: lydiaunderarrest
+	PROVED_MARSTEN_IS_TRAITOR = 0x38,
+	// 0x39 not-in-usecode Beta: foundspektorpotion
+	// 0x3A not-in-usecode Beta: spektorsaidharnna
+	KNOW_TEST_SECRETS = 0x3B,
+	KNOW_MARSTEN_GIVES_PERMISSION = 0x3C,
+	BRENDANN_PROPOSAL = 0x3D,
+	// The Avatar is visibly a Monitorian. This is used in Fawn and somewhat in Moonshade.
+	GOT_TATTOOED = 0x3E,
+	BRENDANN_TATTOO_COMPLIMENT = 0x3F,
+	// 0x40 not-in-usecode Beta: postbrendannmet
+	DEFEATED_LUTHER = 0x41,
+	// Set by Cellia, checked by Luther
+	ASK_LUTHER_ABOUT_BULLY = 0x42,
+	LUTHER_CHALLENGED = 0x43,
+	// Simon: "So, thou hast found me out? Well, to the blazes with it all!"
+	SIMON_IS_A_GOBLIN = 0x44,
+	// Set when you pick up the brown bottle
+	PICKED_UP_BROWN_BOTTLE = 0x45,
+	// Set when Goblin Simon spills his secrets and dies
+	GOBLIN_SIMON_IS_DEAD = 0x46,
+	// Flag when Cantra is cured.
+	CURED_CANTRA = 0x47,
+	// Used for most checks in Monitor, others simply go by GOT_TATTOOED = 0x3E
+	AVATAR_IS_KNIGHT = 0x48,
+	// 0x49 not-in-usecode Beta: ceremonyfirsthalf
+	SLAIN_WOLF = 0x4A,
+	// 0x4B not-in-usecode Beta: invitedtoinductin
+	RETURNED_URN_TO_CALADIN = 0x4C,
+	// 0x4D not-in-usecode Beta: lucillasaidargus
+	KNOW_KRAYG_WALKS_ON_WOODS = 0x4E,
+	// Was to connect the two as sisters?
+	// 0x4F not-in-usecode Beta: lydiasaidselina
+	// Presumably earlier plans were to let you pick which clan you joined
+	// 0x50 not-in-usecode Beta: pickedbearcommand
+	// 0x51 not-in-usecode Beta: pickedwolfcommand
+	// 0x52 not-in-usecode Beta: pickedleopardcommand
+	COURTED_LUCILLA = 0x53,
+	ACCEPTED_LUCILLA_PROPOSAL = 0x54,
+	KNOW_OF_LUCILLA_AND_SPEKTOR = 0x55,
+	// Never checked, Renfry says "Had something to do with that sage who was in town recently. Andral will know more about it. Talk to him."
+	ASK_ANDRAL_ABOUT_THEFT = 0x56,
+	// Never checked, Renfry says "I have been given authority by Lord Marsten to pay 100 monetari for every pikeman's body brought home again."
+	KNOW_PIKEMAN_BODY_REWARD = 0x57,
+	// Andral has explained the robbery and is more comfortable around the Avatar
+	ASKED_ANDRAL_ABOUT_ROBBERY = 0x58,
+	// Never checked, Andral say of Wilfred the Slayer: "Surely, brave Wilfred shall track down the sage and kill him, and I shall enjoy sweet revenge!"
+	ANDRAL_TOLD_OF_WILFRED = 0x59,
+	CURED_LYDIA_POISON = 0x5A,
+	// You told Harnna you would find her daughter
+	WILL_FIND_CANTRA = 0x5B,
+	// 0x5C not-in-usecode Beta: toldharnnamonks
+	// 0x5D not-in-usecode Beta: metpostshazzana
+	// 0x5E not-in-usecode Beta: dupreatwolves
+	// You know the brown bottle found in the woods is Fawnish Ale, and Simon drinks it.
+	CLUE_BROWN_BOTTLE = 0x5F,
+	AVATAR_GOT_SHORT_STICK = 0x60,
+	DUPRE_IS_TOAST = 0x61,
+	// 0x62 not-in-usecode Beta: duprefights
+	// 0x63 not-in-usecode Beta: firstsaved
+	// 0x64 not-in-usecode Beta: secondsaved
+	// 0x65 not-in-usecode Beta: wolf9dead
+	// 0x66 not-in-usecode Beta: wolf10dead
+	// 0x67 not-in-usecode Beta: wolf11dead
+	// 0x68 not-in-usecode Beta: wolf12dead
+	// Never set, only checked by Krayg, who says "Well, that foolish leader of the Leopards is now dead. I wonder who will replace him?"
+	MARSTEN_IS_DEAD = 0x69,
+	// 0x6A not-in-usecode Beta: standarrdead
+	// 0x6B not-in-usecode Beta: shazzanadead
+	// 0x6C not-in-usecode Beta: harnnadead
+	// 0x6D not-in-usecode Beta: brendanndead
+	// 0x6E not-in-usecode Beta: lucilladead
+	// 0x6F not-in-usecode Beta: renfrydead
+	// 0x70 not-in-usecode Beta: kraygdead
+	// 0x71 not-in-usecode Beta: shmeddead
+	// Never set, only checked in 0x8EF, which seems to be Anti-Dupre transforming Caladin
+	CALADIN_IS_DEAD = 0x72,
+	// 0x73 not-in-usecode Beta: lutherdead
+	// 0x74 not-in-usecode Beta: templardead
+	// 0x75 not-in-usecode Beta: lydiadead
+	// Harnna has directed you to Fawn
+	KNOW_ABOUT_VARO_LEAVES = 0x76,
+	// 0x77 not-in-usecode Beta: senttomarsten
+	// Iolo has updated the list after "being freed from that vile Monitorian prison cell!"
+	IOLO_MADE_EQUIPMENT_LIST = 0x78,
+	KNOW_CANTRA_IS_MISSING = 0x79,
+	
+	/*
+	 *	Fishnet Subplot, presumably intended to link Selina to Shmed's attack
+	 */
+	
+	// Never set, allows you to ask Selina about fishnet stockings
+	ASK_SELINA_ABOUT_FISHNET = 0x7A,
+	// Never set, allows you to ask Harnna, Jendon, and Bucia about them 
+	FOUND_FISHNET_STOCKINGS = 0x7B,
+	// Never set, but if set removes the option to ask Harnna, Jendon, and Bucia about them.
+	// This should be set after Alyssand tells you that Flindo resells them, and
+	// "Apparently one of the mages hath taken a liking to them."
+	KNOW_FLINDO_BUYS_FISHNET = 0x7C,
+	
+	/*
+	 *	Monitor Townplot again
+	 */
+	
+	GAVE_WOLF_TO_CELIA = 0x7D,
+	HAVE_WOLF_CLOAK = 0x7E,
+	KNOW_ABOUT_MONITOR_CLANS = 0x7F,
+	ASKED_SHMED_ABOUT_TEST = 0x80,
+	// 0x81 not-in-usecode Beta: shownshmedevidence
+	BEGAN_KNIGHTS_TEST = 0x82,
+	MONITOR_TRAINING = 0x83,
+	TRAINING_FLAG_SET = 0x84,
+	LEAVING_LIST_FIELD = 0x85,
+	// 0x86	not-in-usecode
+	// 0x87	not-in-usecode
+	// 0x88	not-in-usecode
+	// 0x89	not-in-usecode
+	// From sleeping with Brendann or Lucilla,
+	// set as well as their respective npc_id to 6
+	GAINED_GWANI_CLOAK = 0x8A,
+	// Set when you watch the crystal ball, seems to turn off when the barriers to Shamino's Keep disappear
+	BANE_BARKS_BY_CANTRA = 0x8B,
+	// Set when you watch the crystal ball in Harnna's house, and saw Batlin attack Cantra
+	VISION_OF_CANTRA = 0x8C,
+	// Set by several Monitorians when asked about Brunt
+	ASK_STANDARR_ABOUT_BRUNT = 0x8D,
+	// Set by asking Andral about Batlin
+	KNOW_BATLIN_WAS_IN_MONITOR = 0x8E,
+	// Andral remarks that Lucilla "hath art in her soul, but she hides her secret well."
+	ASK_LUCILLA_ABOUT_ANDRAL = 0x8F,
+	// Caladin thinks you stole his grandfather's ashes.
+	// "Then perhaps thou art the thief! I shall not speak with thee further!"
+	REFUSED_TO_RETURN_URN = 0x90,
+	// "Now that I have the meat, thy stew will be ready for the banquet."
+	GAVE_WOLF_TO_LUCILLA = 0x91,
+	// Set when you turn over the evidence to Brendann or Caladin
+	PROVED_SPEKTOR_IS_TRAITOR = 0x92,
+	// Both set by reading the scrolls
+	KNOW_MARSTEN_IS_TRAITOR = 0x93,
+	KNOW_SPEKTOR_IS_TRAITOR = 0x94,
+	// Set when Harnna asks you to look into her crystal ball
+	GAZE_INTO_CRYSTAL_BALL = 0x95,
+	// Harnna is told "The monks have taken Cantra to their island."
+	TOLD_CANTRA_IS_ALIVE = 0x96,
+	// Set if you have asked Harnna too many questions
+	ASKED_HARNNA_TOO_MUCH = 0x97,
+	// Set during the tattoo cutscene
+	POISONED_BY_LYDIA = 0x98,
+	// People you can ask about the items after talking to Harnna (Monitor):
+	ASK_BRENDANN_ABOUT_STOCKINGS = 0x99,
+	ASK_CALADIN_ABOUT_URN = 0x9A,
+	ASK_KRAYG_ABOUT_PUMICE = 0x9B,
+	ASK_LUCILLA_ABOUT_SILVER_RING = 0x9C,
+	ASK_CELLIA_ABOUT_FUR_CAP = 0x9D,
+	ASK_KRAYG_ABOUT_SLIPPERS = 0x9E,
+	ASK_STANDARR_ABOUT_BREAST_PLATE = 0x9F,
+	ASK_TEMPLAR_ABOUT_BRUSH = 0xA0,
+	ASK_SIMON_ABOUT_STRANGE_WINE = 0xA1,
+	ASK_SPEKTOR_ABOUT_STRANGE_COINS = 0xA2,
+	ASK_RENFRY_ABOUT_SEVERED_HAND = 0xA3,
+	// Set by Marsten and Simon when asked about the Goblins
+	ASK_TEMPLAR_ABOUT_GOBLINS = 0xA4,
+	// Only needed if you have previously proclaimed your allegiance to Marsten.
+	// "I renounce Lord British and everything for which he stands."
+	// "From this moment forward, I am his friend and servant no longer."
+	RENOUNCED_BRITISH = 0xA5,
+	// Marsten suggested "That fellow Krayg could tell thee more."
+	ASK_KRAYG_ABOUT_RUINS = 0xA6,
+	// Simon says "Spektor dealt with her, mostly."
+	ASK_SPEKTOR_ABOUT_GWENNO = 0xA7,
+	// Simon says "Shazzana spent a bit of time with him as I recall."
+	ASK_SHAZZANA_ABOUT_DEADEYE = 0xA8,
+	// Set by Flicken and Marsten in reference to an enchanter appearing during the funeral.
+	// They do not mention Iolo's name.
+	KNOW_ENCHANTER_IMPRISONED = 0xA9,
+	// Iolo says "win my freedom!"
+	TALKED_TO_IMPRISONED_IOLO = 0xAA,
+	
+	/*
+	 *	Luther Subplot
+	 */
+	
+	// 0xAB	not-in-usecode Beta: askluthercommonshield
+	// Lucilla: "They say that that new shield of his doth have special powers, so that now he is truly invincible!"
+	CLUE_MONITOR_SHIELD = 0xAC,
+	// Brendann says "He is a braggart and a buffoon."
+	// "He thinks he shall be the next Champion Knight. But he hath never beaten me!"
+	BRENDANN_SAYS_LUTHER_BRAGGART = 0xAD,
+	// Set by asking Lucilla about Luther.
+	LUCILLA_SAYS_LUTHER_REPULSIVE = 0xAE,
+	// "Why, I should rip thine head off and feed it to the pigs!"
+	CALLED_LUTHER_BRAGGART = 0xAF,
+	// "I will have thine head on a pike for spreading such tales!"
+	CALLED_LUTHER_REPULSIVE = 0xB0,
+	// "How darest thou call me a bully! That little whore Lydia must have put thee up to this..."
+	CALLED_LUTHER_BULLY = 0xB1,
+	// Luther has returned Dupre's Shield
+	LUTHER_RETURNED_DUPRES_SHIELD = 0xB2,
+	
+	// If you have not read the scroll implicating Spektor and talk to him about them, he says
+	// "I shall study this evidence, and if thou art right, I will bring it before the other Lords."
+	TOLD_SPEKTOR_ABOUT_TRAITOR = 0xB3,
+	// Set when talking to him in prison or in his death speech.
+	SPEKTOR_ADMITS_HIS_CRIMES = 0xB4,
+	// "If only thou wert a Knight! Then I could let thee vouch for thy friend, and let him free."
+	// If set, Spektor will accept "a fine -- yes, a fine!" for "the key to the offender's cell."
+	MARSTEN_WONT_RELEASE_IOLO = 0xB5,
+	// Set in conversation with Harnna and Templar
+	KNOW_OF_MONITOR_THIEF = 0xB6,
+	// "That blasted storm exchanged all of mine equipment for useless refuse! Even mine enchanted shield!"
+	DUPRE_MADE_EQUIPMENT_LIST = 0xB7,
+	// Simon offered you some ale and you spat it out
+	TRIED_SIMONS_ALE = 0xB8,
+	// You 'made a donation' to Spektor to get Iolo out of jail before becoming a Knight
+	PAID_IOLO_FINE = 0xB9,
+	// Set when asking Krayg about pumice
+	ASK_STANDARR_ABOUT_QUESTS = 0xBA,
+	// Never set, shortens his training conversation to just plugging the List Field.
+	HEARD_CALADIN_TRAINS = 0xBB,
+	// Set by Cantra when she says Caladin has been training her since her father died.
+	KNOW_CALADIN_TRAINS_CANTRA = 0xBC,
+	// "The storms have been known to magically displace their victims."
+	// Only used so Marsten does not re-ask how Iolo got there.
+	IOLO_DOES_NOT_FLY = 0xBD,
+	// Corrected spelling. This flag is set when a dead Pikeman, Pikewoman, or Brendann shape is cremated in Monitor.
+	// This is why Renfry only pays out once if you do multiple bodies before talking to him.
+	CREMATED_PIKEMAN = 0xBE,
+	MONITOR_BANQUET_STARTED = 0xBF,
+	// Set when Krayg the Provisioner tells you about the Goblins' raid staging area
+	KNOW_GOBLIN_MONOLITH = 0xC0,
+	HAVE_SPEKTORS_KEY = 0xC1,
+	// Shamino asks "Art thou all right?"
+	BURNING_WITH_FEVER = 0xC2,
+	// 0xC3 not-in-usecode
+	// "If thou wilt vouch for thy friend's future behavior, then I shall let him go free."
+	BRENDANN_GAVE_JAIL_KEY = 0xC4,
+	// "I did not want to do it. She seduced me into trying to kill thee! Yet even now, I cannot betray her..."
+	// Only set so he does not repeat his confession on death.
+	SHMED_CONFESSED = 0xC5,
+	// Set by reading the scroll from Cantra on his body.
+	FOUND_CANTRAS_FATHER = 0xC6,
+	// "'Tis better to know what truly happened than to be left knowing nothing."
+	TOLD_HARNNA_FOUND_SCROLL = 0xC7,
+	// Set when you see the brown bottle by the monolith
+	FOUND_BROWN_BOTTLE = 0xC8,
+	// Set in the Pikeman shape when npc_id 14 is slain
+	PIBB_IS_DEAD = 0xC9,
+	// "Yes, I poisoned thee, but I will not say at whose insistence it was done!"
+	LYDIA_CONFESSES = 0xCA,
+	// Only set by Harnna, never checked. "Be thou careful whom thou dost trust!"
+	HARNNA_WARNS_BE_CAREFUL = 0xCB,
+	// This should be set by Pomdirgun's death in a future update.
+	// If 0xCC is set, changes or adds conversation with Harnna, Shazzana, Standarr, Templar, Brendann, Caladin,
+	// and also looks to add a bark about it to Brendann. No one outside of Monitor checks this,
+	// so the dialog in Fawn won’t change. Similar to the original Origin bug with Harnna and the Strange Coins,
+	// if Flag 204 is set you can repeatedly ask Standarr about Pomdirgun, the option does not get removed.
+	POMDIRGUN_IS_DEAD = 0xCC,
+	// "Very well. Keep thine eye on him. We do not want people popping in and out of our city like this!"
+	MARSTEN_GAVE_JAIL_KEY = 0xCD,
+
+	/*
+	 *	Banes Subplot
+	 */
+	
+	// Set by using the Flux Analyzer on the Black Sword
+	USED_FLUX_ANALYZER = 0xCE,
+	// Set on game start, unset when his is freed. "Thou art a fool, Avatar! Thou hast no idea what thou hast lost!"
+	ARCADION_IN_BLACK_SWORD = 0xCF,
+	// These are set when the Banes are in the Black Sword and unset when put into soul prisms.
+	// "I shall not forget that thou hast beaten me, vile human!"
+	ANARCHY_BANE_CAPTURED = 0xD0,
+	// "Vanquished! By a mere mortal!"
+	WANTONESS_BANE_CAPTURED = 0xD1,
+	// "Thou hast beaten me, vile human. I will remember this day!"
+	INSANITY_BANE_CAPTURED = 0xD2,
+	// The quotes are from http://www.it-he.org
+	// Haha! I am Dupre, bane of drunkenness!
+	WANTONESS_BANE_DEAD = 0xD3,
+	// Kneel before Shamino, bane of rapidly diminishing consequence...
+	ANARCHY_BANE_DEAD = 0xD4,
+	// I am Iolo! Bane of shooting-the-Avatar-through-the-heart-with-the-triple-crossbow!
+	INSANITY_BANE_DEAD = 0xD5,
+	
+	/*
+	 *	Moonshade Townplot
+	 */
+	
+	// Never set, only checked in autoRotoOneMoment 0x8FF
+	// gflags[0x00D6]
+	// "I bring thee greetings from my mistress, the sorceress Rotoluncia. This scroll is from her."
+	HAVE_TALKING_SCROLL = 0xD7,
+	// Set the first time Rocco is asked about staying in a room at his inn.
+	// "We've nothing fancy -- simply clean rooms, and we keep the ruffians out."
+	// "But thou lookest to be a respectable person."
+	ROCCO_SIMPLE_CLEAN_ROOMS = 0xD8,
+	// Set at the end of the MageLord's banquet.
+	// "Pothos and I must speak privately concerning important matters of state. I thank thee all for coming!"
+	POTHOS_RETURNED = 0xD9,
+	// Flindo must be asked in two conversations about his promise to arrange a meeting with the MageLord.
+	// First before you use the talking scroll, and again afterward.
+	FLINDO_PROMISE_AGAIN = 0xDA,
+	// Fedabiblio: "I will now conjure a spellbook for thee."
+	HAVE_NEW_SPELLBOOK = 0xDB,
+	// Set by talking to Flindo or Bucia after the MageLord's banquet ends.
+	// "There are those who believe that Erstam is Pothos' father. But Pothos will never talk about it, so I do not know."
+	KNOW_POTHOS_SECRET = 0xDC,
+	// "Thou dost have the Blood Moss! Wonderful!"
+	HELPED_POTHOS = 0xDD,
+	// Fedabiblio: "Bring me three fresh Mandrake Roots, and I shall let thee have a spellbook. The Roots are found on Monk Isle."
+	NEED_FRESH_MANDRAKE = 0xDE,
+	// Set by talking to Mosh: "Thou shouldst speak to she who hath done me wrong: The Sorceress Columna"
+	ASK_COLUMNA_ABOUT_MOSH = 0xDF,
+	// "Well enough! Take this blue key. It will open the gate to the catacombs for thee."
+	HAVE_CATACOMBS_KEY = 0xE0,
+	// Mosh: "The sweet tunes from mine instrument will pacify them"
+	HAVE_MAGIC_HARP = 0xE1,
+	// Set in darlingImHere 0x8EC but is used as a general Moonshade post-trial flag.
+	MORTEGRO_DISAPPEARED = 0xE2,
+	// "Now we can report to Gustacio."
+	LIGHTNING_COLORS_EXPERIMENT = 0xE3,
+	// Gustacio: "But of course! Thou must needs go to Fedabiblio for the answers..."
+	ASK_FEDABIBLIO_ABOUT_EXPERIMENT = 0xE4,
+	// Only set and checked by Gustacio so you cannot ask him further about the experiment.
+	// Gustacio: "Thou hast completed the experiment. As a token of appreciation, here is the Mirror of Truth."
+	HAVE_MIRROR_OF_TRUTH = 0xE5,
+	// Set in 0x8E2 when Ale is swapped with Edrin
+	RESTORED_EDRIN = 0xE6,
+	// Freli on Delin: "He is my long-lost father. Here is a scroll thou canst give him from me."
+	// Unset when the scroll is delivered.
+	HAVE_FRELIS_SCROLL = 0xE7,
+	// "Thou art my savior! I shall await thy return eagerly."
+	WILL_HELP_POTHOS = 0xE8,
+	// "I am speaking to thee by means of this magic scroll -- there is no need to be afraid."
+	SCROLL_SPEAKS = 0xE9,
+	// Set when the Companion disappears
+	COMPANION_KIDNAPPED = 0xEA,
+	// Set in a few spots, including when confronting the messenger automaton when searching her manor.
+	SEARCHED_ROTOLUNCIAS_MANOR = 0xEB,
+	// "Thou shalt need a boat to reach this place. Take my yacht. I give thee permission."
+	CAN_USE_FILBERCIOS_BARGE = 0xEC,
+	// Hawk: "So ye're still trying ta leave this island?"
+	ASK_JULIA_ABOUT_CATACOMBS = 0xED,
+	// "Why, she sleeps with her rats! I ask thee, is this the action of a respectable mage?"
+	ASKED_COLUMNA_ABOUT_MOSH = 0xEE,
+	// "Thou dost truly believe me now... ah, I see that thou dost. Thou art truly one I can say is my friend."
+	MOSHS_FRIEND = 0xEF,
+	// Fedabiblio: "Once thou hast looked, come back and I shall divine what thou hast seen."
+	CRYSTAL_BALL_WILL_SHOW_EDRIN = 0xF0,
+	// Set in shape#(0x3E6) "Much better..."
+	FEDABIBLIO_RESTORED = 0xF1,
+	// Set after seeing the vision in the crystal ball and talking to Febabiblio.
+	// "At last, all is made clear! Tell good Gustacio that Edrin the missing brother is actually Ale the Bird!"
+	KNOW_ALE_IS_EDRIN = 0xF2,
+	// "When I would dream, I would envision this maiden -- fair as summer's day. She called herself Siranush."
+	EDRIN_DREAMS_OF_SIRANUSH = 0xF3,
+	// "Oh, am I glad to see thee! I have been very scared."
+	ANDRIO_IS_SCARED = 0xF4,
+	// Never set. "If thou dost think I will help thee, then the madness that hath seemingly infected the entire
+	// world hath also infected thy brain. I suggest thou dost have it removed."
+	ASK_TORRISSIO_TO_HELP_FEDABIBLIO = 0xF5,
+	// Fedabiblio: "As a token of my gratitude, please accept this, the Scroll of the Serpent."
+	HAVE_SCROLL_OF_THE_SERPENT = 0xF6,
+	// 0xF7 not-in-usecode Beta: gustgavetooth
+	// 0xF8	not-in-usecode Beta: filgavetooth
+	// 0xF9	not-in-usecode Beta: roccogavenote
+	// "It looks to be one of the Serpent Teeth that Mad Erstam used to collect."
+	STEFANO_GAVE_SERPENT_TOOTH = 0xFA,
+	// "Thou hast but to look within the vault behind mine old house,"
+	STEFANO_TOLD_SERPENT_IN_VAULT = 0xFB,
+	// Julia: "With this Crime Certificate, thou canst commit one unlawful act without fear of punishment."
+	HAVE_CRIME_CERTIFICATE = 0xFC,
+	// Set in Func06AA object#(0x6AA) Beta: stolecomb
+	// Makes Columna use her second, ugly face.
+	HAVE_COMB_OF_BEAUTY = 0xFD,
+	// Ducio: "I have heard that he is working on something called the flux analyzer. It might be of aid to thee."
+	CLUE_FLUX_ANALYZER = 0xFE,
+	// Torrissio: "On this scroll, thou shalt find the spell for creating Soul Prisms."
+	KNOW_OF_SOUL_PRISMS = 0xFF,
+	// "As he lay dying, Hawk gave me this key. He said that it unlocked his sea chest at the Blue Boar Inn"
+	FEBABIBLIO_GAVE_HAWKS_KEY = 0x100,
+	// 0x101 not-in-usecode
+	// 0x102 not-in-usecode
+	
+	/*
+	 *	Moonshade Storm Equipment
+	 */
+	
+	// "I must be getting back to work now. But it hath been nice talking with thee."
+	ASKED_BUCIA_TOO_MUCH = 0x103,
+	// "Oh, 'tis a rotten egg! Leave here with that!"
+	BUCIA_SAW_ROTTEN_EGG = 0x104,
+	// 0x105 not-in-usecode
+	// Set when you ask Bucia about the fishnet stockings
+	ASK_JULIA_ABOUT_SELENIA = 0x106,
+	// 0x107 not-in-usecode
+	// Bucia: "'Tis a pinecone! I don't know where they come from, but Captain Hawk gave me one once."
+	ASK_HAWK_ABOUT_PINECONE = 0x108,
+	// 0x109 not-in-usecode
+	// "Cap'n Hawk might know! He hath been everywhere in the world!"
+	ASK_HAWK_ABOUT_BLUE_EGG = 0x10A,
+	// "Perhaps the Magister could help thee. He is an authority on many subjects."
+	ASK_FEDABIBLIO_ABOUT_PINECONE = 0x10B,
+	// Set only if you ask Bucia without the egg in your possession.
+	// "A blue egg? I have never heard of such a thing, but the Magister is wise in many subjects."
+	ASK_FEDABIBLIO_ABOUT_BLUE_EGG = 0x10C,
+	// 0x10D not-in-usecode Beta: fedaknowscat
+	// Set only if you ask Bucia without the skull in your possession.
+	// "A skull?! I know nothing about bones! Perhaps Magister Fedabiblio could help thee."
+	ASK_FEDABIBLIO_ABOUT_SKULL = 0x10E,
+	// Only set if you ask Bucia without the urn in your possession.
+	// "Perhaps Topo could aid thee -- he assists Master Ducio in fashioning bowls and pots for the Mages."
+	ASK_TOPO_ABOUT_URN = 0x10F,
+	// "Since thou art a Mage, perhaps thou couldst ask thy fellow wizards about this magical apparatus."
+	CLUE_LAB_APPARATUS = 0x110,
+	// Set by asking Bucia before you have the spellbook or Fedabiblio anytime about the apparatus
+	ASK_DUCIO_ABOUT_LAB_APPARATUS = 0x111,
+	// "The Magister is a storehouse of knowledge. Perhaps he could aid thee."
+	ASK_FEBABIBLIO_ABOUT_PUMICE = 0x112,
+	// "Perhaps thou couldst speak to the Master Artisan. He hath made many baubles for the MageLord and his mistresses."
+	ASK_DUCIO_ABOUT_SILVER_RING = 0x113,
+	// Set by asking Bucia about the slippers
+	ASK_MAGES_ABOUT_SLIPPERS = 0x114,
+	// Set by asking Bucia, Melino, or Pothos
+	KNOW_SLIPPERS_ARE_MUNDANE = 0x115,
+	// Set by asking Bucia about it without it in your possession.
+	// "Thou art seeking brushes? Perhaps Topo the Artisan could help thee"
+	ASK_TOPO_ABOUT_BRUSH = 0x116,
+	// "Mortegro doth have an interest in Death, and goodness knows what the Mad Mage might be doing!"
+	ASK_MORTEGRO_ABOUT_SEVERED_HAND = 0x117,
+	// Set by asking Bucia
+	ASK_ERNESTO_ABOUT_SHIELD = 0x118,
+	// "Dost thou not know that it is a crime to possess Stoneheart! It is a most dangerous substance."
+	SHOWED_STONEHEART_TO_BUCIA = 0x119,
+	// Set by Bucia, never checked.
+	// "I'm not sure of what thou speakest, but perhaps Pothos the Apothecary could identify it for thee."
+	ASK_POTHOS_ABOUT_RUDDY_ROCK = 0x11A,
+	// Only checked by Julia, never set.
+	CLUE_FISHNET_STOCKINGS = 0x11B,
+	
+	/*
+	 *	Moonshade Townplot Again
+	 */
+	
+	HAVE_1ST_ENERGY_GLOBE = 0x11C,
+	HAVE_2ND_ENERGY_GLOBE = 0x11D,
+	// "Those are my wife's stockings! Oh, vile fiend! To think that thou wouldst flaunt Columna's indiscretion in my face!"
+	SHOWED_STOCKINGS_TO_MELINO = 0x11E,
+	// "Then I have nothing to bargain with. I shall certainly end my life in the Mountains of Freedom now!"
+	WILL_NOT_HELP_POTHOS = 0x11F,
+	// In the unmodified game, this is set when he dies so he is not respawned.
+	ERNESTO_IS_DEAD = 0x120,
+	SAW_RED_LIGHTNING = 0x121,
+	SAW_YELLOW_LIGHTNING = 0x122,
+	SAW_GREEN_LIGHTNING = 0x123,
+	// 0x124 not-in-usecode
+	// "Come after midnight, alone, to my manor, and I shall reveal such knowledge as thou hast never before beheld."
+	FRIGIDAZZIS_INVITATION = 0x125,
+	// 0x126 not-in-usecode
+	// Never set, if set Torrissio will not sell spells to you, blocking the soul gems plot.
+	SOLD_STOCKINGS_TO_FILBERCIO = 0x127,
+	// Set when the crystal ball shows Edrin hit by green lightning to become Ale.
+	SAW_EDRIN_TRANSFORM = 0x128,
+	// "I thank thee for protecting my son and for breaking The Fellowship's evil grip over Britannia."
+	MORTEGRO_SEANCE_CHRISTOPHER = 0x129,
+	// "This is said to be the legendary artifact which guided Erstam the Mad during the voyage to Serpent Isle."
+	READ_MAGIC_COMPASS_SCROLL = 0x12A,
+	// If he is dead prior to the Moonshade trial, the Monks resurrect him for plot purposes so her can secretly meet
+	// with Frigidazzi and give you the items from her. "However, the good monks found my body and returned life to me."
+	SHAMINO_RESURRECTED_BY_MONKS = 0x12B,
+	// 0x12C not-in-usecode
+	// Gwenno: "If thou canst learn who gave Batlin the secret of trapping souls,
+	// I will try to learn what can make them able to withstand the forces that we wish to contain."
+	// When set, allows asking Torrissio about soul trapping.
+	SEEK_SECRET_OF_TRAPPING_SOULS = 0x12D,
+	// "The only problem is that none have ever won free. And Filbercio reigns unchallenged."
+	POTHOS_EXPLAINED_FREEDOM = 0x12E,
+	// "This will take time, but I can arrange this."
+	FLINDO_PROMISE_FIRST = 0x12F,
+	// "I am certain thou wilt find his means of summoning thee... very unusual..."
+	MAGELORD_WILL_SUMMON = 0x130,
+	// "My darling husband, Iolo, although I am dead I must tell thee that my love for thee shall never die."
+	MORTEGRO_SEANCE_GWENNO = 0x131,
+	// "Yes, as a Necromage I can commune with the spirits of the dead."
+	// Not certain exactly what this does yet.
+	MORTEGRO_CAN_SEANCE = 0x132,
+	// Set after you talk to Rotoluncia a second time, by scroll or in person.
+	ROTOLUNCIA_SECRET_TO_DAEMONS = 0x133,
+	// Seems to be set if the companion kidnapped was not visible at the time.
+	COMPANION_KIDNAPPED_FROM_AFAR = 0x134,
+	// Set after talking to any of the Three Companions after escaping the Mountains of Freedom.
+	// "I am sure that the one known as Gustacio will be inclined to help us now."
+	AFTER_FREEDOM_NEWS = 0x135,
+	// Set after he takes it, or you willingly trade it.
+	// "Good! Thou hast brought it with thee -- and now I shall take it!"
+	TORRISSIO_HAS_PHILANDERERS_FRIEND = 0x136,
+	// "With it, thou wilt be able to retrieve the cursed Rock Serpent that hath caused me such trouble."
+	HAVE_STEFANOS_VAULT_KEY = 0x137,
+	// 0x138 not-in-usecode
+	// Set when talking to Petra after the Banes: "Mine existence is pointless now"
+	// "Rocco -- my love -- is dead, and the Blue Boar destroyed."
+	PETRAS_EXISTENCE_IS_POINTLESS = 0x139,
+	// Appears set if Shamino was not near Moonshade when the Avatar is sentenced to Freedom.
+	SHAMINO_TELEPORTED_BY_MONKS = 0x13A,
+	// "Ha! Now I have what I want and I did not have to give thee a thing! Thou art not dealing with a child here!"
+	TORRISSIO_TOOK_STOCKINGS = 0x13B,
+	// "Thou art as cold-hearted as any man I have ever met! I can no longer tolerate thy company."
+	REFUSED_STOCKINGS_TO_TORRISSIO = 0x13C,
+	// Set by Pothos, unset by using the bell
+	CAN_CALL_TURTLE = 0x13D,
+	// "If thou wert to be at the Blue Boar Inn at 10 tonight, I could discuss these things further with thee..."
+	BUCIA_FLIRTED = 0x13E,
+	// Set by asking Rocco or Torrissio about the kidnapping.
+	CAN_ACCUSE_MORTEGRO = 0x13F,
+	// Set by asking young Topo about the kidnapping.
+	// "Julia would not let such an injustice stand, I am sure of it."
+	// Only adds lines about mundanes being right to direct you to her.
+	ASK_JULIA_ABOUT_KIDNAPPING = 0x140,
+	// Set by asking Torrissio or Fedabiblio about the kidnapping.
+	KNOW_KIDNAPPING_WAS_MAGICAL = 0x141,
+	// Set by asking Rocco or Andrio about the kidnapping.
+	CAN_ACCUSE_TORRISSIO = 0x142,
+	// "Perhaps if thou couldst provide the 30 guilders which a proper investigation costs...?"
+	PAID_BRIBE_TO_JULIA = 0x143,
+	// Julia offers to investigate for 20 the first time and 30 if rejected then.
+	REJECTED_BRIBE_TO_JULIA = 0x144,
+	// Set by Pothos, never checked.
+	KNOW_ERSTAMS_PASSWORD = 0x145,
+	// Set if Pothos has returned and tries to set Filbercio to talk in autoRotoOneMoment 0x8FF
+	// If falls back to TALK instead.
+	FILBERCIO_AVAILABLE_TO_TALK = 0x146,
+	// Andrio: "'Twas called the Philanderer's Friend. It enabled the user to command objects to move"
+	// Allows you to talk to Torrissio about it, he takes it if Fedabiblio is not in WAITING.
+	CLUE_PHILANDERERS_FRIEND = 0x147,
+	// 0x148 is connected to Rotoluncia asking you about controlling Daemons.
+	// Set if Stefano is dead when the Banes are released, allows you to ask him only once about it.
+	// "She said her name was Thoxa, and that I had to live in order to fulfill thy destiny"
+	STEFANO_RESURRECTED_BY_THOXA = 0x149,
+	// Gustacio gave you a cage to trap Ale.
+	// "I shall give thee this cage to hold the bird within."
+	HAVE_BIRD_CAGE = 0x14A,
+	// Shamino: "The scroll bears a spell of protection against heat, and should be most useful."
+	HAVE_CHILL_SPELL = 0x14B,
+
+	/*
+	 *	Fawn Townplot
+	 */
+
+	// Set in updateScheduleAlyssand 0x8A9 when you ask others about the lost ring.
+	CLUE_SILVER_RING = 0x14C,
+	// Delin: "Thou dost not work for the Magister, dost thou?"
+	WORK_FOR_MAGISTER = 0x14D,
+	// The five Goblin NPCs have been slain
+	CLEARED_FAWN_TOWER = 0x14E,
+	// Never set, seems to be an orphaned flag to prevent entry to Fawn.
+	// Only appears in the Fawn Guard shape#(0x17D)
+	BARRED_FROM_FAWN = 0x14F,
+	// Delphynia: "Wilt thou carry a letter back to Ruggs for me?"
+	// If set, she does not charge for healing.
+	HAVE_LETTER_TO_RUGGS = 0x150,
+	// Never checked, only appears once in the code.
+	// Scots: "I would be honored if thou wouldst accept a copy of my map."
+	HAVE_SCOTS_MAP = 0x151,
+	// Ruggs: "Delphynia is the most beautiful woman in all Fawn, to me."
+	HAVE_LETTER_TO_DELPHYNIA = 0x152,
+	// 0x153 not-in-usecode
+	// 0x154 not-in-usecode
+	// Set when Jendon is talking about scholars visiting.
+	JENDON_TESTIFY_GWENNO = 0x155,
+	// Never set, previously mixed up with 0x158.
+	ASK_DELIN_ABOUT_BATLIN = 0x156,
+	// Set by Jendon, but without mentioning Delin.
+	ASK_DELIN_ABOUT_MOONSHADE = 0x157,
+	// Set when you ask Jendon about Daemon artifacts.
+	JENDON_TESTIFY_RUINS = 0x158,
+	// 0x159 not-in-usecode
+	// 0x15A not-in-usecode
+	// Only set and checked by Jorvin if you have the tattoo.
+	JORVIN_TALKED_ABOUT_MONITOR = 0x15B,
+	// After the Fawn storm cutscene.
+	// Jorvin: "Be certain to bring that fellow Iolo with thee -- the Lady doth wish to confer an honor upon him."
+	JORVIN_AUDIENCE_WITH_YELINDA = 0x15C,
+	// Set when Kalen attacks you and when he dies.
+	KALEN_ASSASSINATION_ATTEMPT = 0x15D,
+	// Never set, only checked by Kylista.
+	// "Thou hast found me out! The Oracle is a fraud!"
+	KYLISTA_CAUGHT_IN_FRAUD = 0x15E,
+	// Leon: "The Triad of Inner Strength is the answer."
+	LEON_EXPLAINED_FELLOWSHIP = 0x15F,
+	// Leon: "The Inner Voice is within all living beings."
+	LEON_EXPLAINED_INNER_VOICE = 0x160,
+	// Leon: "If thou dost trust thy brother, thou wouldst not live in fear."
+	LEON_EXPLAINED_TRUST_THY_BROTHER = 0x161,
+	// Leon: "One rock doth not make a wall. But many rocks can -- with a common purpose."
+	LEON_EXPLAINED_STRIVE_FOR_UNITY = 0x162,
+	// Leon: "If everyone strives to be worthy of that which they seek, such injustices would be few."
+	LEON_EXPLAINED_WORTHINESS = 0x163,
+	// Jendon: "He'll have had a drink or two ta calm him down. Then thou canst have him tell his tales."
+	CANT_ASK_OLON_ABOUT_STORMS = 0x164,
+	// Olon: "Go away, I'm not drunk enough yet."
+	OLON_NOT_DRUNK_ENOUGH = 0x165,
+	// 0x166 Oracle switch?
+	// 0x167 REJECTED_RUGGS_LETTER_WITH_COMPANIONS
+	FIRST_VISIT_TO_FAWN = 0x168,
+	// Scots: "I can tell thee that it digresses from the Virtues that Lord British set forth. But it makes sense."
+	SCOTS_EXPLAINED_FELLOWSHIP = 0x169,
+	// Scots: "Leon is a very charismatic Fellowship follower."
+	// Set when you ask Scots about Leon, then cannot re-ask about him.
+	SCOTS_SAID_LEON_IS_CHARISMATIC = 0x16A,
+	// 0x16B Oracle switch 2?
+	// 0x16C Oracle switch 3?
+	// 0x16D Oracle switch 4?
+	// The Oracle does not have a guilty flag, so not setting either of the two below functions that way.
+	// The Oracle has been set to say the defendant is innocent and the party has "no wish to destroy Beauty!"
+	ORACLE_SET_TO_INNOCENT = 0x16E,
+	// "The true criminals are Priestess Kylista and Great Captain Voldin, who have conspired to convict this innocent man!"
+	ORACLE_SET_TO_CORRUPT = 0x16F,
+	// Dual-use flag, set on the start of the audience cutscene, unset during the
+	// recess between trial sessions, and re-set again after the trial concludes:
+	AUDIENCE_WITH_YELINDA = 0x170,
+	FAWN_TRIAL_DONE_FIRST_DAY = 0x170,
+	// Set after the first day in outcomeFawnTrial 0x93A.
+	FAWN_TRIAL_RECESS = 0x171,
+	// Set regardless of the outcome?
+	FAWN_TRIAL_DONE = 0x172,
+	DUPRE_ACCUSED = 0x173,
+	IOLO_ACCUSED = 0x174,
+	SHAMINO_ACCUSED = 0x175,
+	// Testified flags are set when the NPC is called to testify, and if you call the trial a "charade".
+	// They are then all unset after the first day and reused when you can call them back to testify.
+	// Unless they are in the Fellowship or otherwise absent.
+	// Can also be set with 0x01AF
+	ALYSSAND_TESTIFIED = 0x176,
+	DELIN_TESTIFIED = 0x177,
+	DELPHYNIA_TESTIFIED = 0x178,
+	JENDON_TESTIFIED = 0x179,
+	JORVIN_TESTIFIED = 0x17A,
+	// Yelinda: "Perhaps we should spare the defendant from further embarrassment."
+	FAWN_TRIAL_DAY_ONE_MIDPOINT = 0x17B,
+	KYLISTA_TESTIFIED = 0x17C,
+	JOTH_TESTIFIED = 0x17D,
+	OLON_TESTIFIED = 0x17E,
+	GARTH_TESTIFIED = 0x17F,
+	SCOTS_TESTIFIED = 0x180,
+	YELINDA_TESTIFIED = 0x181,
+	ZULITH_TESTIFIED = 0x182,
+	// 0x183 not-in-usecode
+	// 0x184 not-in-usecode
+	// 0x185 not-in-usecode
+	// 0x186 not-in-usecode
+	// 0x187 set in the Avatar's usecode, only checked once.
+	ARRESTED_FOR_BLASPHEMY = 0x187,
+	// 0x188 not-in-usecode
+	// Yelinda: "Our city was named after the beautiful ruler who commissioned the Oracle."
+	YELINDA_EXPLAINED_FAWN = 0x189,
+	// Yelinda: "Thou hast never heard of the Oracle of Beauty?" "Thou shouldst speak with Kylista at the temple."
+	YELINDA_EXPLAINED_ORACLE = 0x18A,
+	// Iolo: "I am truly sorry, but I do not think that I can help thee..."
+	FAWN_STORM_IOLO = 0x18B,
+	FAWN_STORM_STARTED = 0x18C,
+	// Delin: "Freli... Didst thou say Freli? Hast thou seen him? I have not seen him since the Magister took him away."
+	DELIN_MAGISTER_TOOK_FRELI = 0x18D,
+	// Set when the party spots Zulith following them.
+	ZULITH_SPOTTED_FOLLOWING = 0x18E,
+	// Zulith: "If thy business lies along the route that mine doth, what fault of mine is that?"
+	ZULITH_CONFRONTED_FOLLOWING = 0x18F,
+	// Iolo: "Wait, sailor! I shall sing thee mine heart's one song..."
+	FAWN_STORM_IOLO_SANG = 0x190,
+	
+	/*
+	 *	Fawn Storm Equipment
+	 */
+	
+	// Jendon: "They come from big trees, but not like those hereabouts. Thou couldst ask Olon about it, he hath travelled quite a bit."
+	ASK_OLON_ABOUT_PINECONE = 0x191,
+	// Jendon: "We have none so fancy here -- Only the ones that Alyssand makes."
+	ASK_ALYSSAND_ABOUT_STOCKINGS = 0x192,
+	// Jendon: "But perhaps Delphynia could help thee. She uses all manner of fancy equipment to prepare her herbs for healing and such."
+	ASK_DELPHYNIA_ABOUT_LAB_APPARATUS = 0x193,
+	// Jendon: "Go thou and ask Delphynia, though. She collects odd things that she calls reagents. Perhaps she might know what that is."
+	ASK_DELPHYNIA_ABOUT_PUMICE = 0x194,
+	// Jendon: "Ask thou Delin if he hath heard of such a cap. He is the provisioner. He should know."
+	ASK_DELIN_ABOUT_FUR_CAP = 0x195,
+	// Jendon: "Thou mightest check with Delin to see if he remembers who purchased these."
+	ASK_DELIN_ABOUT_SLIPPERS = 0x196,
+	// Only set if you ask Jendon about it without it in the party's possession.
+	// Jendon: "Ask Delphynia. She doth know all manner of strange things."
+	ASK_DELPHYNIA_ABOUT_BLUE_EGG = 0x197,
+	// Jendon: "Come ta think of it, it looks like something that Jorvin was talking about, when our healer was killed. Thou shouldst show it to him."
+	ASK_JORVIN_ABOUT_BRUSH = 0x198,
+	// Never set, part of the removed dead cat plot. If you have the body (it incorrectly checks for the corpse of a Gwani child), Olon will say:
+	// "Poor critter. Thou shouldst give it a decent burial... Before Jendon sees it, if thou dost know what be good for thee."
+	ASK_OLON_ABOUT_DEAD_CAT = 0x199,
+	// Never checked, should be in Delin's conversation.
+	// Jendon: "Perhaps thou shouldst ask Delin. He is the Provisioner here in town."
+	// "I seem to recall Delin complaining that he had lost some coins -- but I thought that was his forgetfulness!"
+	ASK_DELIN_ABOUT_STRANGE_COINS = 0x19A,
+	// Jendon: "Ask Jorvin if it is a Goblin skull. If it is, I might buy it from thee to hang above the door!"
+	ASK_JORVIN_ABOUT_SKULL = 0x19B,
+	// Jendon: "Seek Jorvin's aid. He is well trained with the devices of battle."
+	ASK_JORVIN_ABOUT_SHIELD = 0x19C,
+	// Jendon: "This stone sounds magical -- since she deals with spell reagents, perhaps she'll know of it."
+	ASK_DELPHYNIA_ABOUT_RUDDY_ROCK = 0x19D,
+	// Jendon: "They are made right here, by young Alyssand."
+	ASK_ALYSSAND_ABOUT_FISHNET = 0x19E,
+	// Never checked. Jendon's replies vary by the Avatar's tattoo and gender.
+	ASKED_JENDON_ABOUT_MONITOR = 0x19F,
+	// Set in askedTooManyQuestions 0x9AE
+	ASKED_JENDON_TOO_MUCH = 0x1A0,
+	// Delin: "How wouldst thou like a discount on anything within the store? Yes, yes... half my normal price -- but just this once!"
+	DELIN_DISCOUNT = 0x1A1,
+	// 0x1A2 only set in buyFromDelin 0x818
+	
+	/*
+	 *	Fawn Townplot again
+	 */
+	
+	// Delphynia: "A letter from Ruggs? Oh, I must see it!"
+	DELIVERED_LETTER_TO_DELPHYNIA = 0x1A3,
+	// Only set and checked by Alyssand.
+	// Alyssand: "I assume that the gauntlets are thine... They are clearly meant for someone more adventurous than a mere weaver."
+	ALYSSAND_RETURNED_GAUNTLETS = 0x1A4,
+	// Delphynia: "Take these leaves back to Harnna quickly, before thou dost worsen."
+	HAVE_VARO_LEAVES = 0x1A5,
+	// Set via egg foundVoldinControls object#(0x6E0)
+	ENTERED_ORACLE_CONTROL_ROOM = 0x1A6,
+	// Never set, only checked in Ruggs code.
+	DELIVERED_LETTER_TO_RUGGS = 0x1A7,
+	// Alyssand: "One of the Temple guards is sympathetic to our Cause. He hath given me this key, which will lead thee into the hidden parts of the Temple."
+	HAVE_FAWN_TEMPLE_KEY = 0x1A8,
+	// Jendon: "Covered in fur, like an animal. Hear they're worse than Goblins... even eat their own kind!"
+	ASKED_JENDON_ABOUT_GWANI = 0x1A9,
+	// Set when you ask Jendon about the dialog category strange items.
+	ASKED_JENDON_ABOUT_ITEMS = 0x1AA,
+	// Set during the first day of the trial if Jendon was asked about the Gwani.
+	QUESTION_JENDON_ABOUT_SAVAGES = 0x1AB,
+	// Set during the first day of the trial if Jendon was ever asked about the ruins.
+	QUESTION_JENDON_ABOUT_RUINS = 0x1AC,
+	// Set during the first day of the trial if Jendon was asked about strange items.
+	// Jendon: "He did ask me about strange objects, such as I had never heard of. They weren't normal items, sir!"
+	QUESTION_JENDON_ABOUT_ITEMS = 0x1AD,
+	// Never set, intended to be set if you got Varo leaves from Delphynia prior to the trial.
+	QUESTION_DELPHYNIA_ABOUT_VARO = 0x1AE,
+	// Set during the first day of the trial if Alyssand testifies.
+	QUESTION_DELIN_ABOUT_RING = 0x1AF,
+	// Set if Zulith testified during the first day, changes his answer if he is questioned on the second day.
+	ZULITH_TESTIFIED_ABOUT_FOLLOWING = 0x1B0,
+	// Set by asking Ruggs about Yelinda post-Banes, checked by the Hound of Doskar's direction function.
+	// "The Great Lady did flee Fawn in a terrible hurry, due to the Curse. All she left behind was her Diamond Necklace."
+	KNOW_YELINDAS_DIAMOND_NECKLACE = 0x1B1,
+	// Set by asking Alyssand about her lost ring. Used to trigger Zulith's following.
+	ASKED_ALYSSAND_ABOUT_RING = 0x1B2,
+	// Set when you agree to help against Fawn's false traditions. Set in joinedTheCause 0x802.
+	JOINED_THE_CAUSE = 0x1B3,
+	// Set if the trial has been set to corrupt and the male Avatar meets Alyssand before the verdict.
+	// Alyssand: "I think I could love a man like thee"
+	ALYSSAND_FLIRTED = 0x1B4,
+	// Set when Iolo meets Yelinda during the audience / dinner. Is not checked anywhere but in Yelinda's code.
+	HAVE_WHITE_DIAMOND_NECKLACE = 0x1B5,
+	// Set in setTournamentFlagsInFawn 0x8AA to prevent it from recurring.
+	SET_FAWN_TOURNAMENT_FLAGS = 0x1B6,
+	
+	/*
+	 *	Mad Mage Townplot
+	 */
+	
+	// Erstam: "Excellent! Then go and bring to me my phoenix egg. I shall send thee there immediately."
+	WILL_HELP_ERSTAM = 0x1B7,
+	// Erstam: "Quickly, put the egg into the machine!"
+	START_PHOENIX_EGG_EXPERIMENT = 0x1B8,
+	// Boydon: "But first thou shouldst ask Erstam if I may go. After all, I am his creation."
+	ASK_ERSTAM_MAY_BOYDON_JOIN = 0x1B9,
+	// Erstam: "Certainly he may. It will serve my creation well to see the world."
+	BOYDON_PERMISSION_TO_JOIN = 0x1BA,
+	// Set as he walks out of the Assimilation Machine in createdBoydon object#(0x77E).
+	CREATED_BOYDON = 0x1BB,
+	// Skyrise: "It is a phoenix egg. It is obviously quite rare, and it possesses magical qualities that go beyond explanation."
+	HAVE_PHOENIX_EGG = 0x1BC,
+	// Set by the egg under the Jawbone via eggPickedUpItem object#(0x6C6) with quality 3.
+	HAVE_SERPENT_JAWBONE = 0x1BD,
+	// Erstam: "I know nothing of this foolish, dangerous power they call teleportation, dost thou hear me? Nothing!"
+	// Allows you to ask Vasel about it.
+	ASK_VASEL_ABOUT_TELEPORTATION = 0x1BE,
+	// Only set similar to a MET flag, asking Pothos for this information first is not required.
+	// Avatar: "A mutual friend told me to mention Iskatradeeth to thee."
+	TOLD_PASSWORD_TO_ERSTAM = 0x1BF,
+	// Set when you talk to "Boydon, the Living Head."
+	MET_THE_LIVING_HEAD = 0x1C0,
+	// Vasel: "The Jawbone of the Serpent enables one to walk through the great Void. But it belongs to the Master."
+	ASK_ERSTAM_ABOUT_JAWBONE = 0x1C1,
+	// Erstam: "Here is a serpent's tooth. This will allow thee to travel back from whence thou didst come."
+	// Tooth 12
+	HAVE_TOOTH_TO_MOONSHADE = 0x1C2,
+	// Erstam: "Here is another tooth. It will allow thee to travel back to this island."
+	// Tooth 11
+	HAVE_TOOTH_TO_MAD_MAGE = 0x1C3,
+	// Erstam: "Here is a tooth that will enable thee to travel to another place." 
+	// Tooth 5
+	HAVE_TOOTH_TO_MONK_ISLE = 0x1C4,
+	// Typo in original.
+	// Erstam: "I shall now rest until I have learned all of the secrets of the universe."
+	CANNOT_ASK_ERSTAM_ABOUT_EXPERIMENTS = 0x1C5,
+	// Set so you cannot ask about it again.
+	ASKED_ERSTAM_ABOUT_IMMORTALITY = 0x1C6,
+	ASKED_ERSTAM_ABOUT_LIFE_AND_DEATH = 0x1C7,
+	ASKED_ERSTAM_ABOUT_DISTURB = 0x1C8,
+	// Erstam: "Here is the key to my storeroom. There thou wilt find the secret of teleportation."
+	HAVE_STOREROOM_KEY = 0x1C9,
+
+	/*
+	 *	Sleeping Bull Townplot
+	 */
+	
+	// Never set, only checked by Templar: "He took bribes, and when my friend accused him of it, Argus slew him on the List Field."
+	ASK_TEMPLAR_ABOUT_ARGUS = 0x1CA,
+	// Set when "We should find a seat." and unset afterward.
+	SAILING_ON_THE_ARABELLA = 0x1CB,
+	// Set in setSailComplete object#(0x7E6)
+	// Hawk: "Never again!"
+	// Used in conversations with other NPCs that make the trip.
+	ARRIVED_IN_MOONSHADE = 0x1CC,
+	// Set by several NPCs in conversation.
+	KNOW_PIKEMEN_JAILED_HAWK = 0x1CD,
+	// Triggers Selina to seek the Avatar: "I have heard that thou art in need of... finances, shall we say."
+	ASKED_PIKEMEN_ABOUT_HAWK = 0x1CE,
+	// Only set, never checked.
+	RESUME_QUEST_WITH_SELINA = 0x1CF,
+	// 0x1D0 not-in-usecode Beta: hawkfree
+	// Set when you hand over gold bars.
+	PAID_BULL_TOWER_RANSOM = 0x1D1,
+	// 0x1D2 not-in-usecode Beta: flindocontacts
+	
+	/*
+	 *	Bard Songs by Byrin and Iolo
+	 *	All set in bardSongs 0x9B0
+	 */
+	
+	HEARD_BEATRIX_SONG = 0x1D3,
+	HEARD_MOUNTAIN_SONG = 0x1D4,
+	HEARD_GWANI_SONG = 0x1D5,
+	HEARD_FOREST_MASTER_SONG = 0x1D6,
+	HEARD_DREAM_SONG = 0x1D7,
+	HEARD_WHITE_DRAGON_SONG = 0x1D8,
+	
+	/*
+	 *	Sleeping Bull Townplot again
+	 */
+
+	// Luther: "When Argus heard Flessar repeating these things, Argus called him into a selfish duel and killed him!"
+	ASK_ARGUS_ABOUT_DUEL_AND_BRIBES = 0x1D9,
+	// 0x1DA not-in-usecode Beta: move_boulder
+	// 0x1DB not-in-usecode Beta: chopped_wood
+	// 0x1DC not-in-usecode Beta: scrub_pots
+	// 0x1DD not-in-usecode Beta: clean_chimney
+	// 0x1DE not-in-usecode Beta: avatardidchores
+	// 0x1DF not-in-usecode Beta: knowswardrobe
+	// Set in shape#(0x314) when using the master switch
+	WARDROBE_MASTER_SWITCH = 0x1E0,
+	// Wilfred: "Together, none can stand in our way!"
+	WILFRED_JOINED_PARTY = 0x1E1,
+	// Wilfred: "I was a fool to join with thee, Avatar! Now I am to lose my life in this foolish quest."
+	// "Why, thou art incompetent as a battle leader -- I was nearly killed the last time I journeyed with thee!"
+	WILFRED_NEARLY_KILLED = 0x1E2,
+	// Wilfred: "What! Dost thou think me some strumpet, to be cast off at the first excuse?"
+	INSISTED_WILFRED_LEAVE = 0x1E3,
+	// Only set, never checked.
+	// Devra: "I was stirred from a sound sleep by the sound of voices downstairs in the cellar."
+	ASKED_DEVRA_ABOUT_ANGUS_DISAPPEARANCE = 0x1E4,
+	// Selina: "Here is the key I promised."
+	HAVE_MINT_KEY = 0x1E5,
+	// Selina: "We are attacked again! Now that we have the gold, I think that it is time for me to use my Blink Ring to escape."
+	SELINA_ESCAPED = 0x1E6,
+	// Selina: "Thou didst pledge to take me to the treasure, but this is the wrong direction!"
+	SELINA_WRONG_DIRECTION = 0x1E7,
+	// 0x1E8 Selina
+	// Devra: "Here are thy boots then... And I thank thee for my slippers."
+	RETURNED_SLIPPERS_TO_DEVRA = 0x1E9,
+	// Selina: "Oh, my!" Not certain what this is.
+	SELINA_SPOTTED_AMBUSH = 0x1EA,
+	
+	/*
+	 *	Furnace Townplot
+	 */
+	 
+	// 0x1EB Set in Clone Iolo's Test of Purity
+	// Set in testOfPuritySexPassed 0x926
+	PASSED_PURITY_ETHICALITY = 0x1EC,
+	// Set in Clone Dupre's object#(0x4B4)
+	PASSED_PURITY_DISCIPLINE = 0x1ED,
+	// Clone Shamino pressed the button
+	PURITY_TEMPTATION = 0x1EE,
+	
+	
+	// Never set, only checked by Zhelkas. If set, he will ask if you have reconsidered.
+	REFUSED_ZHELKAS_TEST = 0x1EF,
+	// 0x1F0 first refusal
+	// 0x1F1 second refusal
+	// 0x1F2 third refusal
+	// Clone Dupre: "Then let the Game begin!"
+	STARTED_WORM_GAME = 0x1F3,
+	// Each seems to set before a new worm appears and is used to determine which barks Clone Dupre uses.
+	WORM_1 = 0x1F4,
+	WORM_2 = 0x1F5,
+	WORM_3 = 0x1F6,
+	WORM_4 = 0x1F7,
+	WORM_5 = 0x1F8,
+	
+	// Set by the egg under the staff, eggPickedUpSerpentStaff object#(0x6AC)
+	HAVE_SERPENT_STAFF = 0x1F9,
+	// Zhelkas: "To be relieved that you have come at last..."
+	ZHELKAS_EXPLAINED_TEST = 0x1FA,
+	// Avatar: "Where am I?" "Where are my belongings?"
+	STARTED_TEST_OF_PURITY = 0x1FB,
+	// Set in circle3Chill object#(0x650)
+	CHILL_ENABLED = 0x1FC,
+	// Zhelkas: "To seem to recognize you, as if from the vision of my slumbers... To wonder if you are the Hero of the Dream..."
+	HERO_OF_THE_DREAM = 0x1FD,
+	// Zhelkas: "To enter our realm..." "To seek the Pillars!"
+	// Used in Zhelkas' conversation and monksResurrectAvatar 0x8FA to determine where to send the Avatar back to.
+	ENTERED_FURNACE = 0x1FE,
+	// Seems to be set after you have satisified Zhelkas' tests.
+	ASK_ZHELKAS_LEAVE_FURNACE = 0x1FF,
+	// Zhelkas: "To be unwilling to allow the ring to fall into the wrong hands."
+	// "To say that the Dream warns of the deceitfulness of the Spectral Trinity."
+	ASKED_ZHELKAS_SECOND_CHANCE = 0x200,
+	// Set after the Avatar has returned to Zhelkas with the everlasting goblet.
+	// Zhelkas: "To keep the Goblet, Hero From Another World. To hope that it might have powers to aid you on your quest."
+	PASSED_CONJURY_TEST = 0x201,
+	// 0x202 Set by Clone Shamino.
+	// Each set in testOfPurityNPCTrigger object#(0x7F6)
+	STARTED_PURITY_LOGIC = 0x203,
+	STARTED_PURITY_ETHICALITY = 0x204,
+	STARTED_PURITY_DISCIPLINE = 0x205,
+	// Never checked, set in eggDaisyIsle object#(0x6AE). Once set they should not repeat it, but do every time.
+	// Three Companions and Gwenno will say: "A hall of sleeping gargoyles..."
+	// "'Tis reminiscent of the problems that are occurring in Britannia this very instant!"
+	SAW_SLEEPING_GARGOYLES = 0x206,
+	// Zhelkas: "To be relieved that you came before the dreaming sickness spread."
+	// "To have feared that none would remain awake to give you the ring. Now it is yours."
+	HAVE_SERPENT_RING = 0x207,
+	// Set in eggFurnaceArena object#(0x6FA) and checked in eggFurnaceArenaInside object#(0x6FF)
+	// Seems to be used to prevent the recreated Automatons from attacking the Avatar again.
+	FURNACE_ARENA = 0x208,
+	// Set on the of death each Arena Automaton in his NPC usecode.
+	AUTO_ARENA_1_IS_DEAD = 0x209,
+	AUTO_ARENA_2_IS_DEAD = 0x20A,
+	AUTO_ARENA_3_IS_DEAD = 0x20B,
+	AUTO_ARENA_4_IS_DEAD = 0x20C,
+	
+	/*
+	 *	Gorlab Swamp and Dream Realm Townplots
+	 */
+		
+	// Never set, seems intended to prevent Siranush from assisting the Avatar
+	// until he has restored Edrin and talked to him about his dreams?
+	MEMORIES_OF_A_BIRD = 0x20D,
+	// Set when asking Siranush how to defeat Rabindrinath but never checked.
+	// Order here is arbitrary, they are listed in different virtue orders in same block of conversation.
+	SIRANUSH_ARTIFACT_OF_COURAGE = 0x20E,
+	SIRANUSH_ARTIFACT_OF_LOVE = 0x20F,
+	SIRANUSH_ARTIFACT_OF_TRUTH = 0x210,
+	// Set by Siranush, checked by her, Harnna's prophecies, and the egg gorlabSwampSleep object#(0x6B3)
+	// which will remove itself if this is set.
+	DREAM_REALM_DONE = 0x211,
+	// Yelinda: "Thank thee, Avatar! Thank thee for returning to me the Comb of Beauty. Take this key..."
+	RETURNED_COMB_OF_BEAUTY = 0x212,
+	// Fixed, originally never set, omitting Edrin's sad comments about never seeing her again.	
+	EDRIN_KNOWS_SIRANUSH_IS_REAL = 0x213,
+	
+	/*
+	 *	Temple Plots
+	 */
+	
+	// Only used to change his response when you return.
+	// Mortegro: "Perhaps I can find another way to escape before I starve to death."
+	REFUSED_TO_HELP_MORTEGRO = 0x214,
+	// Seems to be set by talking to Mortegro when he is stuck on the temple's island.
+	MORTEGRO_IS_TRAPPED = 0x215,
+	// Mortegro: "I shall give thee a scroll, which contains the spell of Shade Summoning."
+	MORTEGRO_IS_FREE = 0x216,
+	
+	// These flags are used in a convoluted way, being set and unset rather than used in a linear fashion.
+	// Eth_Automaton: "Thou hast truly learned the Ethicality of saving others! Thou art worthy to continue the test... Behold!"
+	ETHICALITY_OF_SAVING_OTHERS = 0x217,
+	// Eth_Automaton: "Thou hast learned to value Ethicality over money... Thou art worthy to continue the test! Behold!"
+	ETHICALITY_VALUE_OVER_MONEY = 0x218,
+	// Eth_Automaton: "Thou hast retained thy virtue! The very essence of Ethicality flows within thine heart!"
+	ETHICALITY_TEST_DONE = 0x219,
+	// Eth_Automaton: "Ethicality demands that thou shouldst maintain thy virtue and oppose evil, even at the cost of thy life."
+	// Eth_Automaton: "Ethicality is often the most subjective and tenuous." "Thou art worthy to begin the test..."
+	STARTED_ETHICALITY_TEST = 0x21A,
+	// Set at the same time as 0x219, checked by fountainEthicality object#(0x6B0)
+	// Eth_Automaton: "I congratulate thee, seeker. Thou hast accomplished what many have failed to do."
+	FOUNTAIN_OF_ETHICALITY = 0x21B,
+	// Man in Fire: "Thou didst risk thy life..." "Thou art truly ethical!"
+	SAVED_MAN_IN_FIRE = 0x21C,
+	// Seems to be set if you did not take any gold or valuables in the test.
+	NO_GOLD_FROM_TEST = 0x21D,
+	// Set at the same time as 0x218
+	CONTINUE_TEST_OF_ETHICALITY = 0x21E,
+	// Clone Batlin: "Yield to me, and perhaps I shall spare thy life! Dost thou yield?"
+	DID_NOT_YIELD = 0x21F,
+
+	// Set when you gather the first bucket with the water.
+	// When set Petra's response to leaving the party changes.
+	HAVE_WATER_OF_DISCIPLINE = 0x220,
+	// Both are never checked, set when you fill the first bucket.
+	HAVE_WATER_OF_ETHICALITY = 0x221,
+	HAVE_WATER_OF_LOGIC = 0x222,
+	
+	// Set by the function of the Well shape if the Avatar's location is the Temple of Emotion.
+	// Also set in shape#(0x25F)
+	HAVE_WATER_OF_EMOTION = 0x223,
+	// Set by the function of the Well shape if the Avatar's location is the Temple of Enthusiasm.
+	// Also set in shape#(0x269)
+	HAVE_WATER_OF_ENTHUSIAM = 0x224,
+	// Set by eggAltarTolerace object#(0x75B) when an empty bucket is placed on it.
+	HAVE_WATER_OF_TOLERANCE = 0x225,
+	// Set by Acid_Automaton: "Die in acid!... automaton... fetches Water!"
+	// Checked and also can be set by Petra if she's in the party when you go downstairs?
+	CLUE_ACID_IN_DISCIPLINE = 0x226,
+	// Read Body Transference by "The Ultimate Warrior"
+	// Checked by Petra to enable asking her to join the party.
+	READ_BODY_TRANSFERENCE = 0x227,
+	// Set in the floor shape#(0x33D)
+	// Petra's code is set to use the blond male Avatar shape 721 on polymorph.
+	TRANSFERRED_BODIES_WITH_PETRA = 0x228,
+	
+	// 0x229 set in object#(0x6FD)
+	// 0x22A set in object#(0x6FD)
+	
+	// Ghost: "Who dares to disturb the restless repose of the Hierophant of Chaos!"
+	TALKED_TO_CHAOS_HIEROPHANT = 0x22B,
+
+	// Set in visionWallOfLights 0x9B5
+	// Enables the vision cutscene of the Banes in the basement of White Dragon Castle.
+	VISION_OF_BANES_ENABLED = 0x22C,
+	// Set in funcAntiShamino shape#(0x13D) which includes the vision dialog.
+	// Anti-Shamino: "We shall never be found..." "in the abandoned castle..." "...of the White Dragon!"
+	VISION_OF_BANES_DONE = 0x22D,
+	
+	// Each is set and unset via eggPlatformLogic object#(0x71C) calling
+	// resetPlatformLogic 0x8E8 and passedPlatformLogic 0x8E9.
+	// Numbers here match the egg qualities.
+	LOGIC_PLATFORM_0_RED = 0x22E,
+	LOGIC_PLATFORM_0_AGAIN = 0x22F,
+	LOGIC_PLATFORM_1_YELLOW = 0x230,
+	LOGIC_PLATFORM_2_BLUE = 0x231,
+	LOGIC_PLATFORM_3_WHITE = 0x232,
+	
+	// Murder4: "I confess. It was I that destroyed Number 7... as I shall destroy thee!"
+	MURDER4_CONFESSED = 0x233,
+	
+	/*
+	 *	Mountains of Freedom Townplot
+	 */
+	
+	// Arcadion after the guard Prison2 is dead, says: "At last thou hast found me, Avatar..."
+	// "I thought that I was free of thee when that strange lightning teleported me to this place..."
+	// This flag could be used to improve the Equipment List to say conclusively where the ruddy rock came from.
+	FOUND_BLACK_SWORD = 0x234,
+	// Sadly, Lorthondo has no conversation, just barks.
+	// 0x235 not-in-usecode Beta: metlorthondo
+	// Teldrono: "Thou shalt not have the reagent!"
+	TELDRONO_CHICKEN = 0x236,
+	// Teldrono: "I shan't reveal my secret!"
+	TELDRONO_BEAR = 0x237,
+	// Seems to be set when the Avatar and Stefano throw the two switches at the same time.
+	SWITCHES_TEAMWORK = 0x238,
+	// Set in the eggFreedom object#(0x7DF) for the exit egg quality 207.
+	STEFANO_ESCAPED_FREEDOM = 0x239,
+	// Arcadion: "Thou art a fool, Avatar! Thou hast no idea what thou hast lost!"
+	RELEASED_ARCADION = 0x23A,
+	// Used to change later conversations with the first Automaton in Freedom.
+	// Jail_01: "I am the caretaker here. It is my duty to record thy name and crime."
+	MET_CARETAKER = 0x23B,
+	
+	/*
+	 *	Skullcrusher Townplot
+	 */
+	
+	// Set in eggPickedUpItem object#(0x6C6) quality 2
+	HAVE_FLUX_ANALYZER = 0x23C,
+	// Set in eggPickedUpItem object#(0x6C6) quality 1
+	HAVE_PHILANDERERS_FRIEND = 0x23D,
+	
+	// Opens the Wall of Lights in Skullcrusher
+	// Set in 0x8BF just before animateWallOfLights(true);
+	// Beta: blackrockserpentinslot
+	BLACKROCK_CHAOS_IN_SLOT = 0x23E,
+	// Beta: anarchyprismonaltar
+	ANARCHY_PRISM_ON_ALTAR = 0x23F,
+	// Beta: wantonnessprismonaltar
+	WANTONNESS_PRISM_ON_ALTAR = 0x240,
+	// Beta: madnessprismonaltar
+	MADNESS_PRISM_ON_ALTAR = 0x241,
+	// Beta: ashesonaltar
+	DUPRES_ASHES_ON_ALTAR = 0x242,
+	
+	// Entry puzzle in funcSerpentRune shape#(0x14A)
+	// Unset if done out of order in clearFlagsRuneGate 0x8BD
+	// Initials for "Isal Sal Cra Gaas Iskar."
+	SKULLCRUSHER_RUNE_I = 0x243,
+	SKULLCRUSHER_RUNE_S = 0x244,
+	SKULLCRUSHER_RUNE_C = 0x245,
+	SKULLCRUSHER_RUNE_G = 0x246,
+	SKULLCRUSHER_OPENED = 0x247,
+	
+	// Set by reading the scroll that triggers Vasculio to appear.
+	// "Now my bones decompose, My flesh doth rot, But soon I will rise, And torture the lot."
+	READ_PARTING_VERSES = 0x248,
+	// 0x249 not-in-usecode Beta: seendallas
+	// Beta: xenkacame
+	XENKA_APPEARED_IN_SKULLCRUSHER = 0x24A,
+	// Set in the powder key shape#(0x2C0)
+	EXPLODED_OPEN_DOOR = 0x24B,
+	// Xenka: "Take this Serpent's Tooth... Thou must seek the Dead on the Isle of Crypts."
+	HAVE_TOOTH_TO_ISLE_OF_CRYPTS = 0x24C,
+	
+	/*
+	 *	Spinebreaker Townplot
+	 */
+	
+	// Only used to prevent talking to him again before he runs out of power.
+	// Auto_Butler: "Hierophant, here is thy Serpent Sceptre!"
+	HAVE_SERPENT_SCEPTRE = 0x24D,
+	// Set in goonsLastBattle object#(0x73A)
+	// Selina: "This should stop thee!"
+	ANTECHAMBER_AMBUSH = 0x24E,
+	// Set in visionsWallOfLights 0x9B5 to avoid replaying the vision?	
+	BEGIN_VISION_OF_BATLIN = 0x24F,
+	// Set in Batlin's shape#(0x13E)
+	FINISHED_VISION_OF_BATLIN = 0x250,
+	// Metal_Man: "Ah, so thou art a true accolyte of Order. I will permit thee to enter the Grand Shrine."
+	GRAND_SHRINE_OPENED = 0x251,
+	// Allows the correct answer to Metal_Man's question, the book is "A collection of the Principles of Order"
+	READ_STRUCTURE_OF_ORDER = 0x252,
+	// Triggered by switches via object#(0x6DD)
+	BRUNT_TRAP = 0x253,
+	PALOS_TRAP = 0x254,
+	DEADEYE_TRAP = 0x255,
+	// Used to keep Selina alive until the other goons are dead.
+	BRUNT_IS_DEAD = 0x256,
+	PALOS_IS_DEAD = 0x257,
+	DEADEYE_IS_DEAD = 0x258,
+	
+	// Set in eggWhiteDragon object#(0x6EC)
+	// 0x259,
+	// 0x25A not-in-usecode
+	
+	// Beatrix's rage has subsided, set when all of her eggs have been hatched?
+	BEATRIX_PROTECTION = 0x25B,
+	// Beatrix will appear if Shamino dies. "Do not die, my sweet King..."
+	// "Keep this book as a keepsake between us. Now I must go into the Void, but remember me always..."
+	BEATRIX_FORGAVE_SHAMINO = 0x25C,	
+	
+	/*
+	 *	Gwani Townplot
+	 */
+	
+	// Set when the Hound is asked to track Batlin's medallion.
+	// Used as a plot-critical flag, Yenani will not give the password to Skullcrusher without it.
+	HOUND_TRACKED_BATLIN = 0x25D,
+	// Set when you return the amulet to Yenani: "Here something to reward good deed."
+	// Also set in some unused code smellThatCleanAir object#(0x742) and eggPickedUpItem object#(0x6C6)
+	HAVE_TOOTH_TO_SUNRISE_ISLE = 0x25E,
+	// Set when using the artifact the Gwani Horn on her ice block, which is frame 6.
+	FREED_GWENNOS_BODY = 0x25F,
+	// Yenani: "Daughter can be saved! I thank thee."
+	GAVE_ICE_DRAGON_BLOOD = 0x260,
+	// Yenani: "Amulet is now with the Trapper. Thou find his lair north, in cave along mountains."
+	KNOW_HAZARDS_LAIR = 0x261,
+	// Set by many Gwani, causes Iolo's response to asking about her to change.
+	// Iolo: "Mine heart is broken! My life hath no meaning without my lady love!"
+	// Renamed to match scheme used on other flags.
+	ASKED_GWANI_ABOUT_GWENNO = 0x262,
+	// Changes the responses of the remaining Gwani.
+	// Hazard: "Argh! Thou thinkest thou canst save thy precious Gwani by slaying me? Fool! Thou hast the brain of a headless!"
+	HAZARD_IS_DEAD = 0x263,
+	// Baiyanda: "Here, take bucket of mine. If thou find and slay Ice Dragon, please bring bucket of blood."
+	BAIYANDA_GAVE_BUCKET = 0x264,
+	// Yenani gave you a valuable secret, the password to open the gate to Skullcrusher.
+	KNOW_SKULLCRUSHER_PASSWORD = 0x265,
+	// New for SIfixes, set when the Skullcrusher automatons receive non-waiting schedules.
+	SKULLCRUSHER_AUTOMATONS = 0x266,
+	
+	/*
+	 *	Monk Isle Townplot
+	 */
+	
+	// Set by Karnax: "Fedabiblio had something he referred to as the Scroll of the Serpent."
+	ASK_FEDABIBLIO_SCROLL_SERPENT = 0x267,
+	// Set by Torrissio: "Only Worm Gems will do, and even these must first be enchanted with the spell which I give thee now."
+	ASK_DUCIO_ABOUT_WORM_GEMS = 0x268,
+	// Karnax: "According to this, thou shouldst have the victim drink the water from the temple dedicated to that virtue which the person lacks."
+	// "I think that Miggim doth have a book with maps of those ancient temples."
+	ASK_MIGGIM_ABOUT_MAPS = 0x269,
+	// Set by default, unset in partyResurrect 0x8FE
+	GWENNO_IS_DEAD = 0x26A,
+	// Set by several Monks when asking about Xenka.
+	KNOW_XENKA_DISAPPEARED = 0x26B,
+	// Braccus: "The tides are in convergence. If thou desirest Mandrake Roots, thou must hasten to the swamplands."
+	// Checks by eggFreshMandrake object#(0x6C7) to make the mandrake roots appear.
+	CORRECT_SALT_TIDES = 0x26C,
+	// Set by eggEnoughMandrake object#(0x6C8)
+	HAVE_FRESH_MANDRAKE = 0x26D,
+	// Used to set a timer for when the tides will be correct.
+	ASKED_BRACCUS_ABOUT_SWAMP = 0x26E,
+	// Set when the Avatar dies, unset when resurrected by Monks or Surok, or in object#(0x616)
+	AVATAR_IS_DEAD = 0x26F,
+	// Xenka: "It is I..." Karnax: "Come to us, Xenka!"
+	XENKA_RETURNED = 0x270,
+	// Both seem to be connected with Xenka's return and the bells.
+	// 0x271,
+	// 0x272,
+	// Draxta: "Journey to the Place of Visions, and I shall meet thee there."
+	// Unset after he shows the vision of Petra walking though the acid.
+	ASKED_DRAXTA_FOR_VISION = 0x273,
+	// Karnax: "Now, if I may see it, I may be able to unlock the secret to restoring thy lady friend."
+	GAVE_KARNAX_SCROLL_SERPENT = 0x274,
+	// Gwenno: "But thou didst not have to give me anything to prove thy love. That thou art here now is proof enough."	
+	// Iolo and Gwenno are alive, sane and talked to each other.
+	IOLO_GWENNO_REUNITED = 0x275,
+	// Xenka: "Thy destiny and our fate shall be found upon the island known as Sunrise Isle."
+	// "Take this Serpent Sword as my final aid to thee... I can do no more."
+	// She gives the Ophidian Sword, not a plain Serpent Sword.
+	HAVE_OPHIDIAN_SWORD = 0x276,
+	
+	/*
+	 *	Isle of Crypts Townplot
+	 */
+
+	// 0x277 not-in-usecode
+	// Set by the Great Hierophant if the Party does not have the Serpent Staff. Allows asking Xenka and Zhelkas.
+	// "Thou dost not have my Serpent Staff... Thou must travel to the fiery depths to find where it now lies."
+	ASK_ABOUT_SERPENT_STAFF = 0x278,
+	// Ssithnos: "At last, I am awakened from the slumber of death."	
+	TALKED_TO_GREAT_HIEROPHANT = 0x279,
+	
+	/*
+	 *	Teleport Storm Plot Flags
+	 */
+	
+	// Set via exchangeItemFlags 0x92B
+	STORM_PINECONE = 0x27A,
+	STORM_STOCKINGS = 0x27B,
+	STORM_URN = 0x27C,
+	STORM_LAB_APPARATUS = 0x27D,
+	STORM_PUMICE = 0x27E,
+	STORM_SILVER_RING = 0x27F,
+	STORM_FUR_CAP = 0x280,
+	STORM_SLIPPERS = 0x281,
+	STORM_BREAST_PLATE = 0x282,
+	STORM_BLUE_EGG = 0x283,
+	STORM_GOBLIN_BRUSH = 0x284,
+	STORM_ICE_WINE = 0x285,
+	// 0x286 not-in-usecode Beta: GOTDEADCAT
+	STORM_FILARI = 0x287,
+	STORM_BEAR_SKULL = 0x288,
+	STORM_SEVERED_HAND = 0x289,
+	STORM_MONITOR_SHIELD = 0x28A,
+	STORM_RUDDY_ROCK = 0x28B,
+	
+	// Flags identifying the teleport storm items:
+	KNOW_PINECONE_OWNER = 0x28C,
+	KNOW_MOONSILK_OWNER = 0x28D,
+	KNOW_URN_ORIGIN = 0x28E,
+	KNOW_LAB_APPARATUS_OWNER = 0x28F,
+	KNOW_PUMICE_ORIGIN = 0x290,
+	KNOW_SILVER_RING_OWNER = 0x291,
+	KNOW_FUR_CAP_OWNER = 0x292,
+	KNOW_SLIPPERS_OWNER = 0x293,
+	KNOW_BREAST_PLATE_OWNER = 0x294,
+	KNOW_BLUE_EGG_OWNER = 0x295,
+	KNOW_GOBLIN_BRUSH_ORIGIN = 0x296,
+	KNOW_ICE_WINE_ORIGIN = 0x297,
+	// Set by reading "My Notebook" in the Seminarium.
+	// "After several manipulations I was successful in increasing their lives up to nine times."
+	KNOW_DEAD_CAT_ORIGIN = 0x298,
+	KNOW_FILARI_OWNER = 0x299,
+	KNOW_BEAR_SKULL_ORIGIN = 0x29A,
+	KNOW_SEVERED_HAND_OWNER = 0x29B,
+	KNOW_MONITOR_SHIELD_ORIGIN = 0x29C,
+	KNOW_STONEHEART_ORIGIN = 0x29D,
+	// Set by Febabiblio.
+	CLUE_PUMICE = 0x29E,
+	// Only checked by Febabiblio, never set.
+	ORPHANED_CLUE_PUMICE = 0x29F,
+	// Bucia: "I sold it to the MageLord, who gave it to his favorite at the Feast of Illusions."
+	CLUE_FUR_CAP = 0x2A0,
+	// Bucia: "The MageLord protects her, for she is his latest paramour."
+	// If this is set before asking about the Fur Cap, the owner flag is also set then.
+	KNOW_MAGELORDS_MISTRESS = 0x2A1,
+	// Shamino: "It hath all been replaced by strange items that I do not recognize."
+	SHAMINO_MADE_EQUIPMENT_LIST = 0x2A2,
+	// Set in eggStartingHints object#(0x7AE)
+	// If not set, causes Shamino to say "We did pass through an illusionary wall to enter."
+	// "Might there be another leading from this place to somewhere else?"
+	ENTERED_DEEPER_CAVE = 0x2A3,
+	
+	/*
+	 *	Sunrise Isle Townplot End Game Flags?
+	 */
+
+	// 0x2A4 set in object#(0x71D)
+	// 0x2A5 set in object#(0x71D)
+	// 0x2A6 set in object#(0x71F)
+	// 0x2A7 set in object#(0x71F)
+	// 0x2A8 set in object#(0x71F)
+	// 0x2A9 set in object#(0x71E)
+	// 0x2AA set in object#(0x71E)
+	// 0x2AB - 0x2B0 set in object#(0x721)
+	// 0x2B1 set in object#(0x72B)
+	HAVE_ORDER_SERPENT_EYE = 0x2B1,
+	// 0x2B2 set in object#(0x723)
+	// 0x2B3 set in object#(0x723)
+	// 0x2B4 - 0x2B8 set in object#(0x724)
+	
+	/*
+	 *	Northern Forest Townplot
+	 */
+
+	// Beryl: "The Forest Master could guide thee to King's Savior"
+	ASK_MORGHRIM_KINGS_SAVIOR = 0x2B9,
+	// Never checked.
+	// Morghrim: "Wouldst thou try to retrieve mine Orb?"
+	WILL_HELP_MORGHRIM = 0x2BA,
+	// Set when you return the Orb to Morghrim and get the Hound Whistle.
+	// "In return I shall give thee the whistle to summon the Hound of Doskar."
+	RETURNED_ORB_TO_MORGHRIM = 0x2BB,
+	// Set in sleepArrowDraygan object#(0x7E1)
+	HIT_DRAYGAN_WITH_SLEEP_ARROW = 0x2BC,
+	// "My name is Beryl. I am so glad that thou hast met me privately."
+	MET_BERYL_PRIVATELY = 0x2BD,
+	// 0x2BE Draygan is suspicious? Knows you met with Beryl?
+	// Beryl: "Then use it! Use it to numb the tyrant Draygan!"
+	TOLD_BERYL_ABOUT_ARROWS = 0x2BF,
+	// Beryl: "Now, thou must treat an arrow with the juices from the King's Savior plant."
+	TOLD_BERYL_GOT_SAVIOR = 0x2C0,
+	// 0x2C1 not-in-usecode
+	
+	/*
+	 *	Thoxa and Karnax Flags
+	 */
+	
+	// Thoxa: "I know that thou shalt need to seek out three artifacts -- a Ring, a Necklace, and an Earring."
+	// If she is not asked about them Karnax will mention them after the battle.
+	SEEK_THREE_ARTIFACTS = 0x2C2,
+	// Thoxa: "The writings of Xenka speak of the Three which shall travel with thee. Without them, thou canst not succeed."
+	// If she is not asked about them she will mention them after the battle.
+	SEEK_THREE_COMPANIONS = 0x2C3,
+
+	// 0x2C4 - 0x2C7 set in object#(0x7FA)
+	// 0x2C8 set in 0x8A2
+	// 0x2C9 set in 0x8A3
+	// 0x2CA set in 0x8A4
+	// 0x2CB set in happyHappyJoyJoy 0x8A5
+	// 0x2CC set in 0x8A3
+	
+	/*
+	 *	Temple of Emotion
+	 */
+
+	// Set by eggLodestones object#(0x763)
+	PLACED_LODESTONE_OF_HATE = 0x2CD,
+	PLACED_LODESTONE_OF_HAPPINESS = 0x2CE,
+	PLACED_LODESTONE_OF_DESPAIR = 0x2CF,
+	PLACED_LODESTONE_OF_LOVE = 0x2D0,
+	
+	/*
+	 *	Party Dynamics
+	 */
+	
+	// Never set, only unset in notTimeToSleep 0x87F
+	TIME_TO_SLEEP = 0x2D1,
+	// 0x2D2 not-in-usecode Beta: badavatar
+	// Set in sickOfStealing object#(0x633) "I am leaving!"
+	// Called by stealingObjections object#(0x63A) with a 1/8 chance the member will leave.
+	// Does not appear enabled in the game though.
+	IOLO_QUIT_PARTY = 0x2D3,
+	DUPRE_QUIT_PARTY = 0x2D4,
+	SHAMINO_QUIT_PARTY = 0x2D5,
+	// 0x2D6 not-in-usecode
+	// 0x2D7 not-in-usecode
+	// 0x2D8 not-in-usecode
+	
+	/*
+	 *	Great Earth Serpent Speech Flags
+	 *	Why these are used rather than the main flags, we'll never know.
+	 */
+	
+	// This flag is used to determine which GES speech is played later.
+	LIGHTNING_EXPERIMENT_DONE = 0x2D9,
+	// Zhelkas: "To be called ruler of gargoyles. To respond to Zhelkas. To mean `Iron Helm.'"
+	SERPENT_SPEECH_IMBALANCE_VEILS = 0x2DA,
+	// Siranush: "I wish thee luck in thy quest. May thy sleep be peaceful..."	
+	DREAM_REALM_COMPLETE = 0x2DB,
+	// Set at the end of cutsceneWallofLights object#(0x73B)
+	SERPENT_SPEECH_GWANI_HORN = 0x2DC,
+	// GES talked about banes after Gwenno got resurrected:
+	SERPENT_SPEECH_GWENNO_BANE = 0x2DD,
+	// Never set, only checked in triggersStartSpeechWrapper 0x916
+	SERPENT_SPEECH_ASHES_ON_ALTAR = 0x2DE,
+	// Set in usecodeStartSpeechWrapper13 object#(0x6D0)
+	SERPENT_SPEECH_KEY_IS_DEAD_WIZARD = 0x2DF,
+	// 0x2E0 not-in-usecode
+	// Set by eggPickedUpItem object#(0x6C6)
+	SERPENT_SPEECH_FREE_GWENNO = 0x2E1,
+	// Used in other spots as well, GES says "Look into the Moons' Eye."
+	BATLIN_FLED_SHAMINOS_KEEP = 0x2E2,
+	// Set by the black serpent statue shape#(0x2E7)
+	// "Slay me! Slay me with the Serpent Sword, and send my soul back into the Void!"
+	SERPENT_SPEECH_SLAY_ME = 0x2E3,
+	// Set in object#(0x71F)
+	SERPENT_SPEECH_PLACE_EYES = 0x2E4,
+	// Set in object#(0x72B)
+	SERPENT_SPEECH_WORTHY_EMBLEMS = 0x2E5,
+	// Set in object#(0x726)
+	SERPENT_SPEECH_BLACKROCK = 0x2E6,
+	// Set in object#(0x726)
+	SERPENT_SPEECH_NEED_ARTIFACTS = 0x2E7
+};	
+
+enum Silver_Seed_flags
+{
+	WEARING_BELT_OF_STRENGTH = 0x2E8,
+	EXPERIENCE_FROM_BELT_OF_STRENGTH = 0x2E9,
+	// 0x2EA
+	// 0x2EB
+	// 0x2EC
+	// 0x2ED
+	USED_AMULET_OF_BALANCE = 0x2EE,
+	// 0x2EF set in 0x884
+	// 0x2F0
+	// 0x2F1
+	// 0x2F2
+	// 0x2F3
+	ASKED_SUROK_TOO_MUCH = 0x2F4,
+	RED_ORB_PLACED = 0x2F5,
+	PURPLE_ORB_PLACED = 0x2F6,
+	BLUE_ORB_PLACED = 0x2F7,
+	YELLOW_ORB_PLACED = 0x2F8,
+	EXPERIENCE_FROM_GAUNTLETS_OF_QUICKNESS = 0x2F9,
+	KNOW_YUREL_LOVES_CHEESE = 0x2FA,
+	HAVE_AMULET_OF_BALANCE = 0x2FB,
+	HAVE_SILVER_SEED = 0x2FC,
+	KARNAX_WITNESSED_SEED_PLANTING = 0x2FD,
+	CASK_WAS_MOVED = 0x2FE,
+	ROPE_ON_WELL = 0x2FF,
+	HAVE_KEY_RING = 0x300,
+	// 0x301 not-in-usecode, added in Conquests
+	EXPERIENCE_FROM_HELM_OF_LIGHT = 0x301,
+	WEARING_GAUNTLETS_OF_QUICKNESS = 0x302,
+	HOLDING_ERINONS_AXE = 0x303,
+	EXPERIENCE_FROM_ERINONS_AXE = 0x304,
+	WAS_ASKED_LIARS_RIDDLE = 0x305,
+	WAS_ASKED_EARRINGS_RIDDLE = 0x306,
+	WAS_ASKED_LONGTOOTH_RIDDLE = 0x307,
+	WAS_ASKED_CLOTH_RIDDLE = 0x308,
+	SOLVED_LIARS_RIDDLE = 0x309,
+	SOLVED_EARRINGS_RIDDLE = 0x30A,
+	SOLVED_LONGTOOTH_RIDDLE = 0x30B,
+	SOLVED_CLOTH_RIDDLE = 0x30C,
+	// He is a shape, not a real NPC in the original.
+	MET_ISSTANAR = 0x30D,
+	HAVE_PURPLE_ORB = 0x30E,
+	MET_RIEYA = 0x30F,
+	MET_DRUSILLA = 0x310,
+	MET_SOLARIA = 0x311,
+	// 0x312 not-in-usecode
+	PLANTED_SILVER_SEED = 0x313,
+	USED_IRON_MAIDEN = 0x314,
+	EXPERIENCE_FROM_RING_OF_REAGENTS = 0x315,
+	// Added in Conquests
+	FOUND_ARDINISS_BODY = 0x316,
+	RETURNED_ARDINISS_BODY = 0x317
+};
+
+	// The last original flag is an orphan. Never checked.
+	// Only set in destroyEverythingInMoonshade object#(0x68C)
+	const int MOONSHADE_DESTROYED = 0x318;
+
+enum serpent_isle_fixes_flags
+{
+	// New flag to fix bug with fur cap:
+	GAVE_FUR_CAP_BACK = 0x319,
+	TIME_FORMAT_24_HOURS = 0x31A
+};
+
+enum conquests_of_chaos_flags
+{
+	// This is not in the original game, mod-only use:
+	DEBUG_MODE = 2,
+	// For coming across the lost spellbook in Furnace:
+	FOUND_RUINED_SPELLBOOK = 794,
+	
+	CONQUESTS = 800,
+
+	WANTONNESS_HAS_MAGEBANE = 801,
+	WANTONNESS_HAS_DUPRES_SHIELD = 802,
+	WANTONNESS_HAS_HELM_OF_MONITOR = 803,
+	WANTONNESS_HAS_MAGIC_ARMOUR = 804,
+	
+	BRUNT_HAS_BLACK_SWORD = 805,
+	BRUNT_HAS_BELT_OF_STRENGTH = 806,
+
+	ANARCHY_HAS_DRAGONSLAYER = 807,
+	ANARCHY_HAS_MOONSILK = 808,
+	ANARCHY_HAS_LOVE_SONNETS = 809,
+	ANARCHY_HAS_RING_OF_REAGENTS = 810,
+
+	PALOS_HAS_HELM_OF_LIGHT = 811,
+	PALOS_HAS_MAGIC_HARP = 812,
+	
+	MADNESS_HAS_RUDYOMS_WAND = 813,
+	MADNESS_HAS_IOLOS_LUTE = 814,
+	MADNESS_HAS_URN = 815,
+	MADNESS_HAS_SERPENT_CROWN = 816,
+	MADNESS_HAS_SILVER_RING = 817,
+	MADNESS_HAS_NECKLACE = 818,
+	MADNESS_HAS_BREAST_PLATE = 819,
+	
+	KALEN_HAS_QUICKNESS = 820,
+	DEADEYE_HAS_ERINONS_AXE = 821,
+
+	SPELLBOOK_MISSING = 822
+	// BANES_LEFT_CRYSTAL_ROSE = 823,
+	// BANES_LEFT_MIRROR_OF_TRUTH = 824
+};

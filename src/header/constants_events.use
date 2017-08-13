@@ -1,0 +1,105 @@
+/*
+ *	Copyright 2006 Alun Bestor/The Exult Team
+ *	Copyright 2017 Scott Cooper
+ *
+ *	This program is free software: you can redistribute it and/or modify it under the terms
+ *	of the GNU General Public License as published by the Free Software Foundation,
+ *	either version 2 of the License, or (at your option) any later version.
+ *
+ *	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ *	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *	See the GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License along with this program.
+ *	If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/*
+ *	This header file defines general constants used throughout usecode, for
+ *	Black Gate and Serpent Isle. Constants particular to a function can be
+ *	found in the relevant codefile; constants particular to a game can be
+ *	found in that game's header directory.
+ *
+ *	Author: Alun Bestor (exult@washboardabs.net)
+ *	With modifications by Marzo Junior (marzojr@yahoo.com)
+ *	Last modified: 2006-02-27
+ *	2017-01-26 Knight Captain added ANY
+ */
+
+/*
+ *	Event types, compiled with help from Marzo
+ *	The global <event> variable is set with one of these values to describe
+ *	how the current function was called: whether by the player clicking on the
+ *	object, or by a scripted event, or by egg trigger conditions, or just the
+ *	item being onscreen, etc.
+ *	Functions check the value of <event> in order to provide different responses
+ *	to different events.
+ *	Functions can also set <event> to an arbitrary value, in order to mimic a
+ *	real event or just as a 'pseudo-argument' to functions called with the
+ *	likes of UI_path_run_usecode.
+ *
+ *	Note that some events like PROXIMITY cannot be used on non-NPCs.
+ */
+
+enum events
+{
+	// When an NPC is on-screen or nearby this is called repeatedly,
+	// with a random delay between each call. Typically used for barks.
+	PROXIMITY		= 0,
+
+	// When an object (item or NPC) is double-clicked.
+	// NPCs in combat, sleeping, or otherwise unable to speak will ignore this.
+	DOUBLECLICK		= 1,
+	
+	// When a function is called from inside a script{} block, very common.
+	SCRIPTED		= 2,
+
+	// When an egg is hatched (triggered by activation conditions) this event
+	// occurs, such as spawning guards, monsters, or barks, etc.
+	EGG				= 3,
+
+	// When an item is wielded and 'swing' in combat. This is mainly used with
+	// 'weapon-like' objects like smokebombs, fishing rods, and other items
+	// that have more advanced 'attack' behavior.
+	WEAPON			= 4,
+
+	// When an item is worn or readied in a party member's inventory.
+	// Used by items like the Ring of Invisibilty and Helm of Light.
+	READIED			= 5,
+	
+	// When an item is taken off or put away.
+	UNREADIED		= 6,
+	
+	// SI-only. When an NPC with the TOURNAMENT flag set is killed.
+	DEATH			= 7,
+	
+	// When an object is transformed, but Exult does not fully implement this.
+	// It was unknown for some time. This is why some NPCs do not return
+	// to their original shapes on death. Brunt, Deadeye, etc.
+	POLYMORPHED		= 8,
+	
+	// SI-only. When an NPC conversation starts, showing the NPC's portrait.
+	// This happens when the NPC's schedule is set to TALK by double-clicking
+	// on them or if they are already scheduled for TALK.
+	// Some characters behind walls, like Flicken, may not use this.
+	STARTED_TALKING	= 9,
+
+	// When called by SI script{} blocks that allow listing a specific event
+	// to be run. This allows for multiple scripted events for each NPC,
+	// though few use all three possibilities.
+	SCRIPTED_A 		= 10,
+	
+	// Same as above, but less frequent.
+	SCRIPTED_B		= 11,
+
+	// Event 12 does not appear in SI.
+							
+	//The following events are arbitrary programmer conventions:
+	// Used by calls to UI_path_run_usecode, to indicate
+	// a successful pathfind to the target object.
+	PATH_SUCCESS	= 13,
+
+	// Used by calls to UI_set_path_failure, to indicate an interrupted 
+	// pathfind, such as when the Avatar moves away manually.
+	PATH_FAILURE	= 14
+};

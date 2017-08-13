@@ -1,0 +1,474 @@
+/*
+ *	Copyright 2006 The Exult Team
+ *	Copyright 2017 Scott Cooper
+ *
+ *	This program is free software: you can redistribute it and/or modify it under the terms
+ *	of the GNU General Public License as published by the Free Software Foundation,
+ *	either version 2 of the License, or (at your option) any later version.
+ *
+ *	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ *	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *	See the GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License along with this program.
+ *	If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/*	This list has been reordered to remove the groupings and add notes to each
+ *	NPC. Some have been renamed to match the actual purpose or area for easier
+ *	identification and modding.
+ *
+ *	2017-01-20 Reordered by Knight Captain
+ */
+
+enum serpent_isle_npcs
+{
+	DUPRE = -1,
+	SHAMINO = -2,
+	IOLO = -3,
+	
+	/*
+	 *	Moonshade NPCs
+	 */
+	
+	// Mageling
+	ANDRIO = -4,
+	// Melino and Columna's automaton
+	AUTO_MELINO = -5,
+	AUTO_GUSTACIO = -6,
+	AUTO_TORRISSIO = -7,
+	AUTO_DUCIO_BAKER = -8,
+	AUTO_DUCIO_BLACKSMITH = -9,
+	AUTO_MAGELORD = -10,
+	AUTO_ROTOLUNCIA = -11,
+	AUTO_FLINDO = -12,
+	// Shopkeeper
+	BUCIA = -13,
+	COLUMNA = -14,
+	DUCIO = -15,
+	EDRIN = -16,
+	FEDABIBLIO = -17,
+	FILBERCIO = -18,
+	// Child
+	FRELI = -19,
+	FRIGIDAZZI = -20,
+	// Frigidazzi's servant
+	GOBLIN_MESSENGER = -21,
+	GUSTACIO = -22,
+	// Commander of the Rangers
+	JULIA = -23,
+	MELINO = -24,
+	// Rotoluncia's messenger
+	AUTO_MESSENGER = -25,
+	MORTEGRO = -26,
+	// Rat woman
+	MOSH = -27,
+	// Joins for Temple of Discipline, remains until kicked out
+	PETRA = -28,
+	POTHOS = -29,
+	// Innkeeper
+	ROCCO = -30,
+	ROTOLUNCIA = -31,
+	TOPO = -32,
+	TORRISSIO = -33,
+	
+	/*
+	 *	Mad Mage NPCs
+	 */
+	
+	BOYDON = -34,
+	ERSTAM = -35,
+	VASEL = -36,
+	// Parrot
+	ALE = -37,
+	ARGUS = -38,
+	BYRIN = -39,
+	HAWK = -40,
+	DEVRA = -41,
+	FLINDO = -42,
+	KANE = -43,
+	// Joins for the Mint subquest, leaves after
+	SELINA = -44,
+	// Joins after Banes, bolts if hurt too badly, won't rejoin
+	WILFRED = -45,
+	
+	/*
+	 *	Fawn and Fellowship NPCs
+	 */
+	
+	ALYSSAND = -46,			// Shopkeeper / seamstress
+	DELIN = -47,			// Shopkeeper
+	DELPHYNIA = -48,		// Horticulturalist
+	GARTH = -49,			// Great Captain
+	JOTH = -50,				// Great Captain
+	VOLDIN = -51,			// Great Captain
+	JENDON = -52,			// Innkeeper and bartender
+	JORVIN = -53,			// Security
+	KYLISTA = -54,			// Priestess
+	YELINDA = -55,			// Leader of Fawn
+	LEON = -56,				// Leader of the Fellowship
+	KALEN = -57,			// Fellowship Pirate
+	OLON = -58,				// Sailor
+	RUGGS = -59,			// Fellowship Soldier
+	SCOTS = -60,			// Fellowship Mapmaker
+	ZULITH = -61,			// Chancellor
+	
+	/*
+	 *	Monitor NPCs
+	 */
+	
+	ANDRAL = -62,			// Sculptor, Leopard
+	CALADIN = -63,			// Leader of the Bears
+	CANTRA = -64,			// Child, not yet a knight
+	CELLIA = -65,			// Furrier, Wolf
+	G_SIMON = -66,			// Simon the Goblin
+	HARNNA = -67,			// Farmer and Healer, Leopard
+	KRAYG = -68,			// Provisioner, Wolf
+	MARSTEN = -69,			// Leader of the Leopards
+	LUCILLA = -70,			// Waitress, Wolf
+	LUTHER = -71,			// Braggart, Bear
+	LYDIA = -72,			// Tattoos, Bear
+	RENFRY = -73,			// Crematorium, Wolf
+	SHAZZANA = -74,			// Trainer, Leopard
+	SHMED = -75,			// Knight's Test, Wolf
+	SIMON = -76,			// Simon in disguise, Bear
+	SPEKTOR = -77,			// Treasurer, Leopard
+	STANDARR = -78,			// Blacksmith, Leopard
+	TEMPLAR = -79,			// Goblin expert, Bear
+	FLICKEN = -80,			// West gate guard, Bear
+	
+	ENSORCIO = -81,			// Exile from Moonshade
+	
+	/*
+	 *	Temple of Discipline and Furnace Arena NPCs
+	 */
+	
+	LORD_OF_DISCIPLINE = -82, // Failing automaton
+	ACID_AUTOMATON = -83,	// Another failing automaton
+	AUTO_DISCIPLINE1 = -84,
+	AUTO_ARENA_1 = -85,
+	AUTO_DISCIPLINE3 = -86,
+	AUTO_ARENA_2 = -87,
+	AUTO_DISCIPLINE5 = -88,
+	AUTO_DISCIPLINE6 = -89,
+	AUTO_DISCIPLINE7 = -90,	// The dead one (can be brought back)
+	AUTO_DISCIPLINE8 = -91,
+	AUTO_ARENA_3 = -92,
+	AUTO_ARENA_4 = -93,
+	
+	/*
+	 *	Temple of Logic NPCs
+	 */
+	
+	AUTO_LOGIC1 = -94,
+	AUTO_LOGIC2 = -95,
+	AUTO_LOGIC3 = -96,
+	AUTO_LOGIC4 = -97,
+	AUTO_LOGIC5 = -98,
+	AUTO_LOGIC6 = -99,
+	
+	/*
+	 *	Temple of Ethicality NPC
+	 */
+	
+	ETH_AUTOMATON = -100,	// The automaton which administers the test of ethicality
+	
+	/*
+	 *	Goblin Camp NPCs
+	 */
+	
+	GOBL01 = -101,
+	GOBL02 = -102,
+	GOBL03 = -103,
+	GOBL04 = -104,
+	GOBL05 = -105,
+	GOBL06 = -106,
+	GOBL07 = -107,
+	GOBL08 = -108,
+	GOBL09 = -109,
+	GOBL10 = -110,
+	GOBL11 = -111,
+	GOBL12 = -112,
+	GOBL13 = -113,
+	GOBL14 = -114,
+	GOBL15 = -115,
+	GOBL16 = -116,
+	GOBL17 = -117,
+	GOBL18 = -118,
+	
+	/*
+	 *	Goblins at Fawn Tower NPCs
+	 *	These are the five goblins you must kill to free the tower.
+	 */
+
+	GOBL19 = -119,
+	GOBL21 = -120,
+	GOBL22 = -121,
+	GOBL23 = -122,
+	GOBL24 = -123,
+
+	DREAM_STEFANO = -124,
+	
+	/*
+	 *	Spinebreaker NPCs
+	 */
+	
+	AUTO_BUTLER = -125, 	// The hierophant's butler
+	GUARD_11 = -126,		// Greets you with Batlin's voice
+	BRUNT = -127,			// Fighter
+	DEADEYE = -128,			// Pirate
+	AUTO_PASSWORD = -129,	// Asks for the password at entrance
+	GUARD12 = -130,			// Automaton, starts at House of the Dead
+	GUARD13 = -131,			// Automaton, starts at House of the Dead
+	GUARD14 = -132,			// Automaton, starts at House of the Dead
+	GUARD15 = -133,			// Automaton, starts at House of the Dead
+	GUARD16 = -134,			// Automaton, starts at House of the Dead
+	
+	/*
+	 *	Gwani Enemy NPCs
+	 */
+	
+	ZOMBIE01 = -135,		// Gwani, starts at House of the Dead
+	ZOMBIE02 = -136,		// Gwani, starts at House of the Dead
+	ZOMBIE03 = -137,		// Gwani, starts at House of the Dead
+	ZOMBIE04 = -138,		// Gwani, starts at House of the Dead
+	ZOMBIE05 = -139,		// Gwani, starts at House of the Dead
+	GWANI_01 = -140,		// Skullcrusher zombie
+	GWANI_02 = -141,		// Skullcrusher zombie
+	GWANI_03 = -142,		// Skullcrusher zombie
+	
+	/*
+	 *	Gwani Village NPCs
+	 */
+	
+	BAIYANDA = -143,
+	BWUNDIAI = -144,
+	MWAERNO = -145,
+	MYAURI = -146,
+	NEYOBI = -147,			// Gwani child
+	YENANI = -148,			// Chieftaness
+	GWENNO = -149,			// Joins after Dupre becomes a pile of ashes
+
+	BRENDANN = -150,		// Leader of the Wolves
+	MAN_IN_FIRE = -151,
+	SETHYS = -152,			// Joins in Temple of Tolerance, dies soon after
+
+	GILWOYAI = -153,
+	KAPYUNDI = -154,
+
+	/*
+	 *	Northern Forest NPCs
+	 */
+
+	BERYL = -155,
+	DRAYGAN = -156,
+	HURD = -157,
+	IVOR = -158,
+	MORGHRIM = -159,
+
+	/*
+	 *	 Mountains of Freedom NPCs
+	 */
+
+	JAIL_01 = -160,
+	JAIL_02 = -161,
+	JAIL_03 = -162,
+	LORTHONDO = -163,
+	PRISON1 = -164,
+	PRISON2 = -165,
+	PRISON3 = -166,
+	PRISON4 = -167,
+	STEFANO = -168,
+	TELDRONO = -169,
+	
+	/*
+	 *	 Furnace and the Test of Purity NPCs
+	 */
+	
+	ZHELKAS = -170,			// Winged Gargoyle
+	SEX_01 = -171,
+	SEX_02 = -172,
+	SEX_03 = -173,
+	SEX_04 = -174,
+	SEX_05 = -175,
+	THIRSTY_THIEF1 = -176,
+	THIRSTY_THIEF2 = -177,
+	CLONE_IOLO = -178,		// Also appears in Dream World
+	CLONE_SHAMINO = -179,
+	CLONE_DUPRE = -180,
+	
+	RABINDRINATH = -181,
+	SIRANUSH = -182,
+	
+	THIRSTY_THIEF3 = -183,
+	
+	AUTO_LOGIC7 = -184,
+	
+	DED_AUTOMATON = -185,	// Automaton, in the middle of ocean
+	
+	/*
+	 *	Skullcrusher Order Automaton NPCs
+	 */
+	
+	GUARD18 = -186,			// East Big Doors Guard, southern one
+	GUARD19 = -187,			// East Big Doors Guard, northern one
+	GUARD20 = -188,			// Serpent Gate Guard
+	GUARD21 = -189,			// Exit Guard
+	GUARD17 = -190,			// Western Gate Guard
+	
+	/*
+	 *	Moonshade NPCs 2 - Automatons
+	 */
+	
+	AUTO_STEFANO = -191,	// Stefano's, was SERV09
+	AUTO_MORTEGRO = -192,	// Mortegro's, was SERV10
+	AUTO_SEMINARIUM = -193,	// Seminarium's, was SERV11
+	AUTO_POTHOS = -194,		// Pothos' downstairs automaton, was SERV12
+	
+	PERRY_STOKES = -195,	// The software pirate
+	PIRATE_GUY = -196,		// Mountains of Freedom
+	
+	IAUTO = -197,			// Automaton, starts at House of the Dead
+	
+	AUTO_MUSIC01 = -198,	// Blue Boar musician
+	AUTO_MUSIC02 = -199,	// Blue Boar musician
+	AUTO_MUSIC03 = -200,	// Blue Boar musician
+	
+	DREAM_CANTRA = -201,
+	METAL_MAN = -202,		// Asks about The Structure of Order
+	
+	/*
+	 *	Shamino's Castle NPCs
+	 */
+
+	HENCH2 = -203,			// Starts at House of the Dead
+	HENCH3 = -204,			// Starts at House of the Dead
+	HENCH1 = -205,
+		
+	AUTO_DUCIO_SEW = -206,	// Ducio's seamster
+		
+	/*
+	 *	Monk Isle NPCs
+	 */	
+	
+	KARNAX = -207,			// Leader
+	AVOWED_MONK = -208,		// "She hath made a vow." Silent2
+	MIGGIM = -209,			// Librarian
+	DEAF_MONK = -210,		// "He is deaf." Silent3
+	THOXA = -211,
+	BRACCUS = -212,
+	DRAXTA = -213,
+	MUTE_MONK = -214,		// "He cannot speak." Silent1
+	XENKA = -215,			// Visionary
+	
+	/*
+	 *	Misc NPCs
+	 */	
+	
+	AUTOGUARD = -216,		// Pothos' patrolling automaton
+	SABRINA = -217,
+	DREAM_BYRIN = -218,
+	DREAM_ENSORCIO = -219,
+	DREAM_FILBERCIO = -220,
+
+	/*
+	 *	Mint Ambush NPCs
+	 */
+
+	MINT_AMBUSH1 = -221,	// Starts at the House of the Dead
+	
+	DEATH_KNIGHT = -222,	// Not in the Mint Ambush, starts at the House of the Dead
+	
+	MINT_AMBUSH2 = -223,	// Starts at the House of the Dead
+	MINT_AMBUSH3 = -224,	// Starts at the House of the Dead
+	MINT_AMBUSH4 = -225,	// Starts at the House of the Dead
+	MINT_AMBUSH5 = -226,	// Starts at the House of the Dead
+	MINT_AMBUSH6 = -227,	// Starts at the House of the Dead
+
+	/*
+	 *	Misc NPCs
+	 */	
+	
+	AUTO_2 = -228,			// Automaton, starts at the House of the Dead
+	AUTO_3 = -229,			// Automaton, starts at the House of the Dead
+	AUTO_4 = -230,			// Automaton, starts at the House of the Dead
+	AUTO_LARRY = -231,		// Automaton, starts at the House of the Dead
+	AUTO_STAN = -232,		// Automaton, starts at the House of the Dead
+	
+	ERNESTO = -233,			// Ranger, second in command.
+	
+	SUPER_GOBLIN = -256,	// At the tree leading to Goblin Camp
+	BILLY_CAIN = -257,		// Goblin, SW of knight's test
+	STEVE_POWERS = -258,	// Goblin, SE of Sleeping Bull Inn, along north coast
+	KEY_GUY = -259,			// Troll, has key to Serpent Staff
+	BUSTER = -260,			// Olon's dog
+	SMUDGE = -261,			// Cat in Monitor
+	
+	// The quotes are from http://www.it-he.org
+	ANTI_DUPRE = -263, 		// Haha! I am Dupre, bane of drunkenness!
+	ANTI_IOLO = -262,  		// I am Iolo! Bane of shooting-the-Avatar-through-the-
+							// heart-with-the-triple-crossbow!
+	ANTI_SHAMINO = -264, 	// Kneel before Shamino, bane of rapidly diminishing
+							// consequence...
+	
+	GOBLIN_KING = -265,
+	GARG_PRISONER = -266,	// Mountains of Freedom
+	YEARL = -267,			// Snow leopard
+	BRENDA = -268,			// Naga
+	HOUND_OF_DOSKAR = -269,
+	HENCH_MAN = -270,		// Starts at the House of the Dead
+	HENCHMAN = -271,		// Starts at the House of the Dead
+	PALOS = -272,			// Gargoyle
+	MEELOSE = -273,			// Wildman
+	CHUCK = -274,			// Goblin
+	HAZARD = -275,
+	WINDRUNNER = -276,		// Timberwolf known as Windrunner, renamed to match dialog
+	SMITHZHORSE = -277,		// Dream Realm
+	ELSI = -278,			// Cow, north of Mint
+	EMMIT = -279,			// Ratman
+	LORD_BRITISH = -280,
+	CRUSTY = -281,			// Clown, SW of Captain Stokes tower
+	WATSON = -282,			// Ranger
+	DEATHMARE = -283,
+	PIBB = -284,			// Starts at the House of the Dead
+	JOHNSON = -285,			// Captive Pikeman in Goblin Camp
+	
+	CINDY = -287,			// Naked girl S of turtle-summoning bell
+	
+	DBEYER = -293,			// Gargoyle, starts at the House of the Dead
+	VASCULIO = -294,		// Vampire
+	FITCH = -295			// Trapper, the one dying at the edge of the Ice Plains
+};
+
+// Using the same numbers as listed in faces.vga
+enum silver_seed_npcs
+{
+	SHAL = -305,			// The Fiend is a madman of Chaos searching for his ring.
+	ISSTANAR = -306,		// Commander of The Serpent's Fang.
+	ELISSA = -307,			// Order Mage of the First Rank.
+	SUROK = -308,			// Healer of Serpent's Fang.
+	TSANDAR = -309,			// SubCommander, aide to the Garrison Commander.
+	DRAXINAR = -310,		// The green dragon says "My friends, however, call me 'Stumpy'."
+	YUREL = -311			// The catman was an "experiment long ago gone wrong."
+};
+
+enum intrinsic_npcs
+{
+	AVATAR = -356,
+	// Used by several intrinsics (e.g. UI_count_objects) that would otherwise
+	// take a single NPC
+	// Not supported by several other intrinsics that you'd really like it to
+	// (e.g. UI_get_cont_items)
+	PARTY = -357,
+	NONPARTYNEARBY = -358
+	
+};
+
+// These are different from NPC flags.
+enum npc_ids
+{
+	CURED_OF_INSANITY = 29,
+	// When you are sent to Freedom, the NPC ID of Iolo, Shamino, Dupre and Boydon
+	// gets set to this value so the game knows they were in your party:
+	BOOTED_FOR_FREEDOM = 30
+};

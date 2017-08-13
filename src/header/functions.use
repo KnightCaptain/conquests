@@ -1,0 +1,105 @@
+/*
+ *	Copyright 2006 The Exult Team
+ *	Copyright 2017 Scott Cooper
+ *
+ *	This program is free software: you can redistribute it and/or modify it under the terms
+ *	of the GNU General Public License as published by the Free Software Foundation,
+ *	either version 2 of the License, or (at your option) any later version.
+ *
+ *	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ *	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *	See the GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License along with this program.
+ *	If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/*	New functions that will be auto-assigned a number by the build process.
+ *
+ *	2017-01-20 KC removed some functions into new files with object numbers.
+ */
+
+void freeze object#() ()
+{
+	set_item_flag(DONT_MOVE);
+}
+
+void unfreeze object#() ()
+{
+	clear_item_flag(DONT_MOVE);
+}
+
+void addShaminoToParty ()
+{
+	SHAMINO->add_to_party();
+	gflags[SHAMINO_HAS_BELONGINGS] = true;
+	SHAMINO->set_npc_id(0);
+
+	script getPathEgg(5, 4) after 10 ticks
+	{
+		nohalt;
+		call shapeSilverRingSerpentRing;
+	}
+	delayedBark(SHAMINO, "@Welcome back!@", 0);
+	abort;
+}
+
+// Yes he does? void leavePartyIolo 0x83C ()
+// Unlike the other two companions, Iolo didn't have one for himself:
+void askIoloBelongings ()
+{
+	if (IOLO->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY))
+	{
+		say("@I am carrying many items, some of which may be of use to thee. Wouldst thou care to have these?@");
+		if (askYesNo())
+		{
+			say("@Here they are.@");
+			gflags[IOLO_HAS_BELONGINGS] = false;
+
+			var iolo_items = IOLO->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
+			var obj;
+			var index;
+			var max;
+			var give_return;
+			var cumulative_result = [false, 0];
+
+			for (obj in iolo_items with index to max)
+			{
+				if (!((obj->get_item_shape() == SHAPE_SPECIAL_RING) &&
+				    (obj->get_item_frame() == 2)))
+				{
+					give_return = giveItemsToPartyMember(AVATAR, obj->get_item_quantity(0), obj->get_item_shape(), obj->get_item_quality(), obj->get_item_frame(), obj->get_item_flag(TEMPORARY), false);
+					if (cumulative_result[1] == 0)
+						cumulative_result[1] = give_return[1];
+
+					cumulative_result[2] = (cumulative_result[2] + give_return[getArraySize(give_return)]);
+					obj->remove_item();
+				}
+			}
+
+			if (cumulative_result[1] != 0)
+				say("@Thy friends will have to help carry these things.@");
+
+			if (cumulative_result[2] > 0)
+			{
+				give_return = cumulative_result[2];
+				if (give_return > 1)
+					say("@Since thou canst not carry these remaining ",
+					give_return, " items, I will place them at thy feet.@");
+
+				else
+					say("@Since thou dost not have enough room for this last item, I will place it at thy feet.@");
+			}
+		}
+		else
+		{
+			gflags[IOLO_HAS_BELONGINGS] = true;
+			say("@If thou changest thy mind, thou hast but to return and ask again.@");
+		}
+	}
+}
+
+void wraperXenkaReturns object#() ()
+{
+	xenkaReturns();
+}

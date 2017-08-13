@@ -1,0 +1,94 @@
+/*
+ *	Copyright 2006 Alun Bestor/The Exult Team
+ *	Copyright 2017 Scott Cooper
+ *
+ *	This program is free software: you can redistribute it and/or modify it under the terms
+ *	of the GNU General Public License as published by the Free Software Foundation,
+ *	either version 2 of the License, or (at your option) any later version.
+ *
+ *	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ *	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *	See the GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License along with this program.
+ *	If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/*
+ *	Item/NPC flags, stolen from the Exult LB-joins-party patch with some 
+ *	comments added.
+ *	These can be retrieved and set using UI_get_item_flag(itemref, flag),
+ *	UI_set_item_flag(itemref, flag) and UI_clear_item_flag(itemref, flag).
+ *
+ *	2017-05-00 KC commented out game-specific entries.
+ */
+
+enum item_flags
+{
+	INVISIBLE			= 0,
+	ASLEEP				= 1,
+	CHARMED				= 2,
+	CURSED				= 3,
+	DEAD				= 4,
+	
+	IN_PARTY			= 6,
+	PARALYZED			= 7,
+	PARALYSED			= 7,		//British spelling
+	POISONED			= 8,
+	PROTECTION			= 9,
+	ON_MOVING_BARGE		= 10,
+	OKAY_TO_TAKE		= 11,		// The item does not belong to anyone, and won't
+									// trigger stealing behaviour if you take it.
+	MIGHT				= 12,		// Double strength, dext, intel.
+	IMMUNITIES			= 13,		// Lots of imunities; can be gotten only.
+	CANT_DIE			= 14,		// Test flag in monster_info.
+	DANCING				= 15,		// Set by "Dance" spell in BG.
+	DONT_MOVE			= 16,		// SI-only. NPC can't move; "cutscene" mode.
+	// DONT_RENDER		= 16,		// BG-only. Like DONT_MOVE, but avatar also
+									// completely invisible.
+	TEMPORARY			= 18,		// Is temporary - this means that the item will
+									// be deleted once the party gets beyond a certain
+									// range from it (outside the superchunk?)
+
+	SAILOR				= 20,		// The barge's 'captain'. When getting the flag,
+									// you will actually get the current captain.
+	OKAY_TO_LAND		= 21,		// Used for flying-carpet.
+	// BG_DONT_MOVE		= 22,		// BG-only. NPC can't move; "cutscene" mode.
+	DONT_RENDER			= 22,		// SI-only. Like DONT_MOVE, but avatar also
+									// completely invisible.
+	IN_DUNGEON			= 23,		// If set, you won't be accused of stealing.
+	CONFUSED			= 25,
+	IN_MOTION			= 26,		// Object is a barge object moving, or on a barge
+									// object that is moving. Set in usecode, and mostly
+									// used for the SI 'NPC' ships such as the turtle.
+
+	MET					= 28,		// Has the NPC been met before - originally this
+									// was SI-only, but Exult implements it for BG
+									// too. This determines conversation behaviour,
+									// and whether the NPC's real name or shape name
+									// is displayed when they are single-clicked on.
+									// BG originally used global flags for this, which
+									// amounts to an extra 250-odd flags.
+	SI_TOURNAMENT		= 29,		// Call usecode (eventid = 7) on death
+	ZOMBIE				= 30,
+	SI_ZOMBIE			= 30,		// Used for sick Neyobi, Cantra, post-Bane companions.
+
+	NO_SPELL_CASTING	= 31,
+	POLYMORPH			= 32,		// Do not set this flag directly; use the
+									// UI_set_polymorph intrinsic instead.
+	TATTOOED			= 33,
+	READ				= 34,		// Can read non-Latin alphabet scrolls, books, signs.
+	IS_PETRA			= 35,
+	LIZARD_KING			= 36,		// SI, Set by using large magic mushrooms after Batlin dies.
+	FREEZE				= 37,
+	NAKED				= 38, 		// Exult. Makes the avatar naked given its skin.
+									// Other NPCs should use set_polymorph instead.
+	
+	/*
+	 *	Mod Flags
+	 */
+	
+	RE_MET				= 27		// Conquests, used for the first post-Batlin meeting
+									// with each NPC. This allows them to describe their
+									// circumstances and what has happened.
+};

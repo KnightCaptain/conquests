@@ -1,0 +1,1561 @@
+/*
+ *	Copyright 2006 The Exult Team
+ *	Copyright 2017 Scott Cooper
+ *
+ *	This program is free software: you can redistribute it and/or modify it under the terms
+ *	of the GNU General Public License as published by the Free Software Foundation,
+ *	either version 2 of the License, or (at your option) any later version.
+ *
+ *	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ *	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *	See the GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License along with this program.
+ *	If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/*	A list of externally-called code, typically original Usecode that will
+ *	later be referenced in other modified code.
+ *
+ *	2016-12-29 New findings added by Knight Captain
+ */ 
+
+/*
+ *	Shapes with Usecode, in 0x000-0x3FF range.
+ *	Shapes 0x0 - 0x95 (0-149) are Tiles, none have Usecode.
+ */
+
+// Filbercio's shape has the Moonshade Banquet cutscene embedded
+extern void cutscenesFilbercio shape#(0x1C7) ();
+
+extern void funcIolo shape#(0x1D1) ();
+ 
+// The Black Sword, with Acadion's conversation
+extern void theBlackSword shape#(0x326) ();
+extern void funcMage shape#(0x329) ();
+// extern void funcBucket shape#(0x32A) ();
+
+// A rabbit on patrol is what triggers the introduction sequence.
+// This is also a good place to make NPC changes after a funcRabbit.original();
+extern void funcRabbit shape#(0x32B) ();
+
+extern void cutsceneMoonshadeBanquet shape#(0x32E) ();
+
+
+
+// Lydia's Tattoo
+extern void cutsceneTattoo shape#(0x28C) ();
+
+// Calls the first encounter with Thoxa, again in the Dream Realm, and in
+// Skullcrusher are done through this function. The SI devs must have been
+// running out of available functions, or maybe out of time to search for them.
+extern void gwaniChild shape#(0x363) (); 
+
+// Calls the ring (???) usecode, which promptly forwards to a function
+// that will start the appropriate speech for the plot:
+// SIfixes: startSerpentSpeechViaRing
+extern void shapeSilverRingSerpentRing shape#(0x377) ();
+
+// Silver Seed Shapes with embedded conversations
+// Isstanar shape 945
+// extern void funcCapedAutomaton shape#(0x3B1) ();
+// Surok shape 946
+// extern void funcHealer shape#(0x3B2) ();
+// Tsandar shape 947
+extern void funcOphidianSoldier shape#(0x3B3) ();
+// Yurel shape 957
+// extern void funcCatMan shape#(0x3BD) ();
+// Shal shape 975
+extern void funcMadMan shape#(0x3CF) ();
+// Draxinar shape 978
+// extern void shapeGreenDragon shape#(0x3D2) ();
+// Elissa shape 1015
+extern void funcMageWomanBlueGreen shape#(0x3F7) ();
+
+/*
+ *	NPC Usecode, in 0x400-0x563, none listed here.
+ */
+
+/*
+ *	Everything else is above 0x600, both Eggs and any other Functions
+ *	Egg Usecode is generally in the 0x600-0x6FF range, but not required
+ *	to be eggs but it seems that was the intended purpose.
+ */
+
+// Torch and light source use quality decrement.
+// void Func0600 object#(0x600) ()
+
+// Spinebreaker floating carpet button
+extern void carpetLiftButton object#(0x601) ();
+
+// Newly-assigned object number for new code, was unused:
+// extern void CureCantra object#(0x604) ();
+
+// Silver Seed button behind lantern
+extern void caskMoveButton object#(0x605) ();
+// extern void spellFails object#(0x606) ();
+
+// Newly-assigned object number for new code, was unused:
+// extern void CureCompanion object#(0x608) ();
+
+// Only does UI_fade_palette(12, 1, 1); and return;
+extern void fadeFromBlack object#(0x60D) ();
+
+// Silver Seed installation done via conversation with Karnax
+// Left out because it is replaced in SIfixes
+// extern void funcSilverSeedInstall object#(0x612) ()
+
+// Shows the face and text of the speech track being played.
+// Great Earth Serpent speeches:
+//  0 "Hasten! The Imbalance grows stronger..."
+//  1 "His mission here is finished. He may now depart for the Void."
+//  2 "Look into the Moons' Eye."
+//  3 "Thou hast forgotten something."
+//  4 "Place the Staff, Armour, and Crown on the Altar."
+//  5 "Return when thou hast the Three Artifacts of the Great Hierophant: Staff, Armour, and Crown."
+//  6 "The Blackrock Serpents... thou must have the three Serpents of Blackrock."
+//  7 "Thou art in Balance, having mastered both Chaos and Order. I declare thee worthy to bear the emblems of the Great Hierophant of Balance."
+//  8 "Now place the Eyes of the Serpent before my statue."
+//  9 "Slay me! Slay me with the Serpent Sword, and send my soul back into the Void!"
+// 10 "Seek the Temple, and within it, the Eye of the Moon."
+// 11 "Free Gwenno... free her from the ice!"
+// 12 "Time is short. Move on."
+// 13 "The wizard... the key is the dead wizard... thou must vanquish him."
+// 14 "The ashes... place the Ashes on the altar."
+// 15 "Bane of Chaos... Chaos Bane... twisted her soul..."
+// 16 "A new Hero has entered this world... am I dreaming, or is he real?"
+// 17 "Who art thou, stranger? Why can't I see thee? Curse this Imbalance which veils my mind..."
+// 18 "I know that we have met before, Stranger. Dost thou not recall?"
+// 19 "Hero from Another World! Know that it is I, the Great Earth Serpent, whom thou liberated from imprisonment in the days of Exodus the Destroyer. If only thou couldst help me now, Avatar."
+// 20 "Seek the Horn... the Gwani Horn... seek it in the depths beneath the Skullcrusher Mountains.
+// Guardian speeches:
+// 21 "Pleasant dreams, Avatar..." "Ha ha hah hah!"
+// 22 "See how I reward those who fail me!" "Hah hah hah hah!"
+// Arcadion speeches:
+// 23 "Hah hah hah hah!" Played when he is released from the sword.
+// 24 "I have paid my debt to thee, and our bargain is concluded. I shall not aid thee again. Beware the Banes of Chaos, Avatar!"); Unused, doesn't sound fitting.
+// 25 Chaos Serpent: "Avatar! It is I, Dupre! My soul has been fused with the Serpent of Chaos. I am keeping it from attacking thee, but I do not know how much longer I can hold out! Quickly! Thou must go to Sunrise Isle!"
+// 26 Order Serpent: "Dost thou think that thou canst chain the Serpent of Order within a prison of Balance? Never! Servants of Order, attack!"
+extern void showFaceWithSpeech object#(0x614) ();
+
+	/*
+	 *	Silver Seed Witches Conversations
+	 */
+
+// extern void funcDrusilla object#(0x619) ();
+// extern void funcRieya object#(0x61A) ();
+// extern void funcSolaria object#(0x61B) ();
+
+// Avatar: "Quickly! Surround Batlin!"
+// extern void surroundBatlin object#(0x61D) ();
+
+// "Free us with the right button!"
+extern void testOfPuritySexBarks object#(0x61E) ();
+
+extern void clearFlagDancing object#(0x61F) ();
+extern void setFlagDancing object#(0x620) ();
+
+// 0x0621 unused
+
+	/*
+	 *	Sleep Functions
+	 */
+
+// "In how many hours shall I/we awaken thee?"
+extern void askTimeSleeping object#(0x622) ();
+// "Arise, playername. 'Tis time to continue the quest."
+extern void ariseFromBed object#(0x623) ();
+extern void wrapUpBedroll object#(0x624) ();
+
+extern void arrestAvatar object#(0x625) ();
+
+// Dupre: "That is perfectly good beer!"
+extern void useKegBeer object#(0x628) ();
+extern void useKegWine object#(0x629) ();
+
+extern void specialBooks object#(0x62A) ();
+
+
+	/*
+	 *	Sewing Functions
+	 */
+
+// "Why dost thou not spin that wool into thread?"
+extern void useWool object#(0x62D) ();
+// "Why dost thou not weave cloth with that thread on the loom?"
+extern void useThread object#(0x62E) ();
+
+
+// "Blast! The Amulet seems to be protecting him!"
+extern void battleThreeWitches object#(0x632) ();
+
+// "I am leaving!"
+extern void sickOfStealing object#(0x633) ();
+
+// "Do not thou overcook it!"
+// void eggBakeBread object#(0x635) ()
+//	{eggBakeBread.original();}
+
+extern void returnCameraToAvatar object#(0x637) ();
+
+// Quality 120 = SHIP'S LOGBOOK
+// Quality 121 = JOURNAL by burnt boat: "Draygan betrayed us. Who would have thought it?"
+// Quality 122 = HAZARD'S LEDGER
+// Quality 123 = BRIGGIO'S BOOK OF ASTONISHING THINGS
+// Quality 124 = DRINKING SONGS DUPRE TAUGHT ME Volume One MAIDS IN TRADES
+// Quality 125 = DRINKING SONGS DUPRE TAUGHT ME Volume Two ROLL THY LEG OVER
+// Quality 126 is unused
+// Quality 127 = VETRON'S GUIDE TO WEAPONS AND ARMOUR
+// Quality 138 = THE ART OF FIELD DRESSING by Harnna
+// Quality 141 = MY NOTEBOOK Anonymous is the Claw book: "The source of all extra life resides in the Power Generator."
+// It also sets gflags[KNOW_DEAD_CAT_ORIGIN] = true;
+// Quality 150 = MINE EXPERIMENTS by Teldrono
+extern void moreBooks object#(0x638) ();
+
+// 0x639 unused
+
+// "Art thou sure of thine actions, Avatar?"
+extern void stealingObjections object#(0x63A) ();
+
+// Quality 182 = OBSERVATIONS OF PAIN by MageLord Filbercio
+// Quality 184 = POETRY FOR THE ROMANTIC LUTE by Sir D. Dey
+// Quality 201 = NOTES by Erstam
+// Quality 209 = A SHORT TREATISE ON COMBAT TACTICS & HABILIMENTS OF WAR
+// Quality 211 = THE SLEEPING SOLDIER Registry
+// Quality 212 = A TREATISE ON TORTURE by Evad, Royal Servant to the King of the White Dragon
+// Quality 213 = PRINCIPLES OF ECONOMICS By Hyle
+// Quality 214 = THE DWELLERS OF SERPENT ISLE By Byman
+// Quality 215 = COURAGEOUS DEEDS By Andrew of Monitor "The tale of Kosric and Pedigar" It includes:
+// "However, the two launched themselves at the foes, Kosric wielding his hammer, \"Thunderbolt,\" and Pedigar with his greatsword, and brought doom upon the foul trolls."
+// Quality 216 = RECIPE BOOK By Petra "Apple Way"
+// Quality 217 = RECIPE BOOK By Petra "Sweet Muffins"
+// Quality 221 = FIGHTING IS AN ART By Johnson
+// Quality 222 = Lord British's Tyrannical Adventure by Anon
+// Quality 223 = The Crying Lute By Gannt
+// Quality 224 = The House of the Unicorn By Gannt
+// Quality 225 = No Such Thing as Fairies By Gannt
+// Quality 226 = DEVRA'S RECIPES
+// Quality 227 = TROUT SURPRISE By Jendon
+// Quality 228 = GUIDE TO KNIGHTHOOD By Graeme of Monitor
+// Quality 229 = WARRIORS OF FORTUNE QUARTERLY The Adventurer's Guidebook
+// Quality 230 = THE RITES OF CREMATION by Tolbert (Monitor)
+// Quality 231 = TEMPLES OF CHAOS Translated by Miggim
+// Quality 250 = Great Practical Jokes "Chapter One: Exploding Books"
+extern void moreBooks2 object#(0x63B) ();
+
+// This is the function of all NPCs when copy protection has failed.
+extern void funcOink object#(0x63D) ();
+
+// This is not called anywhere else so the object could be reused.
+// ""Busted usable called! Rewrite this one!"
+// extern void bustedUsable object#(0x63E) ();
+
+	/*
+	 *	Spell Functions
+	 *	0x640 to 0x687 or 1600 to 1671
+	 *	Possibly hard coded to the spellbook Gump?
+	 */
+
+extern void spellChill object#(0x650) ();
+
+extern void createImbalanceFields object#(0x688) ();
+// Unused object number assigned here for:
+extern void firesnakeExplode object#(0x689) ();
+
+	/*
+	 *	Misc Functions
+	 *	0x689 to 0x6A3 or 1673 to 1699
+	 */
+
+extern void disableChill object#(0x68A) ();
+
+// "Fascinating. This key refuses to be added to the key ring."
+extern void keyRejectsRing object#(0x68B) ();
+
+// Not sure if this is used at all.
+// Yes it is!
+// extern void destroyEverythingInMoonshade object#(0x68C) ();
+
+// 0x68D-0x6A3 are unused in SI+SS.
+
+/*
+ *	Eggs Part 1, in 0x6A4-0x7CF, or 1700-1999, only uses up to 1971.
+ *	Items listed as a .original are to give these eggs a name in Exult Studio,
+ *	without changing their functionality at all. The original code does not
+ *	require an (event == EGG) even if many of them include that check.
+ */
+
+// 
+// void eggDamnSteppedOnAnEgg object#(0x6A4) ()
+//	{eggDamnSteppedOnAnEgg.original();}
+
+// void eggManInFire object#(0x6A5) ()
+// 	{eggManInFire.original();}
+// Called by the above egg.
+// extern void barksManInFire object#(0x6A6) ();
+
+void eggEthicalityDropMoney object#(0x6A7) ()
+	{eggEthicalityDropMoney.original();}
+
+void eggEthicalityEducator object#(0x6A8) ()
+	{eggEthicalityEducator.original();}
+
+// Fireworks if you pass, disables traps too?
+void eggEthicalityPassMoney object#(0x6A9) ()
+	{eggEthicalityPassMoney.original();}
+
+// Egg behind Melino and Columna's house, which checks if you have Artifact
+// frame 0 (the Comb) and if so, sets flag 0xFD HAVE_COMB_OF_BEAUTY
+// This is what Columna's code checks for which face frame to use.
+// void eggPickedUpCombOfBeauty object#(0x6AA) ()
+//	{eggPickedUpCombOfBeauty.original();}
+
+// Trolls with Tournament flags?
+// void Func06AB object#(0x6AB) ()	
+
+// Egg used under the Serpent Staff in Furnace.
+// void eggPickedUpSerpentStaff object#(0x6AC) ()
+//	{eggPickedUpSerpentStaff.original();}
+
+// "This bottle is identical to the one from which thou didst drink at the inn in Monitor!"
+void eggFoundBrownBottle object#(0x6AD) ()
+	{eggFoundBrownBottle.original();}
+
+// "Snakes! Why did it have to be snakes?"
+// "Why could not Lord British have sent thee somewhere akin to 'Daisy Isle' instead?"
+void eggDaisyIsle object#(0x6AE) ()
+	{eggDaisyIsle.original();}
+
+// "Britannia for a fan!"
+void eggPartyOverheating object#(0x6AF) ()
+	{eggPartyOverheating.original();}
+
+// Checks if you have completed the Test of Ethicality.	
+// void eggFountainOfEthicality object#(0x6B0) ()
+//	{eggFountainOfEthicality.original();}
+
+// This is the egg that kills each Bane-slain NPC.	
+// void eggBaneHolocaust object#(0x6B1) ()	
+//	{eggBaneHolocaust.original();}
+
+// "Mine eyes are closing..."
+// void eggGorlabSwampSleep object#(0x6B3) ()
+//	{eggGorlabSwampSleep.original();}
+
+void eggStartSpeechWrapper02 object#(0x6B4) ()
+	{eggStartSpeechWrapper02.original();}
+
+// void eggBrownBottleMonolith object#(0x6B5) ()
+//	{eggBrownBottleMonolith.original();}
+
+void eggMintBlinks object#(0x6B6) ()
+	{eggMintBlinks.original();}
+
+void eggCreateBlood object#(0x6B7) ()
+	{eggCreateBlood.original();}
+
+void eggCreateBurnMark object#(0x6B8) ()
+	{eggCreateBurnMark.original();}
+
+// Live in SIfixes, commented out here.
+// void eggSkullcrusherAutomatons object#(0x6B9) ()
+//	{eggSkullcrusherAutomatons.original();}
+
+// Egg quality 0 unsets FREEZE, quality 1 sets FREEZE.
+// void eggWarmerColder object#(0x6BA) ()
+//	{eggWarmerColder.original();}
+
+// void eggStuckInFawn object#(0x6BB) ()
+// 	{eggStuckInFawn.original();}
+
+// void eggFawnStorm object#(0x6BC) ()
+//	{eggFawnStorm.original();}
+
+// void eggFawnStalker object#(0x6BF) ()
+//	{eggFawnStalker.original();}
+
+// void eggFellowshipSermon object#(0x6C0) ()
+//	{eggFellowshipSermon.original();}
+
+void eggHoursCheckOracle object#(0x6C1) ()	
+	{eggHoursCheckOracle.original();}
+
+// void eggTriggerYelinda object#(0x6C2) ()
+//	{eggTriggerYelinda.original();}
+
+void eggSpawnBullTowerPikemen object#(0x6C3) ()
+	{eggSpawnBullTowerPikemen.original();}
+
+void eggAfterMintSelina object#(0x6C4) ()
+	{eggAfterMintSelina.original();}
+
+// skip one
+
+// Egg used under specific items to set flags, and removes its own egg.
+// Quality 1 under the Philanderer's Friend.
+// Quality 2 under the Flux Analyzer.
+// Quality 3 under Erstam's Serpent Jawbone.
+// Quality 4 gives an error with the location coordinates, uses same flag as the tooth to Sunrise Isle.
+// Quality 5 under the Gwani Horn.
+// void eggPickedUpItem object#(0x6C6) ()
+//	{eggPickedUpItem.original();}
+
+// Causes mandrake roots to appear when the tides are right.
+// Only Braccus can set the appropriate flag for the tides.
+// void eggFreshMandrake object#(0x6C7) ()
+//	{eggFreshMandrake.original();}
+
+// Placed alongside some of the above eggs, this checks if
+// the Avatar has picked up enough fresh mandrake yet.
+void eggEnoughMandrake object#(0x6C8) ()
+	{eggEnoughMandrake.original();}
+
+// SIfixes now has Ernesto as a standard NPC, so this is disabled.
+// void eggSpawnErnesto object#(0x6C9) ()
+// 	{eggSpawnErnesto.original();}
+	
+// Placed close to the Avatar's game start location to
+// freeze him and polymorph him into the empty shape.
+// void eggGameStartHideAvatar object#(0x6CB) ()
+//	{eggGameStartHideAvatar.original();}
+
+// Also appears to create the worm heart.
+// void eggSpawnIceWorm object#(0x6CC) ()
+//	{eggSpawnIceWorm.original();}
+
+// void eggSwapInSuitsOfArmor object#(0x6CE) ()
+//	{eggSwapInSuitsOfArmor.original();}
+
+// void eggFitchsDeath object#(0x6CF) ()
+//	{eggFitchsDeath.original();}
+
+// void eggStartSpeechKeyIsDeadWizard object#(0x6D0) ()
+//	{eggStartSpeechKeyIsDeadWizard.original();}
+
+// void eggRemoveKeepBarriers object#(0x6D5) ()
+//	{eggRemoveKeepBarriers.original();}
+
+void eggBigRedGateway object#(0x6D7) ()
+	{eggBigRedGateway.original();}
+
+// void eggReduceHealthAvatar50 object#(0x6D8) ()
+//	{eggReduceHealthAvatar50.original();}
+
+// Includes Johnson's death:
+// "I cannot keep pace with thee! My chest feels as though it shall soon explode!"
+void eggsDreamRealmAndJohnson object#(0x6D9) ()
+	{eggsDreamRealmAndJohnson.original();}
+
+// Includes a Spinebreaker egg about Batlin opening the Wall of Lights.
+// Quality 1 - Was inside Perry Stokes' house: "Die, Wares-thief!"
+// Quality 2 - Avatar: "Look at the bones!"
+// Quality 3 - "Where are we?" "We are lost, Avatar."
+// Quality 4 - Avatar: "I don't like this place..."
+// Quality 5 - "Make haste! Batlin must be opening the Wall of Lights!"
+// void eggsKnightsForest object#(0x6DA) ()
+//	{eggsKnightsForest.original();}
+
+// Wakes statues into monsters?
+void eggHaveABadFeeling object#(0x6DB) ()
+	{eggHaveABadFeeling.original();}
+
+// Changes the plaque and opens the door when placing the three items.
+void eggSpinebreakerPedestal object#(0x6DC) ()
+	{eggSpinebreakerPedestal.original();}
+
+// Quality 2 calls Brunt in Spinebreaker.
+// void eggTauntTrapsBatlinsGoons object#(0x6DD) ()
+//	{eggTauntTrapsBatlinsGoons.original();}
+
+// Quality 0 is outside, Quality 1 is inside.
+// void eggFreezeOutside object#(0x6DF) ()
+//	{eggFreezeOutside.original();}
+
+// "Wait, thou art not Kylista!"
+// void eggFoundVoldinAtControls object#(0x6E0) ()
+//	{eggFoundVoldinAtControls.original();}
+
+// His response is different if Shamino is in the Party.
+void eggKingofWhiteDragon object#(0x6E1) ()
+	{eggKingofWhiteDragon.original();}
+
+// Creates the taunting scroll when the Banes are in White Dragon.
+// void eggScrollJoinTheParty object#(0x6E2) ()
+//	{eggScrollJoinTheParty.original();}
+
+// Mad Iolo: "Come and see the freak show, Avatar!"
+// Spawns Wildmen.
+void eggMadIoloFreakShow object#(0x6E3) ()
+	{eggMadIoloFreakShow.original();}
+
+// Mad Iolo: "Want to try some spinning... ...and dying, Avatar?"
+void eggMadIoloSpinningDying object#(0x6E4) ()
+	{eggMadIoloSpinningDying.original();}
+
+// Mad Iolo: "Want to sing an opera, Avatar?"
+void eggMadIoloSingAnOpera object#(0x6E5) ()
+	{eggMadIoloSingAnOpera.original();}
+
+// Various taunts from a random selection of the three Banes.
+void eggBaneTaunts object#(0x6E6) ()
+	{eggBaneTaunts.original();}
+
+// Mad Iolo: "Welcome to mine own private shooting gallery, Avatar."
+void eggMadIoloShootingGallery object#(0x6E7) ()
+	{eggMadIoloShootingGallery.original();}
+
+// Mad Iolo: "I had almost tired of waiting for thee, Avatar. Thou'rt some hero... it	took thee long enough.
+// void eggBanesAttack object#(0x6EA) ()
+//	{eggBanesAttack.original();}
+
+// Mad Iolo: "Hurry, Avatar, I am waiting for thee..."
+void eggMadIoloWaitingForThee object#(0x6EB) ()
+	{eggMadIoloWaitingForThee.original();}
+
+// Eggs mostly used to call Mad Iolo to taunt the Avatar.
+void eggMadIoloNotHereToSleep object#(0x6EC) ()
+	{eggMadIoloNotHereToSleep.original();}
+
+// Party: "An alarm bell!", "They know that we are here."
+// void eggAlarmBell object#(0x6ED) ()
+// 	{eggAlarmBell.original();}
+
+// void eggBalanceSerpentTeleport object#(0x6EF) ()
+//	{eggBalanceSerpentTeleport.original();}
+
+// "This bottle could be a clue..."
+// void eggClueBrownBottle object#(0x6F4) ()
+// 	{eggClueBrownBottle.original();}
+
+// Shamino: "I never thought to see this again!"
+// void eggShaminoSeesHisCastle object#(0x6F7) ()
+//	{eggShaminoSeesHisCastle.original();}
+
+// 0x6F8 and 0x6F9 are unused.
+
+// "The gates are closing!"
+// void eggFurnaceArenaGates object#(0x6FA) ()
+//	{eggFurnaceArenaGates.original();}
+
+// "I will steal this!"
+// void eggShaminosKeep object#(0x6FB) ()
+//	{eggShaminosKeep.original();}
+
+// void eggBeatrixAttacks object#(0x6FC) ()
+//	{eggBeatrixAttacks.original();}
+
+void eggAutoDisciplineGuard1 object#(0x6FD) ()
+	{eggAutoDisciplineGuard1.original();}
+
+// void eggDisciplineForceWall object#(0x6FE) ()
+//	{eggDisciplineForceWall.original();}
+
+// void eggFurnaceArenaInside object#(0x6FF) ()
+//	{eggFurnaceArenaInside.original();}
+
+void eggAutoRotoWhoDothApproach object#(0x700) ()
+	{eggAutoRotoWhoDothApproach.original();}
+
+extern void usecodeStartSpeechWrapper03 object#(0x701) ();
+
+void eggTortureChamber object#(0x702) ()
+	{eggTortureChamber.original();}
+
+void eggFurnaceMergeKeys object#(0x705) ()
+	{eggFurnaceMergeKeys.original();}
+
+// Outside of the temple lightning hits Mortegro again and
+// removes him from the game.
+void eggLightningMortegro object#(0x706) ()
+	{eggLightningMortegro.original();}
+
+// "I am Xenka. Thou must take this Serpent Sword and go to Sunrise Isle."
+// void eggIAmXenka object#(0x709) ()
+//	{eggIAmXenka.original();}
+
+void eggOutOfJail object#(0x70B) ()
+	{eggOutOfJail.original();}
+
+// 0x70C unused
+
+void eggDisciplineAcid object#(0x710) ()
+	{eggDisciplineAcid.original();}
+
+// void eggSpawnPikemanPaceH object#(0x714) ()
+//	{eggSpawnPikemanPaceH.original();}
+
+void eggCreateKey77 object#(0x715) ()
+	{eggCreateKey77.original();}
+
+void eggSethysDies object#(0x718) ()
+	{eggSethysDies.original();}
+	
+// Eggs on the platforms to the Temple of Logic
+// void eggPlatformLogic object#(0x71C) ()
+//	{eggPlatformLogic.original();}
+
+void eggSunriseSerpentSlots object#(0x71F) ()
+	{eggSunriseSerpentSlots.original();}
+
+void eggSunriseAltar object#(0x720) ()
+	{eggSunriseAltar.original();}
+
+void eggSunrisePedestals object#(0x721) ()
+	{eggSunrisePedestals.original();}
+
+// Reimplemented
+// Creates the pikemen and equips them, and sets their activity.
+// void eggSpawnMonitorTowerPikemen object#(0x729) ()
+//	{eggSpawnMonitorTowerPikemen.original();}
+
+// Sunrise Isle placement of Serpent Artifacts
+// Also includes scripted sections
+void placeSerpentArtifacts object#(0x72B) ()
+	{placeSerpentArtifacts.original();}
+
+// Creates the pikemen and equips them, and sets their activity.
+// void eggSpawnFawnTowerPikemen object#(0x72D) ()
+//	{eggSpawnFawnTowerPikemen.original();}
+
+// Unlocks the door is gflags[KNOW_HAZARDS_LAIR] is set?
+// void eggHazardsLair object#(0x72E) ()
+//	{eggHazardsLair.original();}
+
+// Creates the brass boxes in Moonshade if the Banes are released.
+// void eggBrassBoxTeeth object#(0x730) ()
+//	{eggBrassBoxTeeth.original();}
+
+// Creates a mummy that attacks in the Isle of Crypts?
+void eggIsleOfCryptsMummy object#(0x731) ()
+	{eggIsleOfCryptsMummy.original();}
+
+void eggSpeechOrderSerpent object#(0x733) ()
+	{eggSpeechOrderSerpent.original();}
+
+// Reimplemented
+// void eggSpawnFawnGuard object#(0x734) ()
+//	{eggSpawnFawnGuard.original();}
+
+// Opens the portcullis if the Banes have been released.
+void eggOpenPortcullisIfBanes object#(0x737) ()
+	{eggOpenPortcullisIfBanes.original();}
+
+// Only after Siranush has been met.
+// void eggRemoveRabinsGate object#(0x738) ()
+//	{eggRemoveRabinsGate.original();}
+
+extern void startKnightsTest object#(0x739) ();
+
+// Selina: "This should stop thee!"
+// void eggAntechamberAmbush object#(0x73A) ()
+//	{eggAntechamberAmbush.original();}
+
+// Replaced in SIfixes.
+// void eggSpinebreakerWallOfLights object#(0x73B) ()
+
+// Egg on the altar that appears in Gustacio's basement.
+// It swaps an empty bucket for the water of tolerance.
+// void eggAltarOfTolerace object#(0x75B) ()
+// 	{eggAltarOfTolerace.original();}
+
+// void eggSacrificeLightningWhip object#(0x760) ()
+//	{eggSacrificeLightningWhip.original();}
+
+// Used to make the 4 Lodestones of Emotion disappear.
+void eggLodestones object#(0x763) ()
+	{eggLodestones.original();}
+
+
+	
+/*
+ *	Eggs Part 2 with misc. functions mixed in.
+ */
+
+// Replaces the each color orb with a burnt-out one.
+void eggSSOrbPedestals object#(0x765) ()
+	{eggSSOrbPedestals.original();}
+
+// This egg is not visible, it is under the Silver Seed, and hatches when the
+// SS is picked up, bringing in the Three Witches to attack.
+// "Not so fast, deary! Ye don't think that ye kin just dance outta here with that little seed so easy, now do ye?"
+void eggPickedUpSilverSeed object#(0x768) ()
+	{eggPickedUpSilverSeed.original();}
+
+void eggKarnaxAppearsForPlanting object#(0x76B) ()
+	{eggKarnaxAppearsForPlanting.original();}
+
+void eggEarthquakeStumble object#(0x798) ()
+	{eggEarthquakeStumble.original();}
+
+// Makes all non-automaton party members face item.
+// Better call this as "npc->makePartyFaceNPC();"
+extern void makePartyFaceNPC object#(0x7D1) ();
+
+// Makes NPC face Avatar:
+extern void faceAvatar object#(0x7D2) ();
+
+extern void serpentBondRemoveNPCsFromParty object#(0x7D6) ();
+extern void serpentBondAddNPCsBackToParty object#(0x7D7) ();
+
+// Used for calling many other functions and events in the Mountains of Freedom.
+// Quality 207 (0xCF) returns the Avatar and ad hoc party to Moonshade.
+void eggFreedom object#(0x7DF) ()
+	{eggFreedom.original();}
+
+// Appears to determine the destination of the Avatar's return from resurrection.
+// Also sets or unsets the freezing flag based on the destination.
+extern void resurrectionDestination object#(0x7E0) ();
+
+// 7DF Serpent Path gates
+
+// Used for Vasculio and the Wall of Lights in Skullcrusher.
+// void eggSkullcrusher object#(0x7E7) ()
+// 	{eggSkullcrusher.original();}
+
+// Triggered around the time the Avatar arrives on path egg 0 in each scenario.
+extern void testOfPurityNPCTrigger object#(0x7F6) ();
+
+
+//	{.original();}
+//	{.original();}
+	
+
+
+// void eggWakeAndAttackAvatar object#(0x797) ()
+//	{eggWakeAndAttackAvatar.original();}
+
+
+
+// 201612 Usecode digging by Knight Captain
+// The names assigned here are what these functions appear to be/do,
+// but I am not fully certain, so they may change in the future.
+// For now unknown ones are formatted for easy enabling after later research.
+
+/*
+ *	NPC-related functions, neatly in alphabetical order
+ */
+
+// Alyssand
+extern void whisperAlyssand 0x801 ();
+extern void joinedTheCause 0x802 ();
+extern void buyFromAlyssand 0x803 ();
+extern var haggleWithAlyssand 0x804 (var askingprice, var lowestreasonable);
+
+// Argus
+extern void buyFoodFromArgus 0x805  ();
+extern void buyDrinksFromArgus 0x806 ();
+extern var haggleWithArgus 0x807 (var askingprice, var lowestreasonable);
+
+// Automatons
+extern void moonshadeAutomatons 0x808 (var owner, var response_id);
+// Automatons that are broken and restored have the Zombie flag set.
+// They can join the party:
+extern void zombieAutomatons 0x809 ();
+
+// Boydon
+extern void askBoydonBelongings 0x80A ();
+
+// Bucia
+extern void exchangeMoneyBucia 0x80B ();
+extern void buyFromBucia 0x80C ();
+extern var haggleWithBucia 0x80D (var askingprice, var lowestreasonable);
+
+// Cantra
+extern void cantraBattlesBatlin 0x80E ();
+
+// Caretaker Automatons in the Mountains of Freedom
+// food and water
+extern void buyBreadWaterFromCaretaker 0x80F ();
+// potions and bandages
+extern void buyHealingItemsFromCaretaker 0x810 ();
+
+// Cellia
+extern void buyFromCellia 0x811 ();
+extern var haggleWithCellia 0x812 (var askingprice, var lowestreasonable);
+extern var gaveWolfToCellia 0x813 ();
+
+// Clone Iolo 
+extern void cloneIoloThyLoss 0x814 ();
+
+// Thou art truly ethical!
+extern void passedManInFire 0x815 (var var0000);
+
+// Columna
+extern void buySpellsColumna 0x816 ();
+extern var haggleWithColumna 0x817 (var askingprice, var lowestreasonable);
+
+// Delin
+extern void buyFromDelin 0x818 ();
+extern var haggleWithDelin 0x819 (var askingprice, var lowestreasonable);
+
+// Delphynia
+extern void healingByDelphynia 0x81A ();
+extern void buyFromDelphynia 0x81B ();
+extern var haggleWithDelphynia 0x81C (var askingprice, var lowestreasonable);
+
+// Devra
+extern void exchangeMoneyDevra 0x81D ();
+extern void buyFoodFromDevra 0x81E ();
+extern void buyDrinksFromDevra 0x81F ();
+extern var haggleWithDevra 0x820 (var askingprice, var lowestreasonable);
+
+// Draxinar
+extern void draxinarMysticsRiddle 0x821 ();
+// Replaced in SIfixes to correct the spelling of "correct"
+// extern void draxinarEarringsRiddle 0x822 ();
+extern void draxinarLongtoothRiddle 0x823 ();
+// Replaced in SIfixes to correct the correct answer
+// extern void draxinarClothRiddle 0x824 ();
+
+// extern var Func0825 0x825 ();
+
+// Ducio
+extern void createWormGemDucio 0x826 (var var0000);
+extern void buyFromDucio 0x827 ();
+extern var haggleWithDucio 0x828 (var askingprice, var lowestreasonable);
+
+// Dupre
+// extern void leftPartyDupre 0x829 ();
+extern void askDupreBelongings 0x829 ();
+
+// Elissa
+extern void buySpellsElissa 0x82A ();
+extern var haggleWithElissa 0x82B (var askingprice, var lowestreasonable);
+extern void trainWithElissa 0x82C ();
+
+// Ensorcio
+extern void buySpellsEnsorcio 0x82D ();
+extern var haggleWithEnsorcio 0x82E (var askingprice, var lowestreasonable);
+
+// extern void Func082F 0x82F ();
+
+// Filbercio
+extern void interruptsFilbercio 0x830 ();
+
+// Not certain but seems to randomize the placement of the rest of the party:
+// extern var teleportToBanquet 0x831 (var var0000, var var0001);
+// extern var Func0832 0x832 (var var0000);
+
+// Flicken
+extern void openGateFlicken 0x833 (var var0000);
+
+// Gustacio
+extern void freeSpellsGustacio 0x834 ();
+
+// Gwenno
+extern void askGwennoBelongings 0x835 ();
+
+// Harnna
+extern void healingByHarnna 0x836 ();
+extern void buyFromHarnna 0x837 ();
+extern var haggleWithHarrna 0x838 (var askingprice, var lowestreasonable);
+
+// Hawk
+// Makes Hawk walk towards the top of the jail basement stairs and teleports him away:
+extern var goUpstairsHawk 0x839 ();
+extern void setSailHoldFast 0x83A (var var0000);
+
+// Hound of Doskar
+extern void houndDirection 0x83B (var var0000);
+
+// Iolo
+extern void askIoloBelongings 0x83C ();
+
+// Jendon
+extern void buyFoodFromJendon 0x83D ();
+extern void buyAleFromJendon 0x83E ();
+extern var haggleWithJendon 0x83F (var askingprice, var lowestreasonable);
+
+// Julia
+extern void buyWineFromJulia 0x840 ();
+extern var haggleWithJulia 0x841 (var askingprice, var lowestreasonable);
+
+// Krayg
+extern void buyFromKrayg 0x842 ();
+extern void sellLeatherToKrayg 0x843 ();
+extern var haggleWithKrayg 0x844 (var askingprice, var lowestreasonable);
+
+// Lucilla
+extern void buyFoodFromLucilla 0x845 ();
+extern void buyDrinksFromLucilla 0x846 ();
+extern var haggleWithLucilla 0x847 (var askingprice, var lowestreasonable);
+
+// Luther
+extern void returnDupresShield 0x848 ();
+extern void tauntedLuther 0x849 ();
+
+// Marsten
+extern void permissionKnightsTest 0x84A ();
+
+// Melino
+extern void buySpellsMelino 0x84B ();
+extern var haggleWithMelino 0x84C (var askingprice, var lowestreasonable);
+
+// Monks
+// extern var somethingWithMonks 0x84D (var var0000, var var0001);
+extern var setMonksSchedules 0x84E (var var0000, var var0001);
+
+// Mortergo
+extern void buySpellsMortegro 0x84F ();
+extern var haggleWithMortegro 0x850 (var askingprice, var lowestreasonable);
+
+// Petra
+extern void buyRoomBlueBoarInn 0x851 ();
+extern void buyFoodFromPetra 0x852 ();
+// Go drink from the town well
+extern void buyDrinksFromPetra 0x853 ();
+extern var haggleWithPetra 0x854 (var askingprice, var lowestreasonable);
+// extern void standBack 0x855 (var var0000);
+
+// Pomdirgun
+extern void defendPomdirgun 0x856 ();
+
+// Pothos
+extern void sellStoneheartPothos 0x857 ();
+extern void buyPotionsPothos 0x858 ();
+extern void buyReagentsPothos 0x859 ();
+extern void buyMagicItemsPothos 0x85A ();
+extern var haggleWithPothos 0x85B (var askingprice, var lowestreasonable);
+
+// Rabindrinath
+// extern void somethingWithRabindrinath1 0x85C ();
+// extern void somethingWithRabindrinath2 0x85D (var var0000, var var0001);
+
+// Rocco
+extern void buyFoodFromRocco 0x85E ();
+extern void buyDrinksFromRocco 0x85F ();
+extern var haggleWithRocco 0x860 (var askingprice, var lowestreasonable);
+
+// Selina
+extern void askSelinaBelongings 0x861 ();
+extern void dumpItemsSelina 0x862 ();
+
+// Shamino
+extern void askShaminoBelongings 0x863 ();
+
+// Skinless Yelinda
+extern void returnCombYelinda 0x864 ();
+
+// Spektor
+extern void exchangeMoneySpektor 0x865 ();
+
+// Standarr
+extern void buyArmorStandarr 0x866 ();
+extern void buyArmsStandarr 0x867 ();
+extern void sellArmorStandarr 0x868 ();
+extern var haggleWithStandarr 0x869 (var askingprice, var lowestreasonable);
+
+// Stefano
+extern void askStefanoBelongings 0x86A ();
+
+// Surok
+extern void healingBySurok 0x86B ();
+extern void funcResurrection 0x86C (var npc);
+// Resurrects Iolo, Shamino and Dupre and adds them back to the party
+extern void resurrectCompanions 0x86D ();
+
+// Topo
+extern void sellGemsTopo 0x86E ();
+extern void buyFromTopo 0x86F ();
+extern var haggleWithTopo 0x870 (var askingprice, var lowestreasonable);
+
+// Torrissio
+extern void buySpellsTorrissio 0x871 ();
+extern var haggleWithTorrissio 0x872 (var askingprice, var lowestreasonable);
+
+// Tsandar
+extern void trainWithTsandar 0x873 ();
+
+// Wilfred
+// He will refuse to return belongings if you let him leave with them
+extern void askWilfredBelongings 0x874 ();
+extern void trainWithWilfred 0x875 ();
+
+// Zhelkas
+// Not sure why Zhelkas' conversation is broken up into parts
+extern void welcomeZhelkas 0x876 ();
+extern void myHeroZhelkas 0x877 ();
+// Unnecessarily complicated:
+extern void newScheduleZhelkas 0x878 ();
+extern void admittedByZhelkas 0x879 ();
+// extern void somethingWithZhelkas 0x87A ();
+
+// Zulith
+extern void exchangeMoneyZulith 0x87B ();
+
+/*
+ *	Various functions, not seemingly connected to specific NPCs
+ *	Possibly divided by geographic area or by shape?
+ */
+
+extern void useAmuletOfBalance 0x87C ();
+// extern void Func087D 0x87D ();
+// extern var Func087E 0x87E (var var0000, var var0001);
+extern void checkTimeToSleep 0x87F (var var0000);
+// extern var Func0880 0x880 (var var0000);
+// extern void Func0881 0x881 ();
+// extern void Func0882 0x882 ();
+// extern void Func0883 0x883 ();
+// extern void Func0884 0x884 (var var0000);
+// extern void Func0885 0x885 (var var0000);
+// extern void turnsOffThreeFlags 0x886 ();
+extern void upDownWell 0x887 (var var0000);
+// extern void Func0888 0x888 ();
+// extern void Func0889 0x889 (var var0000);
+// extern void Func088A 0x88A (var var0000);
+// extern void Func088B 0x88B (var var0000, var var0001);
+// extern void Func088C 0x88C ();
+extern void partySitDown 0x88D (var var0000, var var0001);
+// extern var Func088E 0x88E (var var0000);
+// extern var Func088F 0x88F (var var0000);
+// extern var Func0890 0x890 ();
+
+// Copy Protection "Oink!" System:
+extern var copyProtectionFail1 0x891 ();
+extern var copyProtectionFail2 0x892 ();
+extern var copyProtectionFail3 0x893 ();
+extern var copyProtectionFail4 0x894 ();
+extern var copyProtectionFail5 0x895 ();
+extern var copyProtectionFail6 0x896 ();
+extern var copyProtectionFail7 0x897 ();
+extern var copyProtectionFail8 0x898 ();
+extern var copyProtectionFail9 0x899 ();
+extern var copyProtectionFailA 0x89A ();
+// Uses variables defined in 1-A.
+extern var copyProtectionFailConvo 0x89B ();
+
+// extern var Func089C 0x89C (var var0000, var var0001);
+extern var checkBridgeBlock 0x89D (var var0000);
+extern void floorRiseGetOn 0x89E ();
+extern void floorSinkGetOn 0x89F ();
+// extern var Func08A0 0x8A0 (var var0000);
+// Func08A1 to Func08A4 baths visit BG?
+// extern void Func08A1 0x8A1 ();
+// extern void Func08A2 0x8A2 ();
+// extern void Func08A3 0x8A3 ();
+// extern void Func08A4 0x8A4 ();
+extern void happyHappyJoyJoy 0x8A5 ();
+// extern void Func08A6 0x8A6 ();
+// extern var Func08A7 0x8A7 (var var0000);
+// extern var Func08A8 0x8A8 (var var0000);
+extern void updateScheduleAlyssand 0x8A9 ();
+extern void setTournamentFlagsInFawn 0x8AA ();
+extern void attackedByKalen 0x8AB ();
+extern var getTrialNPC 0x8AC (var var0000);
+extern void feedPartyResponses 0x8AD (var var0000, var var0001, var var0002, var var0003);
+// extern void somethingWithTeledrono 0x8AE ();
+extern void forceCarryBlackSword 0x8AF (var var0000, var var0001);
+// extern var Func08B0 0x8B0 (var var0000, var var0001, var var0002);
+// extern void Func08B1 0x8B1 (var var0000, var var0001, var var0002, var var0003);
+extern void arenaAutomatonsAttack 0x8B2 ();
+extern void dropItemsKnightsTest 0x8B3 (var var0000);
+// extern void Func08B4 0x8B4 ();
+// extern var Func08B5 0x8B5 ();
+// extern var Func08B6 0x8B6 ();
+extern void newSchedulesKapyundiAndGilwoyai 0x8B7 ();
+// Possibly the function that damages each town after the Banes:
+// extern void Func08B8 0x8B8 ();
+// extern void Func08B9 0x8B9 (var var0000, var var0001);
+// Possibly unused function for Draygan to create animals to protect him:
+extern void barksDraygan 0x8BA ();
+extern void barksVasculiosCage 0x8BB ();
+extern void scratchesCoffin 0x8BC ();
+extern void clearFlagsRuneGate 0x8BD ();
+extern var skullcrusherRuneGate 0x8BE (var var0000);
+extern void skullcrusherWallOfLights 0x8BF ();
+
+// playmusic refers to the Batlin cutscene music:
+extern void animateWallOfLights 0x8C0 (var playmusic);
+// extern var Func08C1 0x8C1 ();
+extern void hideNPCsDuringFawnTrial 0x8C2 ();
+// extern void somethingWithFawnTrial 0x8C3 ();
+// extern void anotherWithFawnTrial 0x8C4 ();
+extern void partySetTrialFacing 0x8C5 ();
+
+/*
+ *	Mountains of Freedom section
+ */
+
+// Jailed Ranger in Mountains of Freedom
+extern void funcWatson 0x8CA ();
+// extern void magesInFreedom 0x8CB ();
+extern void cutscenesLorthondo 0x8CD ();
+extern void wakeSabrina 0x8CE ();
+// "Prepare to die..."
+extern void trappedWithLorthondo 0x8D0 ();
+extern void leadSabrinaToNightmare 0x8D2 ();
+extern void wakeNightmare 0x8D4 ();
+extern void thankTheeReward 0x8D7 ();
+// Only does UI_set_schedule_type(TELDRONO, TALK); and return;
+extern void setScheduleTalkTeldrono 0x8D8 ();
+
+extern void lockOpenedDoor 0x8D9 (var door);
+// Also includes the teamwork switches with Stefano
+extern void brassSwitches 0x8DA (var var0000);
+
+// "Let it be said that Sir Dupre died bravely!"
+extern void sirDupresSacrifice 0x8DB (var var0000);
+
+/*
+ *	Gustacio's Experiments
+ */
+
+extern var restoredEdrin 0x8E2 (var var0000);
+extern void sawLightningColors 0x8E3 ();
+
+// extern void somethingWithDupresGear 0x8E5 ();
+// Also plays sound 42:
+extern void reduceHealthAvatar126 0x8E6 ();
+
+/*
+ *	Temple of Logic platform order puzzle in the Glacier Mountains
+ */
+
+// Called by eggPlatformLogic object#(0x71C) to reset five flags.
+extern void resetPlatformLogic 0x8E8 ();
+// Teleports the Avatar and party to the Temple of Logic.
+extern void passedPlatformLogic 0x8E9 ();
+
+// Filbercio arrives in Frigidazzi's bedchamber and says "Darling, I'm here...!"
+extern void darlingImHere 0x8EC ();
+
+/*
+ *	Monitor section
+ */
+
+extern var banquetSawThings 0x8ED (var var0000);
+// If he's dead, "Caladin is already deceased!"
+extern void antiDupreTransformsCaladin 0x8EF ();
+extern void banquetMakeHaste 0x8F0 ();
+
+/*
+ *	Monks section
+ */
+
+// Checks that the three Bane NPCs are dead and the Three Companions are cured
+// of their zombie flags.
+// extern var areThreeCompanionsRestored 0x8F3 ();
+extern void xenkaReturns 0x8F4 ();
+extern void xenkanMonkDies 0x8F5 (var monk);
+
+// Returns true is point is inside rectangle
+extern var pointInsideRect 0x8F8 (var point, var upperleft, var lowerright);
+// Appears to be decide where to teleport the Avatar back to after resurrection
+extern var whereMonksReturnAvatar 0x8F9 ();
+// "We know not for certain from where thou wilt continue..."
+extern void monksResurrectAvatar 0x8FA ();
+// List of dead bodies nearby:
+extern var getNearbyBodies 0x8FB ();
+extern var areThereBodiesNearby 0x8FC ();
+// List the NPC names for joinable NPCs:
+extern var getJoinableNPCNames 0x8FD ();
+// Fixed in SIfixes
+// Prevents returning Dupre, etc.
+extern void partyResurrect 0x8FE ();
+
+
+extern void autoRotoOneMoment 0x8FF ();
+// extern var Func0900 0x900 (var var0000)
+// This makes Filbercio, Frigidazzi, and others go away or change.
+// Also includes Mortegro being teleporting away to the temple.
+extern void sentencedToFreedom 0x901 ();
+
+/*
+ *	Door functions
+ */
+
+// "The door appears blocked."
+extern void doorAppearsBlocked 0x903 ();
+
+// Reimplemented:
+// extern void doorBarksLocked 0x904 (var object);
+// extern void doorBarksMagicallyLocked 0x905 (var object);
+
+// 0 is unlocked, 1 is swung open, 2 is locked, 3 is magically locked:
+extern var getDoorState 0x906 (var door);
+// state 0 = unlocked, state 1 = swung open, state 2 is locked and
+// state 3 is magically locked
+// "Click"
+extern void setDoorState 0x907 (var door, var state);
+
+// return UI_find_direction(var0000, var0001);
+extern var findDirectionBetween 0x90C (var var0000, var var0001);
+extern var roomToOpen 0x910 (var var0000);
+
+// UI_remove_item(item); and return;
+extern void removeThisItem 0x915 (var obj);
+
+/*
+ *	Short pieces section?
+ */
+
+// Uses the location ID to determine which speech to use
+extern void triggersStartSpeechWrapper 0x916 ();
+
+extern void gangPlankBlocksSailing 0x918 (var var0000);
+// When Palos' stand-in DBeyer is losing in Shamino's Keep
+extern void masterComeQuickly 0x919 (var npc);
+// "I am the Lizard King. I can do anything."
+extern void theLizardKing 0x91A (var var0000);
+
+/*
+ *	Skullcrusher section
+ */
+
+// Next two seem to be leftovers from the Beta, where one of
+// these two was used as an illusion in place of the skeleton
+// begging to be freed from Vasculio's cage
+extern void fakeBrendannInCage 0x91B ();
+extern void fakeLucillaInCage 0x91C ();
+extern void unlockedVasculiosCage 0x91D ();
+
+extern void openSkullcrusherGate 0x921 (var var0000);
+extern void startSpeech 0x922 (var track);
+
+extern var checkThreeCompanionsInParty 0x923 ();
+// Not certain on this one
+// extern void swapInBanes 0x924 (var var0000, var var0001);
+extern void testOfPuritySexPassed 0x926 (var var0000);
+extern void testOfPuritySexFailed 0x927 ();
+
+// Sleeping Bull Wardrobe Teleporter
+extern void wardrobeTeleport 0x92A (var quality);
+
+// SIfixes replaces both to enable missed flags.
+// extern void exchangeItemFlags 0x92B ();
+// vars are shape, quality, frame
+// extern var exchangedItemList 0x92C (var index);
+
+// Total guess:
+extern void endMonitorTraining 0x92E (var npc);
+extern void debugListField 0x92F (var var0000, var var0001);
+// ""Very good, very good," he says as he returns your equipment."
+extern void returnFromListField 0x931 (var var0000);
+// Checks points, money, and if the NPC selected to train already is maxed out
+extern void checksBeforeListField 0x933 (var var0000, var var0001);
+
+// "What weapon dost thou favor?"
+extern void whatWeaponListField 0x935 (var npc);
+// Training / duel outcome utterings
+// The dialog of the Monitorians after training ends:
+extern void trainingEndDialog 0x936 (var npc1, var npc2);
+
+/*
+ *	Fawn Trial section
+ */
+
+// UI_error_", "Obsolete routine TRIAL in conversation"); and return;
+// extern void obsoleteRoutineFawnTrial 0x938 (var var0000);
+// extern void stackUnderflowFawnTrial 0x939 (var var0000);
+
+// End of both days of the trial:
+extern void outcomeFawnTrial 0x93A (var var0000);
+extern void callWitnessesFawnTrial 0x93B (var var0000);
+extern void barksToTestifyFawnTrial 0x93C (var var0000);
+
+/*
+ *	Other checks section
+ */
+
+extern var getNPCLevel 0x941 (var npc);
+extern var npcNearbyAndVisible 0x942 (var npc);
+extern var salesTransaction 0x943 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006, var var0007);
+
+// Used by 0x839 to teleport Hawk to the Sleeping Bull once he is freed.
+extern var teleportNPC 0x944 (var var0000, var var0001, var var0002);
+
+// Sets Flag 0xE when too many things have been stolen or used,
+// if those items are not okay_to_take or in_dungeon.
+extern void stolenSomething 0x945 (var obj);
+extern var getNamesOfNonAutomatonParty 0x946 ();
+extern var checkUnderTwentyAway 0x947 (var point_a, var point_b);
+
+// Simpler versions of partyUtters, one that barks and the other shows a face.
+// Both use the same text, regardless of party size.
+extern void partyUttersSameBark 0x949 (var utter);
+extern void partyUttersSameWithFace 0x94A (var utter);
+// Not sure why these exists, it has no var to pass to it.
+extern var partyUttersNothing1 0x94B ();
+extern var partyUttersNothing2 0x94C ();
+extern var partyUttersNothing3 0x94D ();
+
+// Causes NPC to speak if nearby
+extern void npcSpeakIfNearby 0x94E (var npc, var text);
+// void delayedBarksArray 0x94F (var var0000, var var0001);
+extern void lightCandle 0x950 (var candle);
+
+// Returns true if the party is NOT in a magic storm:
+extern var notInMagicStorm 0x951();
+
+extern var getAvatarName 0x953 ();
+extern var getPoliteTitle 0x954 ();
+extern var askYesNo 0x955 ();
+// Second one is preferred in SIfixes
+extern var chooseFromMenu 0x956 (var choices);
+extern var chooseFromMenu2 0x957 (var choices);
+
+extern var chooseFromMenuPartyNonAutomaton 0x958 ();
+extern var chooseFromMenuParty 0x959 ();
+
+// return UI_get_npc_name(UI_get_npc_object(var0000));
+extern var getNPCsName 0x95B (var npc);
+
+// Returns the value of propid for NPC:
+extern var getPropValue 0x95C (var npc, var propid);
+
+// Increased the value of experience points for the party by delta:
+// Value that is appled is half the number given because of how
+// experience points are handled.
+extern void gainExperience 0x95D (var delta);
+
+// Increases the value of propid for NPC by delta:
+extern void setPropValue 0x95E (var npc, var propid, var delta);
+
+/*
+ *	BG Leftovers
+ */
+
+// Random roll of 1/4 die for response, and add("philosophy") to conversation
+extern void theFellowshipIs 0x965 ();
+extern void askJoinFellowship 0x966 ();
+extern var simpleSellsFor 0x967 (var var0000, var var0001, var var0002, var price, var var0004);
+extern var gargoyleToSellFor 0x968 (var var0000, var var0001, var var0002, var price, var var0004);
+
+extern void buyHealing 0x969 (var npc, var price, var money_shape);
+extern void buyCuringPoison 0x96A (var npc, var price, var money_shape);
+extern void buyResurrection 0x96B (var npc, var var0001, var var0002);
+// Pick from chooseFromMenuPartyNonAutomaton();
+extern var whoWishesToTrain 0x96C ();
+extern var askWantTraining 0x96D (var var0000);
+// Not used in SI, only takes gold coins
+extern var buySpellsFromGargoyle 0x970 (var spell, var price);
+extern void drinkParty 0x973 (var bottle);
+extern void drinkParty2 0x974 (var bottle);
+extern void putInHandHitSomeoneElse 0x975 ();
+
+// Used by healing potions
+// extern void addHealth 0x976 (var var0000, var var0001);
+// extern void healByAmount 0x976 (var target, var amount);
+
+extern var getArraySize 0x977 (var array);
+// var is the item?
+// extern void playSoundEffect108 0x978 (var var0000);
+
+// Wrapper for UI_direction_from(AVATAR, obj)
+extern var directionFromAvatar 0x979 (var obj);
+
+// Includes some Fellowship barks
+extern void barksFromBG 0x97A (var npc);
+extern void barksFromGargoylesBG 0x97B (var npc);
+
+// Sees if the party has a minimum count of the specified item:
+extern var hasItemCount 0x97D (var cont, var mincount, var shapenum, var quality, var framenum);
+
+// Makes the NPC bark after delay ticks:
+extern void delayedBark 0x97F (var npc, var bark_text, var delay);
+
+// extern var poisonedPartyMembers 0x980 (var var0000);
+
+// Same as UI_reduce_health without last var, not sure why they made this
+// extern void reduceHealthNormalDamage 0x982 (var npc, var amount);
+
+// Sees if the NPC can talk (i.e., not asleep/paralyzed/dead/unconscious):
+extern var npcCanTalk 0x983 (var npc);
+
+// Another way of checking if an NPC can move
+extern var isNPCAsleepCursedDeadParalyzed 0x984 (var npc);
+
+extern var checkIfNPCandNotAvatar 0x985 (var npc);
+extern void clearNPCpotionEffects 0x986 (var var0000, var var0001);
+
+// Removes all instances of element from the array:
+extern var removeFromArray 0x988 (var element, var array);
+
+// Checks if the light source is spent, if not swaps it for the
+// equivalent but light version, then lightens the area.
+// extern void swapLightSource 0x98A (var item_off, var item_on);
+extern void checkLightSourceSpent 0x98A (var unlit_shape, var lit_shape);
+
+// Uses a random die roll to select which of the 15 questions is asked.
+// Also sets a flag for each correctly answered question.
+// If the lambskin glove maker question is added back here is where to do it.
+extern var copyProtectionQuestions 0x98C ();
+
+// List the NPC numbers for joinable NPCs:
+extern var getJoinableNPCNumbers 0x98D ();
+
+// Gets a list of all non-automaton party members:
+extern var getNonAutomatonPartyMembers 0x98E ();
+
+// No idea why these functions were removed if 0x949 and 0x94A are essentially the same idea.
+// "Error: Calling PartySays. Change to PartyUtters."
+// extern var obsoletePartySays 0x990 (var var0000, var var0001, var var0002)
+// "Error: Calling PartyBarks. Change to PartyUtters."
+// extern var obsoletePartyBarks 0x991 (var var0000, var var0001, var var0002)
+
+// This one is a beast! Here it goes:
+// If the only party member is the Avatar, avatarutter is used.
+// Otherwise:
+// If npcnum == 1 or if npcnum is not a joinable NPC, a random (non-Avatar)
+// party member will use partyutter.
+// Otherwise:
+// If npcnum *is* a joinable NPC:
+// If npcnum is in the party, that NPC will utter partyutter.
+// Otherwise:
+// This tries to find an in-party substitute for npcnum who will utter partyutter.
+// If the function can't find an appropriate substitute for npcnum, it will give
+// an error.
+// If avatarutter == 0 and only the Avatar is in the party, he will not utter anything.
+// Likewise, partyutter == 0 results in nothing being uttered.
+// Finally, isbark determines if the NPCs bark or interject the text. This is
+// what I meant by "utter" above. False will show the face of npcnum.
+extern var partyUtters 0x992 (var npcnum, var partyutter, var avatarutter, var isbark);
+
+// Fixed in SIfixes, see getLocationID in "misc/location_ids.uc" for details.
+// extern var getLocationID 0x993 (var var0000);
+// Gets the Avatar's location ID using getLocationID above.
+extern var getAvatarLocationID 0x994 ();
+// Not sure what this does yet:
+// extern var anotherLocationID 0x995 ();
+
+// Takes an item from a container and gives it to another:
+extern var giveItem 0x996 (var givefrom, var giveto, var givecount, var shapenum, var quality, var framenum, var flag);
+
+// extern void unusedDelayedBarkAvatar 0x997 (var var0000, var var0001);
+
+extern void ringAroundNPC 0x998 (var npc, var field_shape);
+
+extern var haggleFunction 0x999 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
+extern var checkPartyCarryCapacity 0x99A (var var0000, var var0001);
+extern var giveItemsToPartyMember 0x99B (var cont, var count, var shapenum, var quality, var framenum, var flag1, var flag2);
+// Removes all of a given item
+extern void removeItemFromParty 0x99C (var obj);
+extern var doWeHaveOne 0x99D (var obj);
+extern var getOuterContainer 0x99E (var obj);
+
+// In SI, path eggs are used for scripting purposes. This function turns a pair
+// of numbers (num1 and num2) into a number 0-31 then returns the path egg with
+// the corresponding frame. Returned path eggs come from the Usecode Container.
+extern var getPathEgg 0x9A0 (var num1, var num2);
+
+extern var newOpponentAttackAvatar 0x9A1 (var shape);
+
+// extern void somethingLightningRod 0x9A5 ();
+
+extern var checkForDeadBodies 0x9A6 (var bodyshape);
+
+// Returns an array containing the index of all instances of
+// element in the array:
+extern var getIndexForElement 0x9A8 (var element, var array);
+
+// Clears DONT_MOVE flag:
+extern void unfreezeAvatar 0x9AA ();
+
+// Sets the NPCs schedule to activity at [posx, posy, 0] if posx >= 0.
+// If posx < 0, it ignores posx and posy and uses the NPCs current
+// position instead if the z-coordinate of this position is zero.
+// If the z-coordinate of the NPC is *not* zero, it sets the NPCs
+// immediate schedule to WAIT (right then and there) and -- if they
+// are in the party -- to EAT_AT_INN in the kitchen at Monk isle.
+// Caution, this will wipe out all other schedules for that NPC.
+extern void setNewSchedules 0x9AC (var npc, var posx, var posy, var activity);
+
+// Sets a single NPC to attack the Avatar (specifically rather than the whole Party), 
+// and changes that NPC's alignment to Evil.
+extern void attackAvatar 0x9AD (var npc);
+
+// Used by NPC information sources to count down how many questions you can ask,
+// then give you an excuse to end the conversation. Bucia, Jendon, Harnna, and Surok.
+extern var askedTooManyQuestions 0x9AE (var patience);
+
+// Used when Filbercio introduces each Adept during the banquet.
+// var0002 seems to be wait time for second NPC.
+extern void introductionsMoonshade 0x9AF (var npc0, var npc1, var var0002, var usecode);
+
+// extern void bardSongs 0x9B0 (var song);
+extern void bardSongsPayment 0x9B1 ();
+// extern void setAvatarNaked 0x9B2 ();
+
+// Used when items are being returned from former companions.
+extern var returnBelongings 0x9B3 (var npc);
+
+// Makes the NPC ask where to wait when kicked from the party
+// (or, in some cases, simply says where he will be later):
+extern void npcAskWhereToWait 0x9B4 (var npcnum);
+
+// Shows visions depending on flags. Visions seem to be:
+// Constellation movements.
+// Batlin and Goons at the Wall of Lights
+// Anti-Shamino and the Banes "in the abandoned castle..." "...of the White Dragon!"
+extern void visionWallOfLights 0x9B5 ();
+
+// Used to show the vision of Batlin in Skullcrusher and
+// Anti-Shamino in White Dragon Castle, I think.
+// Variables seem to be the shape to show and
+// location to start the new shape at.
+extern void showVisions 0x9B6 (var shape, var loc);
+
+// Run on the death of each of the Goblin NPCs at Fawn Tower:
+// Fixed as void mightyGoblinDies 0x9B7 (); in SIfixes
+// extern void retakeFawnTower 0x9B7 ();
+
+extern var createNewShape 0x9AB (var shape, var frame, var quality, var is_temporary, var position);
+
+// Places the three Banes in the throne room and makes them sit
+extern void beSeatedBanes 0x9B8 ();
+extern var areAnyBanesDead 0x9BA ();
+extern void lightningStormGlobe 0x9BE (var var0000, var var0001);
+
+/*
+ *	Test of Purity Worms
+ */
+
+extern void testOfPurityCreateWorm 0x9BF ();
+// Clone Dupre's temptations and Avatar's barks, count is worms killed?
+extern void testOfPurityWormBarks 0x9C0 (var var0000);
+extern void testOfPurityTreasures 0x9C1 ();
+
+/*
+ *	Mod-Defined Functions
+ *	All use newly-assigned numbers, unused in original Usecode.
+ */
+
+// extern var gwaniCloakCheck 0x9C2 (var have_gwani_gear);
+// extern void removeSpellShapes 0x9C3 (var npc);
+// extern void conquestsFawnSchedules object#(0x9C4) ();
+// extern void conquestsGwaniSchedules object#(0x9C5) ();
+// extern void conquestsMonitorSchedules object#(0x9C6) ();
+// extern void conquestsMoonshadeSchedules object#(0x9C7) ();
+// extern void conquestsOtherSchedules object#(0x9C8) ();
+// extern void conquestsSleepingBullSchedules object#(0x9C9) ();
+extern var createNewShape2 0x9CA (var shape, var frame, var pos_x, var pos_y, var pos_z);
+// extern void gameStartBoat object#(0x9CB) ();
+// extern void dropAllItems 0x9CC (var npc, var pos);
+// entern void cutsceneBlackoutTest object#(0x9CD) ();
+// extern void partyDefeatedOnListField 0x9CE (var npc);
+// extern var createNewUsecodeEgg 0x9CF (var function, var distance, var pos_x, var pos_y, var pos_z);
+// extern void infoFromHarnna object#(0x9D0) ();
+// extern void infoFromJendon object#(0x9D1) ();
+// extern void infoFromBucia object#(0x9D2) ();
+// extern void conquestsSetNPCFunctions object#(0x9D3) ();
+// extern void conquestsFawnChanges object#(0x9D4) ();
+
+// extern void conquestsMoonshadeChanges object#(0x9D7) ();
+
+
+extern void createSelinasManor object#(0x9E0) ();
+extern void transferAllItems 0x9E1 (var giving_npc, receiving_npc);
+extern void fawnTrialArrest object#(0x9E2) ();
+extern void fawnTrialReminder object#(0x9E3) ();
+extern void countPartyMoney object#(0x9E4) ();
+// extern void spinebreakerPossessShamino object#(0x9E5) ();
+// extern void spinebreakerPossessDupre object#(0x9E6) ();
+// extern void spinebreakerPossessIolo object#(0x9E7) ();
+// extern void spinebreakerRedPoof object#(0x9E8) (); // 2536
+// extern void spinebreakerBatlinsDeath object#(0x9E9) (); // 2537
+extern void spinebreakerWrathOfBanes object#(0x9EA) (); // 2538
+extern void npcAvatarVsBanes object#(0x9EB) (); // 2539
+extern void spinebreakerBaneGear object#(0x9EC) (); // 2540
+extern void conquestsCheckUniqueItems 0x9ED (var shape_to_check, var quality, var frame, var owner_bane, var new_flag); // 2541
+// extern void eggSpinebreakerSeekHorn object(0x9EF) ();
+

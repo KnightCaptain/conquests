@@ -1,0 +1,58 @@
+/*
+ *	Copyright 2006 The Exult Team
+ *	Copyright 2017 Scott Cooper
+ *
+ *	This program is free software: you can redistribute it and/or modify it under the terms
+ *	of the GNU General Public License as published by the Free Software Foundation,
+ *	either version 2 of the License, or (at your option) any later version.
+ *
+ *	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ *	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *	See the GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License along with this program.
+ *	If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/*
+ *	Constants specific to Serpent Isle and The Silver Seed.
+ */
+
+// Calls defined in SI Usecode
+#include "header/si/si_externals.use"
+
+// SI Faces
+#include "header/si/si_faces.use"
+
+// SI Global Flags
+#include "header/si/si_gflags.use"
+
+// SI Inventory Slots used on the Paperdoll
+#include "header/si/si_inventory_slots.use"
+
+// SI Locations
+#include "header/si/si_locations.use"
+
+// SI Music
+#include "header/si/si_music.use"
+
+// SI NPC numbers (not their specific code)
+#include "header/si/si_npcs.use"
+
+// SI Party Size Limit
+#include "header/si/si_party_size.use"
+
+// SI Shapes
+#include "header/si/si_shapes.use"
+
+// SI Sound Effects
+#include "header/si/si_sound_effects.use"
+
+// SI Sprites, formerly animations
+#include "header/si/si_sprites.use"
+
+// SI Timers
+#include "header/si/si_timers.use"
+
+// SI Usecode Script
+#include "header/si/si_usecode_script.use"

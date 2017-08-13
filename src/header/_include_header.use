@@ -1,0 +1,99 @@
+/*
+ *	Copyright 2006 Alun Bestor/The Exult Team
+ *	Copyright 2017 Scott Cooper
+ *
+ *	This program is free software: you can redistribute it and/or modify it under the terms
+ *	of the GNU General Public License as published by the Free Software Foundation,
+ *	either version 2 of the License, or (at your option) any later version.
+ *
+ *	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ *	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *	See the GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License along with this program.
+ *	If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/*	These header files defines general constants used throughout Usecode, for
+ *	Black Gate and Serpent Isle. Constants particular to a function can be
+ *	found in the relevant codefile; constants particular to a game can be
+ *	found in that game's header directory.
+ *
+ *	Author: Alun Bestor (exult@washboardabs.net)
+ *	With modifications by Marzo Junior (marzojr@yahoo.com)
+ *	Last modified: 2006-02-27
+ *	2017-01-26 Knight Captain added ANY
+ */
+
+/*	To simplify future updates to SIfixes and mods built on this work,
+ *	the files in each subdirectory are now listed in one file per each
+ *	directory. This master usecode.uc file now references each sublist.
+ *
+ *	2016-12-29 Split up by Knight Captain
+ */ 
+
+/*
+ *	Engine Constants for SI
+ */
+
+// Constants for Business Activities
+#include "header/constants_activities.use"
+
+// Constants for Alignments
+#include "header/constants_alignments.use"
+
+// Constants for Attack Modes
+#include "header/constants_attack_modes.use"
+
+// Constants for Axes (X, Y, Z)
+#include "header/constants_axes.use"
+
+// Constants for true/false, fade_in/fade_out, etc
+#include "header/constants_booleans.use"
+
+// Constants for Cursors (pointers.vga)
+#include "header/constants_cursors.use"
+
+// Constants for Directions
+#include "header/constants_directions.use"
+
+// Constants for Damage Types
+#include "header/constants_damage.use"
+
+// Constants for Egg states / trigger conditions
+#include "header/constants_egg_states.use"
+
+// Constants for Events
+#include "header/constants_events.use"
+
+// Constants for Frames used in scripts
+#include "header/constants_frames.use"
+
+// Constants for masks, rarely used
+#include "header/constants_masks.use"
+
+// Constants for NPC and Item Flags
+#include "header/constants_npc_flags.use"
+
+// Constants for ability points, STRENGTH, etc
+#include "header/constants_npc_properties.use"
+
+// Constants for Time and Day
+#include "header/constants_time.use"
+
+// Constants for Weather
+#include "header/constants_weather.use"
+#include "header/constants_wildcards.use"
+
+/*
+ *	SI-Specific Constants
+ */
+
+#include "header/si/_include_si.use"
+
+/*
+ *	New Functions with no assigned Function Numbers
+ *	Let's get these assigned or removed.
+ */
+
+#include "header/functions.use"

@@ -1,0 +1,32 @@
+/*
+ *	Copyright 2006 The Exult Team
+ *	Copyright 2017 Scott Cooper
+ *
+ *	This program is free software: you can redistribute it and/or modify it under the terms
+ *	of the GNU General Public License as published by the Free Software Foundation,
+ *	either version 2 of the License, or (at your option) any later version.
+ *
+ *	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ *	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *	See the GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License along with this program.
+ *	If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/*
+ *	Wildcards, used for specifying "any acceptable value for this parameter"
+ *	to a measuring function. These are commonly used with object-related
+ *	intrinsics like UI_get_cont_items, UI_count_objects, UI_remove_party_items.
+ *
+ *	For readability, using the specific type of ANY is recommended.
+ */
+
+enum wildcards
+{
+	ANY				= -359,
+	SHAPE_ANY		= -359,
+	QUALITY_ANY		= -359,
+	QUANTITY_ANY	= -359,
+	FRAME_ANY		= -359
+};

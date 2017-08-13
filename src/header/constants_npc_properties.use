@@ -1,0 +1,42 @@
+/*
+ *	Copyright 2006 Alun Bestor/The Exult Team
+ *	Copyright 2017 Scott Cooper
+ *
+ *	This program is free software: you can redistribute it and/or modify it under the terms
+ *	of the GNU General Public License as published by the Free Software Foundation,
+ *	either version 2 of the License, or (at your option) any later version.
+ *
+ *	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ *	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *	See the GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License along with this program.
+ *	If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/*
+ *	NPC properties (mostly ability scores)
+ *	These can be retrieved and set using UI_get_npc_property(npc, property) and
+ *	UI_set_npc_property(npc, property, value) respectively.
+ *	Note however that UI_set_npc_property will actually *add* the value to the
+ *	original property, not set it to that value. Which means you will need to
+ *	calculate a relative positive/negative adjustment to set it to a target
+ *	value.
+ */
+
+enum npc_properties
+{
+	STRENGTH		= 0,
+	DEXTERITY		= 1,
+	INTELLIGENCE	= 2,
+	HEALTH			= 3,
+	COMBAT			= 4,
+	MANA			= 5,
+	MAX_MANA		= 6,
+	TRAINING		= 7,
+	EXPERIENCE		= 8,
+	FOOD_LEVEL		= 9,
+	SEX_FLAG		= 10,	// 1 (nonzero) if female, 0 if male.
+	MISSILE_WEAPON	= 11	// Cannot be set; returns 1 if wearing a missile
+							// or (good) thrown weapon, 0 otherwise.
+};

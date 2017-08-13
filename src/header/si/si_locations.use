@@ -1,0 +1,65 @@
+/*
+ *	Copyright 2006 The Exult Team
+ *	Copyright 2017 Scott Cooper
+ *
+ *	This program is free software: you can redistribute it and/or modify it under the terms
+ *	of the GNU General Public License as published by the Free Software Foundation,
+ *	either version 2 of the License, or (at your option) any later version.
+ *
+ *	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ *	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *	See the GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License along with this program.
+ *	If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/*	Split out from location_ids.uc, now get_location_id.uc.
+ *	Switched from hex (0xA) to decimal (10).
+ *
+ *	2017-01-26 Knight Captain
+ */
+
+enum location_ids
+{
+	THE_WILDERNESS = -1,
+	WHITE_DRAGON_CASTLE = 0,
+	// Defined in "In Wis" usecode, but not in the function below:
+	CLAW = 1,
+	MONK_ISLE = 2,
+	FAWN = 3,
+	FURNACE = 4,
+	GLACIER_MOUNTAINS = 5,
+	// Defined in "In Wis" usecode, but not in the function below:
+	GRAND_SHRINE = 6,
+	GREAT_NORTHERN_FOREST = 7,
+	ICE_PLAINS = 8,
+	// Inn isn't needed here.
+	SLEEPING_BULL = 9,
+	SLEEPING_BULL_INN = 9,
+	ISLE_OF_CRYPTS = 10,
+	MAD_MAGE_ISLAND = 11,
+	KNIGHTS_TEST = 12,
+	MONITOR = 13,
+	MOONSHADE = 14,
+	FREEDOM_MOUNTAINS = 15,
+	SHAMINOS_CASTLE = 16,
+	DISCIPLINE = 17,
+	EMOTION = 18,
+	ENTHUSIASM = 19,
+	ETHICALITY = 20,
+	LOGIC = 21,
+	TOLERANCE = 22,
+	SKULLCRUSHER_MOUNTAINS = 23,
+	SPINEBREAKER_MOUNTAINS = 24,
+	SUNRISE_ISLE = 25,
+	GORLAB_SWAMP = 26,
+	STARTING_AREA = 27,
+	WESTERN_FOREST = 28,
+	GWANI_VILLAGE = 29,
+	PROGRAMMERS_ISLAND = 30,
+	DREAM_REALM = 31,
+	DREAM_WORLD = 31, // SIfixes
+	SILVER_SEED = 32,
+	THE_MAZE = 33
+};

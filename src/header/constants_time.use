@@ -1,0 +1,52 @@
+/*
+ *	Copyright 2006 Alun Bestor/The Exult Team
+ *	Copyright 2017 Scott Cooper
+ *
+ *	This program is free software: you can redistribute it and/or modify it under the terms
+ *	of the GNU General Public License as published by the Free Software Foundation,
+ *	either version 2 of the License, or (at your option) any later version.
+ *
+ *	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ *	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *	See the GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License along with this program.
+ *	If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/*
+ *	Parts of the day (3-hour intervals) used for setting schedules.
+ *	Returned by UI_part_of_day. This is usually only used by conversation scripts,
+ *	as a way of narrowing down schedule-related behaviour.
+ */
+
+enum day_periods
+{
+	// The period is equal to one-third of the current game hour.
+	MIDNIGHT		= 0,	// 0-2		12AM
+	EARLY			= 1,	// 3-5		3AM
+	DAWN			= 2,	// 6-8		6AM
+	MORNING			= 3,	// 9-11		9AM
+	NOON			= 4,	// 12-14	12PM
+	AFTERNOON		= 5,	// 15-17	3PM
+	EVENING			= 6,	// 18-20	6PM
+	NIGHT			= 7		// 21-23	9PM
+};
+
+/*
+ *	Tick multipliers, for use with UI_advance_time or script statements.
+ *	Examples:
+ *	UI_advance_time(30 * MINUTE);		// advance time by 30 game minutes
+ *	UI_advance_time(2 * HOUR);			// advance time by two game hours
+ *	script after MINUTE ticks	{ ... } // schedule this script block to execute
+ *										// after one game minute
+ */
+
+enum times
+{
+	MINUTE	= 25,
+	HOUR	= 1500
+};
+
+// Listed alone in SI Fixes. Not clear why.
+const long DAY		= 36000;

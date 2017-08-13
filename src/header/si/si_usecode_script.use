@@ -1,0 +1,86 @@
+/*
+ *	Copyright 2017 Scott Cooper
+ *
+ *	This program is free software: you can redistribute it and/or modify it under the terms
+ *	of the GNU General Public License as published by the Free Software Foundation,
+ *	either version 2 of the License, or (at your option) any later version.
+ *
+ *	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ *	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *	See the GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License along with this program.
+ *	If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/*	The Usecode Compiler (UCC.exe) does not recognize commands it should
+ *	know, but apparently does not.
+ *
+ *	2017-01-26 Knight Captain
+ */
+
+enum script_commands
+{
+	continue_script = (byte)0x01,
+	// (byte)0x02 only used once
+	repeat_script = (byte)0x0B,
+	wait_1_tick = (byte)0x21,
+	no_halt = (byte)0x23,
+	wait_ticks = (byte)0x27,
+	wait_avatar_tiles = (byte)0x2B,
+	finish_script = (byte)0x2C,
+	remove_script = (byte)0x2D,
+	step_n = (byte)0x30,
+	step_ne = (byte)0x31,
+	step_e = (byte)0x32,
+	step_se = (byte)0x33,
+	step_s = (byte)0x34,
+	step_sw = (byte)0x35,
+	step_w = (byte)0x36,
+	step_nw = (byte)0x37,
+	lower_z = (byte)0x38,
+	raise_z = (byte)0x39,
+	set_frame = (byte)0x46,
+	hatch_egg = (byte)0x48,
+	set_egg = (byte)0x49,
+	next_frame_stop_at_max = (byte)0x4D,
+	next_frame_wrap_to_zero = (byte)0x4E,
+	prev_frame_stop_at_zero = (byte)0x4F,
+	prev_frame_wrap_to_max = (byte)0x50,
+	script_bark = (byte)0x52,
+	step_forward = (byte)0x53,
+	music_track = (byte)0x54,
+	call_usecode = (byte)0x55,
+	sound_effect = (byte)0x58,
+	face_dir = (byte)0x59,
+	npc_frame_stand = (byte)0x61,			// Do these all automatically face the current direction?
+	npc_frame_walk1 = (byte)0x62,
+	npc_frame_walk2 = (byte)0x63,
+	npc_frame_use_it = (byte)0x64,
+	npc_frame_swing1 = (byte)0x65,
+	npc_frame_swing2 = (byte)0x66,
+	npc_frame_swing3 = (byte)0x67,
+	npc_frame_swing2h1 = (byte)0x68,		// S 23
+	npc_frame_swing2h2 = (byte)0x69,		// S 24
+	npc_frame_swing2h3 = (byte)0x6A,		// S 25
+	npc_frame_sit = (byte)0x6B,
+	npc_frame_lean = (byte)0x6C,
+	npc_frame_kneel = (byte)0x6D,
+	npc_frame_lie = (byte)0x6E,
+	npc_frame_cast1 = (byte)0x6F,
+	npc_frame_cast2 = (byte)0x70,
+	script_damage = (byte)0x78,
+	attack = (byte)0x7A
+};
+
+/*
+# Assuming these aren't defined with other variables for directions
+(byte)0x59, 0x000,,face_dir NORTH; = 
+(byte)0x59, 0x001,,face_dir NORTHEAST; = 
+(byte)0x59, 0x002,,face_dir EAST; = 
+(byte)0x59, 0x003,,face_dir SOUTHEAST; = 
+(byte)0x59, 0x004,,face_dir SOUTH; = 
+(byte)0x59, 0x005,,face_dir SOUTHWEST; = 
+(byte)0x59, 0x006,,face_dir WEST; = 
+(byte)0x59, 0x007,,face_dir NORTHWEST; = 
+*/
